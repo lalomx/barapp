@@ -1,6 +1,10 @@
 # barapp
 Codigo fuente de la aplicaicon bar app
 
+# Requisitos previos
+
+Instalar IDE Visual Studio Code
+
 # Instrucciones de instalación
 
 1. Instalar NodeJS https://nodejs.org/es/
