@@ -1,0 +1,21 @@
+version: '3'
+services:
+  bardb:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: bardb_pass
+      POSTGRES_USER: bardb
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+ 
+volumes:
+  db-data:
+    driver: local
