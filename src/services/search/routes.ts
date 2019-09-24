@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { BarServicesDB } from "../../interfaces/BarServicesDB";
 
 export default [
   {

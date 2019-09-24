@@ -1,4 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express";
+import { BarServicesDB } from "../interfaces/BarServicesDB";
 
 type Wrapper = ((router: Router) => void);
 
@@ -23,7 +24,7 @@ type Route = {
   handler: Handler | Handler[];
 };
 
-export const applyRoutes = (routes: Route[], router: Router) => {
+export const applyRoutes = (routes: Route[], router: Router, db: BarServicesDB) => {
   for (const route of routes) {
     const { method, path, handler } = route;
     (router as any)[method](path, handler);
