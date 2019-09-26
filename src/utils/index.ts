@@ -14,7 +14,5 @@ export const applyMiddleware = (
 };
 
 export const applyRoutes = (router: Router, db: BarServicesDB) => {
-  // de alguna manera se exportan los objetos de servicio
-  // y se matchean los path, el metodo y el handler a las funciones del servicio
   UserService.instance(db).init(router);
 };
