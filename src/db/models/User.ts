@@ -12,18 +12,22 @@ export interface UserAttributes extends Model {
   updatedAt?: Date;
 };
 
-type UserModel = typeof Model  &
-(new (values?: object, options?: BuildOptions) => UserAttributes) & {
+type UserModel = typeof Model &
+  (new (values?: object, options?: BuildOptions) => UserAttributes) & {
   associate: (model: BarServicesDB) => any;
 };
 
 
 const userFactory = (sequalize: Sequelize) => {
-  const User = (<UserModel>sequalize.define('User', {
+  const User = (<UserModel>sequalize.define('Users', {
     id: {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID
+    },
+    username: {
+      allowNull: false,
+      type: DataTypes.TEXT
     },
     nombre: {
       allowNull: true,
@@ -41,17 +45,17 @@ const userFactory = (sequalize: Sequelize) => {
       allowNull: false,
       type: DataTypes.TEXT
     },
-    description: {
-      allowNull: false,
-      type: DataTypes.TEXT
-    },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   })) as UserModel;
 
 
   User.associate = (db: BarServicesDB) => {
-    User.belongsTo(db.Role);
+    User.belongsTo(db.Role, {
+      foreignKey: {
+        name: 'roleId',
+      }
+    });
   };
 
   return User;

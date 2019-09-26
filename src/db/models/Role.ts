@@ -14,7 +14,7 @@ type RoleModel = typeof Model  &
 };
 
 const roleFactory = (sequalize: Sequelize) => {
-    const Role = (<RoleModel>sequalize.define('User', {
+    const Role = (<RoleModel>sequalize.define('Roles', {
       id: {
         allowNull: false,
         primaryKey: true,
