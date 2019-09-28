@@ -1,9 +1,8 @@
 import http from "http";
 import express from "express";
-import { applyMiddleware, applyRoutes } from "./utils";
-import middleware from "./middleware";
-import errorHandlers from "./middleware/errorHandlers";
+import { applyCommonMiddleware, applyRoutes, applyErrorMiddleware } from "./utils";
 import { createDb } from "./db/models";
+import parser from "body-parser";
 
 process.on("uncaughtException", e => {
   console.log(e);
@@ -19,9 +18,10 @@ const db = createDb();
 db.sequelize.sync();
 
 const router = express();
-applyMiddleware(middleware, router);
+
+applyCommonMiddleware(router, db);
 applyRoutes(router, db);
-applyMiddleware(errorHandlers, router);
+applyErrorMiddleware(router);
 
 const { PORT = 3000 } = process.env;
 const server = http.createServer(router);

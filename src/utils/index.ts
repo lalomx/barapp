@@ -1,18 +1,19 @@
 import { Router } from "express";
 import { BarServicesDB } from "../interfaces/BarServicesDB";
 import { UserService } from "../services/UserService";
+import { ErrorMiddleware } from "../middleware/ErrorMiddleware";
+import { CommonMiddleware } from "../middleware/CommonMiddleware";
+import { AuthenticationMiddleware } from "../middleware/AuthenticationMiddleware";
 
-type Wrapper = ((router: Router) => void);
-
-export const applyMiddleware = (
-  middlewareWrappers: Wrapper[],
-  router: Router
-) => {
-  for (const wrapper of middlewareWrappers) {
-    wrapper(router);
-  }
+export const applyCommonMiddleware = (router: Router, db: BarServicesDB) => {
+  CommonMiddleware.instance().init(router);
+  AuthenticationMiddleware.instance(db).init(router);
 };
 
-export const applyRoutes = (router: Router, db: BarServicesDB) => {
+export const applyErrorMiddleware = (router: Router) => {
+  ErrorMiddleware.instance().init(router);
+}
+
+export const applyRoutes = (router: Router, db: BarServicesDB, ) => {
   UserService.instance(db).init(router);
 };

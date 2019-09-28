@@ -3,10 +3,11 @@ import { BarServicesDB } from '../../interfaces/BarServicesDB';
 import Sequelize from 'sequelize'
 import { userFactory } from './User';
 import { roleFactory } from './Role';
+import config from '../../config';
 
 export const createDb = (): BarServicesDB => {
   let sequelize: Sequelize.Sequelize;
-  sequelize = new Sequelize.Sequelize('postgres://bardb:bardb_pass@127.0.0.1:5432/bardb', 
+  sequelize = new Sequelize.Sequelize(config.db.uri, 
   // {
   //   logging: (message: string) => {
   //     const healthCheckQuery = 'Executing (default): SELECT 1+1 AS result';

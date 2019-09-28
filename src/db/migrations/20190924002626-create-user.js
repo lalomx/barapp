@@ -11,6 +11,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
+      password: Sequelize.STRING,
       nombre: {
         allowNull: true,
         type: Sequelize.TEXT
