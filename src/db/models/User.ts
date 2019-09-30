@@ -1,6 +1,7 @@
-import { Sequelize, Model, DataTypes, BuildOptions } from 'sequelize';
+import { Sequelize, Model, DataTypes, BuildOptions, where } from 'sequelize';
 import { BarServicesDB } from '../../interfaces/BarServicesDB';
 import * as bcrypt from 'bcrypt';
+import { RoleModel } from './Role';
 
 export interface UserAttributes extends Model {
   id: string;
@@ -14,9 +15,19 @@ export interface UserAttributes extends Model {
   updatedAt?: Date;
 };
 
+interface UserInfo {
+  id: string;
+  username: string;
+  nombre?: string;
+  apellido?: string;
+  email: string;
+  role: string;
+}
+
 type UserModel = typeof Model & (new (values?: object, options?: BuildOptions) => UserAttributes) & {
   associate: (model: BarServicesDB) => any;
   validPassword: (password: any) => boolean;
+  getUserInfo: (username: string) => Promise<UserInfo | null>;
 };
 
 
@@ -63,6 +74,22 @@ const userFactory = (sequalize: Sequelize) => {
   User.prototype.validPassword = function (password: any): boolean {
     return bcrypt.compareSync(password, this.password)
   };
+  User.getUserInfo = async (user: string) => {
+    const userFound = await User.findOne({
+      where: { username: user },
+      include: [ 'Role' ],
+      rejectOnEmpty: false
+    }) as any
+    if (!userFound) return null;
+    return {
+      id: userFound.id,
+      username: userFound.username,
+      nombre: userFound.nombre,
+      apellido: userFound.apellido,
+      email: userFound.email,
+      role:userFound.Role.roleName
+    }
+  }
 
   return User;
 };

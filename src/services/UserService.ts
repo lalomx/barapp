@@ -16,6 +16,7 @@ export class UserService extends BaseService {
   init(router: Router) {
     router['get'](`${this.API_BASE}users`, passport.authenticate('jwt', { session: false }), this.getAllUsers.bind(this));
     router['post'](`${this.API_BASE}user`, this.addUser.bind(this));
+    router['get'](`${this.API_BASE}user/:user`, this.getUser.bind(this));
   }
   private async getAllUsers(req: Request, res: Response) {
     this.db.User.findAll()
@@ -24,7 +25,15 @@ export class UserService extends BaseService {
   }
 
   private async addUser(req: Request, res: Response) {
-    console.log(req.body);
     res.status(201).send({});
+  }
+
+  private async getUser(req: Request, res: Response) {
+    const user = await this.db.User.getUserInfo(req.params.user);
+    if (!user) {
+      res.status(400).send({ message: 'User not found' })
+    } else {
+      res.send(user);
+    }
   }
 }

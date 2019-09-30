@@ -12,6 +12,7 @@ export class AuthenticationMiddleware {
 
   private readonly API_BASE = '/api/v1/';
   private db: BarServicesDB;
+  private allowedTokens: string[] = [];
 
   private constructor(db: BarServicesDB) {
     this.db = db;
@@ -27,7 +28,6 @@ export class AuthenticationMiddleware {
       usernameField: 'username',
       passwordField: 'password'
     }, (username: string, password: string, done: any) => {
-      console.log('local strategy handler');
       try {
         this.db.User.findOne({
           where: {
@@ -47,16 +47,18 @@ export class AuthenticationMiddleware {
         done(err);
       }
     }));
-    this.initializeRoutes(router);
+    this.initRoutes(router);
 
     let opts: any = {}
     opts.jwtFromRequest = jwtSstrategy.ExtractJwt.fromAuthHeaderAsBearerToken();
     opts.secretOrKey = config.passport.jwtSecret
-    opts.algorithms = [process.env.JWT_ALGORITHM];
 
-    passport.use('jwt', new jwtSstrategy.Strategy(opts, (jwt_payload, done) => {
-      console.log("ejecutando *callback verify* de estategia jwt");
-      const findOpts = { id: jwt_payload.sub, rejectOnEmpty: true };
+    passport.use('jwt', new jwtSstrategy.Strategy(opts, (payload, done) => {
+      const findOpts = {
+        where: {
+          username: payload.id
+        }
+      };
       this.db.User.findOne(findOpts)
         .then(data => {
           if (data === null) {
@@ -67,10 +69,11 @@ export class AuthenticationMiddleware {
         })
         .catch(err => done(err, null))
     }));
-    router.use(this.ensureAuthenticate);
+    router.use(this.ensureAuthenticate.bind(this));
+    
   }
 
-  private initializeRoutes(router: Router) {
+  private initRoutes(router: Router) {
     router['post'](`${this.API_BASE}login`, this.login.bind(this));
     router['get'](`${this.API_BASE}logout`, this.logout.bind(this));
   }
@@ -92,7 +95,8 @@ export class AuthenticationMiddleware {
             if (!user) {
               res.status(400).send('');
             } else {
-              const token = jwt.sign({ id: user.username }, config.passport.jwtSecret);
+              const token = jwt.sign({ id: user.username }, config.passport.jwtSecret, { expiresIn: '1m' });
+              this.allowedTokens.push(token);
               res.status(200)
                 .send({
                   auth: true,
@@ -107,12 +111,20 @@ export class AuthenticationMiddleware {
   }
 
   private logout(req: Request, res: Response) {
-    req.logOut();
+    // let authToken = req.header('Authorization');
+    // authToken = authToken ? authToken.replace('Bearer ', '') : undefined;
+    // console.log(authToken);
+    // TODO: agregar token black list
+    req.logout();
+    res.status(200).send('ok');
   }
 
   private ensureAuthenticate(req: Request, res: Response, next: NextFunction) {
     passport.authenticate('jwt', { session: false }, (err, user, info) => {
-      console.log("ejecutando *callback auth* de authenticate para estrategia jwt");
+      // let authToken = req.header('Authorization');
+      // authToken = authToken ? authToken.replace('Bearer ', '') : undefined;
+      // console.log(authToken);
+      // if (!this.allowedTokens.some(t => t === authToken)) { return (next(new HTTP401Error('Session expired')))}
       if (info) { return next(new HTTP401Error(info.message)); }
       if (err) { return next(err); }
       if (!user) { return next(new HTTP401Error("You are not allowed to access.")); }
