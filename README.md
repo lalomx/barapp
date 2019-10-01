@@ -9,7 +9,7 @@ Codigo fuente de la aplicaicon bar app
 
 # Inicializar docker
 
-1. Abrir el proyecto en el visual estudio
+1. Abrir el proyecto en el visual studio
 2. Abrir una terminal
 3. ejecutar docker-compose up -d
 
@@ -20,6 +20,8 @@ Para le backend
 
 1. cd barapp
 2. npm install
+3. npx sequelize-cli db:migrate
+4. npx sequelize-cli db:seed:all
 3. npm run dev
 4. navegar a http://localhost:3000
 
