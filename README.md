@@ -20,8 +20,8 @@ Para le backend
 
 1. cd barapp
 2. npm install
-3. npx sequelize-cli db:migrate
-4. npx sequelize-cli db:seed:all
+3. npm run migrate
+4. npm run seed
 3. npm run dev
 4. navegar a http://localhost:3000
 
