@@ -3,13 +3,37 @@
     <h3>Bienvenido a Bar Services!</h3>
     <div class="uk-child-width-expand@s" uk-grid>
       <div>
-          <div class="uk-background-cover uk-background-muted uk-height-large uk-panel uk-flex uk-flex-center uk-flex-middle" style="background-image: url(assets/images/logo.png);">
+        <div class="uk-background-cover uk-background-muted uk-height-large uk-panel uk-flex uk-flex-center uk-flex-middle" style="background-image: url(assets/images/logo.png);">
         </div>
       </div>
       <div class="uk-grid-item-match uk-text-justify">
         <div class="uk-card uk-card-default uk-card-body uk-text-center">
-          <h3>Login</h3>
-          <p>Lorem ipsum dolor sit amet.</p>
+          <form>
+            <fieldset class="uk-fieldset">
+              <legend class="uk-legend">Inicia sesión</legend>
+              <div class="uk-margin">
+                <div class="uk-inline">
+                  <span class="uk-form-icon" uk-icon="icon: user"></span>
+                  <input class="uk-input" type="text">
+                </div>
+              </div>
+              <div class="uk-margin">
+                <div class="uk-inline">
+                  <span class="uk-form-icon uk-form-icon" uk-icon="icon: lock"></span>
+                  <input class="uk-input" type="password">
+                </div>
+              </div>
+              <div class="uk-margin">
+                <div>
+                  <button class="uk-button uk-button-default" type="button" tabindex="-1">Login</button>
+                </div>
+              </div>
+              <div class="uk-margin">
+                  ¿Aún no tienes cuenta?
+                  <a class="uk-link-muted" href="#"> Click aquí</a> para obtener una
+              </div>
+            </fieldset>
+          </form>
         </div>
       </div>
     </div>
