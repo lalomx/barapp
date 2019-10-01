@@ -27,7 +27,7 @@ Para le backend
 
 Para el ui
 
-1. En una terminal cd barappui
+1. cd barappui
 2. npm install -g angular@cli
 3. npm install
 4. ng serve -o
