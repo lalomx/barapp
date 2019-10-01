@@ -3,18 +3,33 @@ Codigo fuente de la aplicaicon bar app
 
 # Requisitos previos
 
-Instalar IDE Visual Studio Code
+- Instalar IDE Visual Studio Code
+- Instalar docker
+- Instalar node js version 10+
+
+# Inicializar docker
+
+1. Abrir el proyecto en el visual estudio
+2. Abrir una terminal
+3. ejecutar docker-compose up -d
+
 
 # Instrucciones de instalación
 
-1. Instalar NodeJS https://nodejs.org/es/
-2. cd barapp
-3. npm install
-4. npm run dev
-5. navegar a http://localhost:3000
+Para le backend
 
-Un pequeño tutorial que es la base de este repositorio
-https://itnext.io/production-ready-node-js-rest-apis-setup-using-typescript-postgresql-and-redis-a9525871407
+1. cd barapp
+2. npm install
+3. npm run dev
+4. navegar a http://localhost:3000
+
+Para el ui
+
+1. En una terminal cd barappui
+2. npm install -g angular@cli
+3. npm install
+4. ng serve -o
+
 
 UIKit
 https://getuikit.com/docs/introduction

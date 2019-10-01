@@ -2,7 +2,6 @@ import http from "http";
 import express from "express";
 import { applyCommonMiddleware, applyRoutes, applyErrorMiddleware } from "./utils";
 import { createDb } from "./db/models";
-import parser from "body-parser";
 
 process.on("uncaughtException", e => {
   console.log(e);
