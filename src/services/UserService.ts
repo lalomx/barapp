@@ -15,8 +15,8 @@ export class UserService extends BaseService {
 
   init(router: Router) {
     router['get'](`${this.API_BASE}users`, passport.authenticate('jwt', { session: false }), this.getAllUsers.bind(this));
-    router['post'](`${this.API_BASE}user`, this.addUser.bind(this));
-    router['get'](`${this.API_BASE}user/:user`, this.getUser.bind(this));
+    router['post'](`${this.API_BASE}users`, this.addUser.bind(this));
+    router['get'](`${this.API_BASE}users/:user`, this.getUser.bind(this));
   }
   private async getAllUsers(req: Request, res: Response) {
     this.db.User.findAll()

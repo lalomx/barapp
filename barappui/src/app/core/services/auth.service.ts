@@ -6,6 +6,7 @@ import { Subject, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 import { StorageService } from './storage.service';
+import { config } from '../config/config';
 
 @Injectable()
 export class AuthService {
@@ -52,22 +53,22 @@ export class AuthService {
     return await this.isValidToken();
   }
 
-  async logout() {
+  logout() {
     this.isLoggedOut = true;
     this.loggedInSource.next(false);
     this.storageService.clear();
-    await this.router.navigate[''];
+    this.router.navigate(['login']);
   }
   private handleError(error: HttpErrorResponse) {
-    return throwError(error.error);
+    return throwError(error);
   }
 
   private getUrl() {
-    return 'http://localhost:3000/api/v1/login';
+    return `${config.api}login`;
   }
 
   private getValidationTokenUrl() {
-    return 'http://localhost:8000/api/api-token-verify/';
+    return `${config.api}token-verify`;
   }
 
   private async isValidToken() {

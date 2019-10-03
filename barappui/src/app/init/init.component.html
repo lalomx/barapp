@@ -1,1 +1,62 @@
-<router-outlet></router-outlet>
+<nav class="uk-navbar-container uk-margin" uk-navbar>
+  <div class="uk-navbar-left">
+    <a class="uk-navbar-item uk-logo" href="#">Bar Services</a>
+    <ul class="uk-navbar-nav">
+      <li class="uk-active">
+        <a href="#">Dashboard</a>
+      </li>
+      <li>
+        <a href="#">Comandas</a>
+        <div class="uk-navbar-dropdown">
+          <ul class="uk-nav uk-navbar-dropdown-nav">
+            <li class="uk-active">
+              <a href="#">Dashboard</a>
+            </li>
+            <li>
+              <a href="#">Comandas</a>
+            </li>
+            <li>
+              <a href="#">Inventario</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">Inventario</a>
+      </li>
+      <li>
+        <a href="#">Menús</a>
+      </li>
+      <li>
+        <a href="#">Alertas</a>
+      </li>
+      <li>
+        <a href="#">Reportes</a>
+      </li>
+    </ul>
+  </div>
+  <div class="uk-navbar-right">
+    <ul class="uk-navbar-nav">
+      <li class="uk-active">
+        <a href="#">Settings</a>
+      </li>
+      <li>
+        <a href="#">{{user?.username}}</a>
+        <div class="uk-navbar-dropdown">
+          <ul class="uk-nav uk-navbar-dropdown-nav">
+            <li>
+              <a href="#">Perfil</a>
+            </li>
+            <li>
+              <a (click)="logout()">Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+<div class="uk-container uk-container-large">
+  <router-outlet></router-outlet>
+</div>

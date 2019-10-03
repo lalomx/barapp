@@ -61,7 +61,7 @@ export class DataService {
   }
 
   private getUrl() {
-    return `${config.api}/${this.args.endPoint}/`;
+    return `${config.api}${this.args.endPoint}/`;
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +15,12 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { applyAuthGuard } from './core/guards/auth.guard';
 import { Router } from '../../node_modules/@angular/router';
+import { ComandasComponent } from './comandas/comandas.component';
+import { InventarioComponent } from './inventario/inventario.component';
+import { MenuComponent } from './menu/menu.component';
+import { AlertaComponent } from './alerta/alerta.component';
+import { ReportesComponent } from './reportes/reportes.component';
+import { SharedModule } from './shared/shared.module';
 
 export function initializeApp(bootstrapperService: BootstrapperService) {
   return (): Promise<any> => {
@@ -28,12 +35,20 @@ export function initializeApp(bootstrapperService: BootstrapperService) {
     LoginComponent,
     InitComponent,
     DashboardComponent,
+    ComandasComponent,
+    InventarioComponent,
+    MenuComponent,
+    AlertaComponent,
+    ReportesComponent,
   ],
   imports: [
     BrowserModule,
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     CoreModule,
+    SharedModule,
     BrowserModule,
     AppRoutingModule
   ],

@@ -74,17 +74,21 @@ export class AuthenticationMiddleware {
   }
 
   private initRoutes(router: Router) {
+    router['post'](`${this.API_BASE}token-verify`, this.tokenVerify.bind(this));
     router['post'](`${this.API_BASE}login`, this.login.bind(this));
     router['get'](`${this.API_BASE}logout`, this.logout.bind(this));
+    
   }
 
   private login(req: Request, res: Response) {
     passport.authenticate('local', (err, user, info) => {
+      console.log(err);
+      console.log(info);
       if (err) {
         res.status(400);
       }
       if (info !== undefined) {
-        res.send(info.message);
+        res.status(400).send(info);
       } else {
         req.logIn(user, err => {
           this.db.User.findOne({
@@ -95,7 +99,7 @@ export class AuthenticationMiddleware {
             if (!user) {
               res.status(400).send('');
             } else {
-              const token = jwt.sign({ id: user.username }, config.passport.jwtSecret, { expiresIn: '1m' });
+              const token = jwt.sign({ id: user.username }, config.passport.jwtSecret, { expiresIn: '1d' });
               this.allowedTokens.push(token);
               res.status(200)
                 .send({
@@ -117,6 +121,11 @@ export class AuthenticationMiddleware {
     // TODO: agregar token black list
     req.logout();
     res.status(200).send('ok');
+  }
+
+  private tokenVerify(req: Request, res: Response) {
+    const verified = jwt.verify(req.body.token, config.passport.jwtSecret);
+    res.status(200).send(verified);
   }
 
   private ensureAuthenticate(req: Request, res: Response, next: NextFunction) {

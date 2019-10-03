@@ -11,7 +11,7 @@ export class BootstrapperService {
       const authService = this.injector.get(AuthService);
       const userService = this.injector.get(UserService);
       if (await authService.isLoggedIn()) {
-         userService.bootstrap();
+         await userService.bootstrap();
       }
    }
 }

@@ -1,0 +1,17 @@
+<!-- show: {{show}}<br/>
+data: {{chartData}}<br/>
+labels: {{chartLabels}}<br/>
+color: {{colors}}<br/>
+plugins: {{plugins}}<br/> -->
+<!-- <app-loader [visible]="loading"></app-loader>
+<app-no-data *ngIf="showNoRecordsMessage" [msg]="noRecordsMsg"></app-no-data> -->
+<div *ngIf="show">
+    <canvas ngChartjs 
+            [datasets]="lineChartData" 
+            [labels]="lineChartLabels" 
+            [options]="lineChartOptions" 
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [colors]="colors" >
+    </canvas>
+</div>

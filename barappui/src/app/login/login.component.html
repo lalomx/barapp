@@ -7,25 +7,29 @@
         </div>
       </div>
       <div class="uk-grid-item-match uk-text-justify">
-        <div class="uk-card uk-card-default uk-card-body uk-text-center">
-          <form>
+        <div class="uk-card uk-card-default uk-card-body uk-text-center ">
+          <form [formGroup]="loginForm">
             <fieldset class="uk-fieldset">
               <legend class="uk-legend">Inicia sesión</legend>
+              <div *ngIf="errors" class="uk-margin uk-alert-danger" uk-alert>
+                  <a class="uk-alert-close" uk-close></a>
+                  <p>{{ errors }}</p>
+              </div>
               <div class="uk-margin">
                 <div class="uk-inline">
                   <span class="uk-form-icon" uk-icon="icon: user"></span>
-                  <input class="uk-input" type="text">
+                  <input class="uk-input uk-form-width-medium" [ngClass]="{ 'uk-form-danger' : submitted && f.username.errors}"  formControlName="username" type="text">
                 </div>
               </div>
               <div class="uk-margin">
                 <div class="uk-inline">
                   <span class="uk-form-icon uk-form-icon" uk-icon="icon: lock"></span>
-                  <input class="uk-input" type="password">
+                  <input class="uk-input uk-form-width-medium" [ngClass]="{ 'uk-form-danger' : submitted && f.password.errors}" formControlName="password" type="password">
                 </div>
               </div>
               <div class="uk-margin">
                 <div>
-                  <button class="uk-button uk-button-default" type="button" tabindex="-1">Login</button>
+                  <button class="uk-button uk-button-default" type="button" tabindex="-1" (click)="onSubmit()">Login</button>
                 </div>
               </div>
               <div class="uk-margin">
