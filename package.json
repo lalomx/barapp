@@ -4,6 +4,7 @@
   "description": "codigo fuente del barapp",
   "main": "index.js",
   "scripts": {
+    "start": "node server.ts",
     "dev": "tsc-watch --onSuccess \"node ./dist/server.js\"",
     "migrate": "npx sequelize-cli db:migrate",
     "seed": "npx sequelize-cli db:seed:all"
