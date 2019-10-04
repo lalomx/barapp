@@ -12,10 +12,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      table: {
-        allowNull: false,
-        type: Sequelize.TEXT
-      },
       comandaId: {
         allowNull: false,
         type: Sequelize.UUID,

@@ -4,7 +4,6 @@ import { BarServicesDB } from '../../interfaces/BarServicesDB';
 export interface PersonaAttributes extends Model {
   id: string;
   name: string;
-  table: string;
   comandaId: string;
   createdAt?: Date;
   updatedAt?: Date;

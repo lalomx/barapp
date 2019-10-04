@@ -1,11 +1,12 @@
 import { Sequelize, Model, DataTypes, BuildOptions } from 'sequelize';
 import { BarServicesDB } from '../../interfaces/BarServicesDB';
+import { ComandaStatus } from '../../interfaces/ComandaStatus';
 
 export interface ComandaAttributes extends Model {
   id: string;
   table: string;
   total: number;
-  personasNum: number;
+  status: ComandaStatus;
   createdAt?: Date;
   updatedAt?: Date;
 };
@@ -31,7 +32,7 @@ const comandaFactory = (sequalize: Sequelize) => {
       allowNull: false,
       type: DataTypes.DOUBLE
     },
-    personasNum: {
+    status: {
       allowNull: false,
       type: DataTypes.INTEGER
     },
