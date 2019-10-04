@@ -23,7 +23,7 @@ stages:
     - script: |
         npm install
         npm run build
-    displayName: 'npm install and build'
+    displayName: 'Build Backend'
 
 - stage: ui
   jobs:
@@ -40,4 +40,4 @@ stages:
         cd barappui
         npm install
         npm run build
-    displayName: 'npm install and build'
+    displayName: 'Build UI'
