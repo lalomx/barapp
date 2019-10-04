@@ -12,6 +12,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
+      barId: {
+        allowNull: false,
+        type: Sequelize.UUID,
+        references: {
+          model: 'Bares',
+          key: 'id'
+        },
+      },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     });

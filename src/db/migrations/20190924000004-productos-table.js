@@ -1,42 +1,39 @@
 'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('Productos', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID
       },
-      username: {
+      name: {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      password: Sequelize.STRING,
-      nombre: {
-        allowNull: true,
-        type: Sequelize.TEXT
-      },
-      apellido: {
-        allowNull: true,
-        type: Sequelize.TEXT
-      },
-      email: {
+      type: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
-      roleId: {
+      precio: {
+        allowNull: false,
+        type: Sequelize.DOUBLE
+      },
+      menuId: {
+        allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'Roles',
+          model: 'Menus',
           key: 'id'
         },
-        allowNull: false
       },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     });
   },
+
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('Productos');
   }
 };

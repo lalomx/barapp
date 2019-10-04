@@ -6,39 +6,45 @@ export interface ProductoAttributes extends Model {
   name: string;
   type: string;
   precio: number;
+  menuId: string;
   createdAt?: Date;
   updatedAt?: Date;
 };
 
-type ProductoModel = typeof Model  &
-(new (values?: object, options?: BuildOptions) => ProductoAttributes) & {
+type ProductoModel = typeof Model &
+  (new (values?: object, options?: BuildOptions) => ProductoAttributes) & {
   associate: (model: BarServicesDB) => any;
 };
 
 const productoFactory = (sequalize: Sequelize) => {
-    const Producto = (<ProductoModel>sequalize.define('Productos', {
-      id: {
-        allowNull: false,
-        primaryKey: true,
-        type: DataTypes.UUID
-      },
-      name: {
-        allowNull: false,
-        type: DataTypes.TEXT
-      },
-      type: {
-        allowNull: false,
-        type: DataTypes.STRING
-      },
-      precio: {
-        allowNull: false,
-        type: DataTypes.DOUBLE
-      },
-      createdAt: DataTypes.DATE,
-      updatedAt: DataTypes.DATE,
-    })) as ProductoModel;
-  
-    return Producto;
+  const Producto = (<ProductoModel>sequalize.define('Productos', {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID
+    },
+    name: {
+      allowNull: false,
+      type: DataTypes.TEXT
+    },
+    type: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    precio: {
+      allowNull: false,
+      type: DataTypes.DOUBLE
+    },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
+  })) as ProductoModel;
+
+  Producto.associate = (db: BarServicesDB) => {
+    Producto.belongsTo(db.Comanda, { foreignKey: { name: 'menuId' }, as: 'menu' });
+    Producto.belongsToMany(db.Inventario, { through: 'InventarioProductos', foreignKey: 'productoId', as: 'stock' });
+    Producto.belongsToMany(db.Personas, { through: 'PersonaProductos', foreignKey: 'productoId', as: 'personas' })
   };
-  
-  export { productoFactory, ProductoModel };
+  return Producto;
+};
+
+export { productoFactory, ProductoModel };

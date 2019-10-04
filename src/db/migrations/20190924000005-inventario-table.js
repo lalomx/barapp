@@ -2,21 +2,21 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Productos', {
+    return queryInterface.createTable('Inventarios', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID
       },
-      name: {
+      quantity: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.DOUBLE
       },
-      type: {
+      unitPrice: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.DOUBLE
       },
-      precio: {
+      unitLimit: {
         allowNull: false,
         type: Sequelize.DOUBLE
       },
@@ -26,6 +26,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Productos');
+    return queryInterface.dropTable('Inventarios');
   }
 };

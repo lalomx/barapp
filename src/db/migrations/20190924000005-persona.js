@@ -1,42 +1,35 @@
 'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('Personas', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID
       },
-      username: {
+      name: {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      password: Sequelize.STRING,
-      nombre: {
-        allowNull: true,
-        type: Sequelize.TEXT
-      },
-      apellido: {
-        allowNull: true,
-        type: Sequelize.TEXT
-      },
-      email: {
+      table: {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      roleId: {
+      comandaId: {
+        allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'Roles',
+          model: 'Comandas',
           key: 'id'
         },
-        allowNull: false
       },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     });
   },
+
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('Personas');
   }
 };

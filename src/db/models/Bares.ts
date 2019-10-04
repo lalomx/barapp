@@ -15,7 +15,7 @@ type BarModel = typeof Model  &
 };
 
 const barFactory = (sequalize: Sequelize) => {
-    const Role = (<BarModel>sequalize.define('Bares', {
+    const Bar = (<BarModel>sequalize.define('Bares', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -33,7 +33,7 @@ const barFactory = (sequalize: Sequelize) => {
       updatedAt: DataTypes.DATE,
     })) as BarModel;
   
-    return Role;
+    return Bar;
   };
   
   export { barFactory, BarModel };
