@@ -2,14 +2,18 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Roles', {
+    return queryInterface.createTable('Bares', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID
       },
-      roleName: {
+      barName: {
         allowNull: false,
+        type: Sequelize.STRING
+      },
+      address: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: Sequelize.DATE,
@@ -18,6 +22,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Roles');
+    return queryInterface.dropTable('Bares');
   }
 };

@@ -40,35 +40,31 @@ const userFactory = (sequalize: Sequelize) => {
     },
     username: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     password: DataTypes.STRING,
     nombre: {
       allowNull: true,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     apellido: {
       allowNull: true,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     email: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     roleId: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   })) as UserModel;
 
   User.associate = (db: BarServicesDB) => {
-    User.belongsTo(db.Role, {
-      foreignKey: {
-        name: 'roleId',
-      }
-    });
+    User.belongsTo(db.Role, { foreignKey: { name: 'roleId' }, as: 'role' });
   };
   User.beforeCreate = (user: any) => user.password = bcrypt.hash(user.password, bcrypt.genSaltSync(8));
   User.prototype.validPassword = function (password: any): boolean {
@@ -76,9 +72,7 @@ const userFactory = (sequalize: Sequelize) => {
   };
   User.getUserInfo = async (user: string) => {
     const userFound = await User.findOne({
-      where: { username: user },
-      include: [ 'Role' ],
-      rejectOnEmpty: false
+      where: { username: user }, include: ['role'], rejectOnEmpty: false
     }) as any
     if (!userFound) return null;
     return {
@@ -87,7 +81,7 @@ const userFactory = (sequalize: Sequelize) => {
       nombre: userFound.nombre,
       apellido: userFound.apellido,
       email: userFound.email,
-      role:userFound.Role.roleName
+      role: userFound.Role.roleName
     }
   }
 
