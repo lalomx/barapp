@@ -1,8 +1,11 @@
-import passport from 'passport';
 import { BarServicesDB } from "../interfaces/BarServicesDB";
 import { Router, Request, Response } from "express";
 import { BaseService } from "./BaseService";
-import { Sequelize } from 'sequelize';
+import moment from 'moment';
+import Sequelize from 'sequelize';
+import { Dashboard } from "../interfaces/dashboard/Dashboard";
+import { StockChart } from "../interfaces/dashboard/StockChart";
+const Op = Sequelize.Op;
 
 export class DashboardService extends BaseService {
   private db: BarServicesDB;
@@ -19,7 +22,7 @@ export class DashboardService extends BaseService {
   }
 
   private async getDashboard(req: Request, res: Response) {
-    const personas = await this.db.sequelize.query(
+    const stockQueryResult = await this.db.sequelize.query(
       `SELECT 
         date_trunc('day', "pp"."createdAt") as date,
         "p"."name" as product,
@@ -32,8 +35,27 @@ export class DashboardService extends BaseService {
       LEFT OUTER JOIN "Personas" AS "pe" ON "pp"."personaId" = "pe"."id"
       LEFT OUTER JOIN "Comandas" AS "c" ON "pe"."comandaId" = "c"."id"
       WHERE "c"."status" = 0 OR "c"."status" = 1
-      GROUP BY date, product, stock;`)
-    console.log(personas[0][0]);
-    res.send(personas[0]);
+      GROUP BY date, product, stock;`);
+
+    const d = moment().subtract(7, 'days').toDate();
+    const sales = await this.db.Comanda.findAll({
+      where: {
+        createdAt: {
+          [Op.gte]: d,
+          [Op.lte]: moment().toDate()
+        },
+      },
+      group: ['date'],
+      attributes: [
+        [Sequelize.fn('date_trunc', 'day', Sequelize.col('createdAt')), 'date'],
+        [Sequelize.fn('sum', Sequelize.col('total')), 'total']]
+    })
+
+    const stock = stockQueryResult[0] as StockChart[];
+    const dashboard = {
+      stock,
+      sales
+    } as Dashboard;
+    res.send(dashboard);
   }
 }
