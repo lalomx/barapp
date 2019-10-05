@@ -23,7 +23,7 @@ const personaFactory = (sequalize: Sequelize) => {
     },
     name: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     comandaId: {
       allowNull: false,

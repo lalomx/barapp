@@ -24,7 +24,7 @@ const menuFactory = (sequalize: Sequelize) => {
     },
     menuName: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     barId: {
       allowNull: false,

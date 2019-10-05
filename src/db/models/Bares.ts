@@ -23,11 +23,11 @@ const barFactory = (sequalize: Sequelize) => {
       },
       barName: {
         allowNull: false,
-        type: DataTypes.TEXT
+        type: DataTypes.STRING
       },
       address: {
         allowNull: true,
-        type: DataTypes.TEXT
+        type: DataTypes.STRING
       },
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,

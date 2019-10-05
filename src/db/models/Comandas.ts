@@ -26,7 +26,7 @@ const comandaFactory = (sequalize: Sequelize) => {
     },
     table: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     total: {
       allowNull: false,

@@ -10,7 +10,7 @@ module.exports = {
       },
       menuName: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       barId: {
         allowNull: false,

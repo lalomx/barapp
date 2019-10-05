@@ -10,7 +10,7 @@ module.exports = {
       },
       roleName: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,

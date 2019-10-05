@@ -10,11 +10,11 @@ module.exports = {
       },
       barName: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       address: {
         allowNull: true,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,

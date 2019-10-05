@@ -25,7 +25,7 @@ const productoFactory = (sequalize: Sequelize) => {
     },
     name: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     type: {
       allowNull: false,

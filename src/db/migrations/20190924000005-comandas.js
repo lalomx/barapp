@@ -10,7 +10,7 @@ module.exports = {
       },
       table: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       total: {
         allowNull: false,

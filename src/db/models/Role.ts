@@ -22,7 +22,7 @@ const roleFactory = (sequalize: Sequelize) => {
       },
       roleName: {
         allowNull: false,
-        type: DataTypes.TEXT
+        type: DataTypes.STRING
       },
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,

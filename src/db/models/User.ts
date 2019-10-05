@@ -40,24 +40,24 @@ const userFactory = (sequalize: Sequelize) => {
     },
     username: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     password: DataTypes.STRING,
     nombre: {
       allowNull: true,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     apellido: {
       allowNull: true,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     email: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     roleId: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,

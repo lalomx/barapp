@@ -9,20 +9,20 @@ module.exports = {
       },
       username: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       password: Sequelize.STRING,
       nombre: {
         allowNull: true,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       apellido: {
         allowNull: true,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       email: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       roleId: {
         type: Sequelize.UUID,
