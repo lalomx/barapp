@@ -41,7 +41,7 @@ const inventarioProductosFactory = (sequalize: Sequelize) => {
   })) as InventarioProductosModel;
 
   InventarioProductos.associate = (db: BarServicesDB) => {
-    InventarioProductos.belongsTo(db.Productos, { foreignKey: 'productoId' })
+    InventarioProductos.belongsTo(db.Producto, { foreignKey: 'productoId' })
     InventarioProductos.belongsTo(db.Inventario, { foreignKey: 'inventarioId' })
   };
 

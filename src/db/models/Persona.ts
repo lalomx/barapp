@@ -33,17 +33,13 @@ const personaFactory = (sequalize: Sequelize) => {
         key: 'id'
       },
     },
-    table: {
-      allowNull: false,
-      type: DataTypes.STRING,
-    },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   })) as PersonaModel;
 
   Persona.associate = (db: BarServicesDB) => {
     Persona.belongsTo(db.Comanda, { foreignKey: { name: 'comandaId' }, as: 'comanda' });
-    Persona.belongsToMany(db.Productos, {through: 'PersonaProductos', foreignKey: 'personaId', as: 'productos'})
+    Persona.belongsToMany(db.Producto, {through: 'PersonaProductos', foreignKey: 'personaId', as: 'productos'})
   };
 
   return Persona;

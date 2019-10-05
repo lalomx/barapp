@@ -4,6 +4,14 @@ import Sequelize from 'sequelize'
 import { userFactory } from './User';
 import { roleFactory } from './Role';
 import config from '../../config';
+import { barFactory } from './Bares';
+import { inventarioFactory } from './Inventario';
+import { menuFactory } from './Menus';
+import { personaFactory } from './Persona';
+import { productoFactory } from './Productos';
+import { inventarioProductosFactory } from './InventarioProductos';
+import { PersonaProductosFactory } from './PersonaProductos';
+import { comandaFactory } from './Comandas';
 
 export const createDb = (): BarServicesDB => {
   let sequelize: Sequelize.Sequelize;
@@ -23,7 +31,15 @@ export const createDb = (): BarServicesDB => {
   const db: BarServicesDB = {
     sequelize,
     User: userFactory(sequelize),
-    Role: roleFactory(sequelize)
+    Role: roleFactory(sequelize),
+    Bar: barFactory(sequelize),
+    Inventario: inventarioFactory(sequelize),
+    Menu: menuFactory(sequelize),
+    Persona: personaFactory(sequelize),
+    Producto: productoFactory(sequelize),
+    InventarioProducto: inventarioProductosFactory(sequelize),
+    PersonaProducto: PersonaProductosFactory(sequelize),
+    Comanda: comandaFactory(sequelize)
   }
 
   Object.keys(db).forEach(modelName => {

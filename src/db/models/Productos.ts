@@ -42,7 +42,7 @@ const productoFactory = (sequalize: Sequelize) => {
   Producto.associate = (db: BarServicesDB) => {
     Producto.belongsTo(db.Comanda, { foreignKey: { name: 'menuId' }, as: 'menu' });
     Producto.belongsToMany(db.Inventario, { through: 'InventarioProductos', foreignKey: 'productoId', as: 'stock' });
-    Producto.belongsToMany(db.Personas, { through: 'PersonaProductos', foreignKey: 'productoId', as: 'personas' })
+    Producto.belongsToMany(db.Persona, { through: 'PersonaProductos', foreignKey: 'productoId', as: 'personas' })
   };
   return Producto;
 };

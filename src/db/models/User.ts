@@ -81,7 +81,7 @@ const userFactory = (sequalize: Sequelize) => {
       nombre: userFound.nombre,
       apellido: userFound.apellido,
       email: userFound.email,
-      role: userFound.Role.roleName
+      role: userFound.role.roleName
     }
   }
 

@@ -14,9 +14,10 @@ export class UserService extends BaseService {
   }
 
   init(router: Router) {
-    router['get'](`${this.API_BASE}users`, passport.authenticate('jwt', { session: false }), this.getAllUsers.bind(this));
+    router['get'](`${this.API_BASE}users`, this.getAllUsers.bind(this));
     router['post'](`${this.API_BASE}users`, this.addUser.bind(this));
     router['get'](`${this.API_BASE}users/:user`, this.getUser.bind(this));
+    router['put'](`${this.API_BASE}users/:user`, this.updateUser.bind(this));
   }
   private async getAllUsers(req: Request, res: Response) {
     this.db.User.findAll()
@@ -35,5 +36,9 @@ export class UserService extends BaseService {
     } else {
       res.send(user);
     }
+  }
+
+  private updateUser(req: Request, res: Response) {
+    res.status(200);
   }
 }
