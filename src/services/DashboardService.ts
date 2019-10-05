@@ -22,9 +22,9 @@ export class DashboardService extends BaseService {
     const personas = await this.db.sequelize.query(
       `SELECT 
         date_trunc('day', "pp"."createdAt") as date,
-        "p"."name" as productName,
+        "p"."name" as product,
         "i"."quantity" as stock,
-        COUNT("pp"."productoId")
+        COUNT("pp"."productoId") as sold
       FROM "PersonaProductos" as "pp"
       LEFT OUTER JOIN "Productos" AS "p" ON "pp"."productoId" = "p"."id"
       LEFT OUTER JOIN "InventarioProductos" AS "ip" ON "pp"."productoId" = "ip"."productoId"
@@ -32,7 +32,7 @@ export class DashboardService extends BaseService {
       LEFT OUTER JOIN "Personas" AS "pe" ON "pp"."personaId" = "pe"."id"
       LEFT OUTER JOIN "Comandas" AS "c" ON "pe"."comandaId" = "c"."id"
       WHERE "c"."status" = 0 OR "c"."status" = 1
-      GROUP BY date, productName, stock;`)
+      GROUP BY date, product, stock;`)
     console.log(personas[0][0]);
     res.send(personas[0]);
   }
