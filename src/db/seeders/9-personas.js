@@ -58,7 +58,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      id: '7719373f-511d-4b71-b16e-f189d4c535ee',
+      id: 'bd4097a3-2c31-4bd3-80c0-1e39b027d7d2',
       name: 'Sra Alicia',
       comandaId: 'f6091fda-de32-438a-80d5-be096c1c32c7',
       createdAt: new Date(),

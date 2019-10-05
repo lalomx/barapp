@@ -13,6 +13,28 @@ module.exports = {
       email: 'lalo0892@gmail.com',
       createdAt: new Date(),
       updatedAt: new Date()
+    }, 
+    {
+      id: 'aecd68f8-acf5-4c00-8d8c-bd881966bd4f',
+      username: 'campoamor',
+      password: bcrypt.hashSync('b@rS3rv1s3s', bcrypt.genSaltSync(8)),
+      nombre: 'Campo',
+      apellido: 'Amor',
+      roleId: '12b0f054-1a4d-4c24-ac12-95fe695b2c96',
+      email: 'lalo0892@gmail.com',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, 
+    {
+      id: '14785238-e059-4ab5-9085-7889de683fa0',
+      username: 'mesero',
+      password: bcrypt.hashSync('b@rS3rv1s3s', bcrypt.genSaltSync(8)),
+      nombre: 'Estef',
+      apellido: 'Hernandez',
+      roleId: '9f991291-617f-4108-982d-e628b81ed68d',
+      email: 'lalo0892@gmail.com',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }]);
   },
 
