@@ -6,6 +6,6 @@ import { ProductsChart } from "./ProductsChart";
 export interface Dashboard {
     stock: StockChart[];
     sales: SalesChart[];
-    // tables: TablesChart;
-    // products: ProductsChart;
+    tables: TablesChart[];
+    products: ProductsChart[];
 } 

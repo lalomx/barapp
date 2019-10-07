@@ -22,6 +22,15 @@ export class DashboardService extends BaseService {
   }
 
   private async getDashboard(req: Request, res: Response) {
+    const lastWeek = moment().subtract(7, 'days').format('YYYY-MM-DD');
+    const today = moment().format('YYYY-MM-DD');
+    const where = {
+      createdAt: {
+        [Op.gte]: lastWeek,
+        [Op.lte]: today
+      }
+    }
+
     const stockQueryResult = await this.db.sequelize.query(
       `SELECT 
         date_trunc('day', "pp"."createdAt") as date,
@@ -34,27 +43,62 @@ export class DashboardService extends BaseService {
       LEFT OUTER JOIN "Inventarios" AS "i" ON "ip"."inventarioId" = "i"."id"
       LEFT OUTER JOIN "Personas" AS "pe" ON "pp"."personaId" = "pe"."id"
       LEFT OUTER JOIN "Comandas" AS "c" ON "pe"."comandaId" = "c"."id"
-      WHERE "c"."status" = 0 OR "c"."status" = 1
+      WHERE "c"."status" = 0 OR "c"."status" = 1 
+        AND ("c"."createdAt" >= '${lastWeek}' AND "c"."createdAt" <= '${today}')
       GROUP BY date, product, stock;`);
-
-    const d = moment().subtract(7, 'days').toDate();
     const sales = await this.db.Comanda.findAll({
-      where: {
-        createdAt: {
-          [Op.gte]: d,
-          [Op.lte]: moment().toDate()
-        },
-      },
+      where,
       group: ['date'],
       attributes: [
         [Sequelize.fn('date_trunc', 'day', Sequelize.col('createdAt')), 'date'],
         [Sequelize.fn('sum', Sequelize.col('total')), 'total']]
-    })
+    });
 
+    const tables = await this.db.Comanda.findAll({
+      where,
+      group: ['table'],
+      attributes: [
+        'table',
+        [Sequelize.fn('sum', Sequelize.col('total')), 'total']
+      ]
+    });
+
+    const productsResult = await this.db.PersonaProducto.findAll({
+      include: [
+        {
+          association: 'producto',
+          attributes: [
+            'name',
+            [Sequelize.fn('count', Sequelize.col('producto.name')), 'count']
+          ]
+        },
+        {
+          association: 'persona',
+          attributes: [],
+          include: [{
+            association: 'comanda',
+            where,
+            attributes: []
+          }]
+        }
+      ],
+      attributes: [],
+      raw: true,
+      group: ['producto.name']
+    });
+
+    const products = productsResult.map((p: any) => {
+      return {
+        name: p['producto.name'],
+        count: p['producto.count']
+      }
+    });
     const stock = stockQueryResult[0] as StockChart[];
     const dashboard = {
       stock,
-      sales
+      sales,
+      tables,
+      products
     } as Dashboard;
     res.send(dashboard);
   }
