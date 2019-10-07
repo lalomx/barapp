@@ -5,13 +5,13 @@ color: {{colors}}<br/>
 plugins: {{plugins}}<br/> -->
 <!-- <app-loader [visible]="loading"></app-loader>
 <app-no-data *ngIf="showNoRecordsMessage" [msg]="noRecordsMsg"></app-no-data> -->
+<p *ngIf="showNoRecordsMessage"> {{noRecordsMsg}}</p>
 <div *ngIf="show">
-    <canvas ngChartjs 
-            [datasets]="lineChartData" 
-            [labels]="lineChartLabels" 
-            [options]="lineChartOptions" 
-            [legend]="lineChartLegend"
-            [chartType]="lineChartType"
-            [colors]="colors" >
-    </canvas>
+  <canvas ngChartjs 
+    [datasets]="chartData"
+    [labels]="chartLabels"
+    [options]="chartOptions"
+    legend="true"
+    [chartType]="chartType">
+  </canvas>
 </div>

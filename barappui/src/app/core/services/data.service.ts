@@ -39,8 +39,8 @@ export class DataService {
       );
   }
 
-  public getAll() {
-    return this.httpClient.get<any[]>(`${this.getUrl()}`, this.httpOptions)
+  public getAll<T>() {
+    return this.httpClient.get<T>(`${this.getUrl()}`, this.httpOptions)
       .pipe(
         catchError(e => this.handleError(e))
       );
