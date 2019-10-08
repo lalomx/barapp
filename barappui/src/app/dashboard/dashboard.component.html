@@ -2,25 +2,34 @@
   <div class="uk-child-width-1-2 uk-text-center" uk-grid>
     <div>
       <div class="uk-card uk-card-default uk-card-body">
-        <app-line-chart 
-          [data]="salesChart"
-          [labels]="salesChartLabels"></app-line-chart>
-      </div>
-    </div>
-    <!-- <div>
-      <div class="uk-card uk-card-default uk-card-body">
-        <app-chart></app-chart>
+        <app-line-chart [data]="salesChart" [labels]="salesChartLabels"></app-line-chart>
       </div>
     </div>
     <div>
       <div class="uk-card uk-card-default uk-card-body">
-        <app-chart></app-chart>
+        <app-bar-chart [data]="stockChart" [labels]="stockChartLabels"></app-bar-chart>
       </div>
     </div>
     <div>
       <div class="uk-card uk-card-default uk-card-body">
-        <app-chart></app-chart>
+        <app-pie-chart [data]="tablesChart" [labels]="tablesChartLabels"></app-pie-chart>
       </div>
-    </div> -->
+    </div>
+    <div>
+      <div class="uk-card uk-card-default uk-card-body">
+        <p *ngIf="!productsMostSold || !productsMostSold?.length">No hay datos</p>
+        <div *ngIf="productsMostSold && productsMostSold?.length">
+          <p>Productos mas vendidos</p>
+          <ul class="uk-list uk-text-left">
+            <li *ngFor="let product of productsMostSold">
+              <div class="uk-grid-small" uk-grid>
+                <div class="uk-width-expand" uk-leader>{{product.name}}</div>
+                <div>{{product.count}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </app-page>

@@ -1,24 +1,19 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { LineChartData } from '../../interfaces/LineChartData';
+import { Component } from '@angular/core';
+import { ChartComponent } from '../chart/chart.component';
 
 @Component({
   selector: 'app-line-chart',
-  templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.less']
+  templateUrl: '../chart/chart.component.html'
 })
-export class LineChartComponent implements OnChanges {
-
-  @Input() data: LineChartData[];
-  @Input() labels: string[];
-
+export class LineChartComponent extends ChartComponent {
   lineChartOptions: any = {
     responsive: true
   };
 
-  chartData: LineChartData[];
+  chartType = 'line';
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.chartData = changes.data.currentValue;
+  protected ngOnInitCore() {
+    console.log('childs method');
+    this.options = this.lineChartOptions;
   }
-
 }

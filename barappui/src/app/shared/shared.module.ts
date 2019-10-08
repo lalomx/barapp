@@ -5,15 +5,17 @@ import { ChartComponent } from './chart/chart/chart.component';
 
 import { NgChartjsModule } from 'ng-chartjs';
 import { LineChartComponent } from './chart/line-chart/line-chart.component';
+import { BarChartComponent } from './chart/bar-chart/bar-chart.component';
+import { PieChartComponent } from './chart/pie-chart/pie-chart.component';
 
 
 @NgModule({
-  declarations: [PageComponent, ChartComponent, LineChartComponent],
+  declarations: [PageComponent, ChartComponent, LineChartComponent, BarChartComponent, PieChartComponent],
   imports: [
     CommonModule,
     NgChartjsModule,
     NgChartjsModule.registerPlugin()
   ],
-  exports: [PageComponent, ChartComponent, LineChartComponent]
+  exports: [PageComponent, LineChartComponent, BarChartComponent, PieChartComponent]
 })
 export class SharedModule { }

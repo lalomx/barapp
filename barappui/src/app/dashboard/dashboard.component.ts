@@ -7,8 +7,7 @@ import * as moment from 'moment';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.less']
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
 
@@ -16,6 +15,17 @@ export class DashboardComponent implements OnInit {
 
   constructor(private readonly dataServiceFactory: DataServiceFactory) {
     this.dashboardService = dataServiceFactory.create('dashboard');
+  }
+
+  salesChart: LineChartData[];
+  salesChartLabels: string[];
+  stockChart: any;
+  stockChartLabels: string[];
+  tablesChart: any;
+  tablesChartLabels: string[];
+  productsMostSold: any[];
+
+  ngOnInit() {
     this.dashboardService.getAll<any>().subscribe(p => {
       console.log(p);
       this.salesChart = [{
@@ -23,14 +33,20 @@ export class DashboardComponent implements OnInit {
         data: p.sales.map(s => s.total)
       }];
       this.salesChartLabels = p.sales.map(s => moment(s.date).format('dddd'));
-      console.log(this.salesChartLabels);
+      this.stockChart = [{
+        label: 'Vendido',
+        data: p.stock.map(s => s.sold)
+      }, {
+        label: 'Stock',
+        data: p.stock.map(s => s.stock)
+      }];
+      this.stockChartLabels = p.stock.map(s => s.product);
+      this.tablesChart = [{
+        label: 'Consumo por mesa',
+        data: p.tables.map(t => t.total)
+      }];
+      this.tablesChartLabels = p.tables.map(t => `Mesa: ${t.table}`);
+      this.productsMostSold = p.products;
     });
   }
-
-  salesChart: LineChartData[];
-  salesChartLabels: string[];
-
-  ngOnInit() {
-  }
-
 }
