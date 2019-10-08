@@ -13,7 +13,6 @@ export class LineChartComponent extends ChartComponent {
   chartType = 'line';
 
   protected ngOnInitCore() {
-    console.log('childs method');
     this.options = this.lineChartOptions;
   }
 }
