@@ -1,51 +1,51 @@
 <nav class="uk-navbar-container uk-margin uk-padding-small uk-padding-remove-top uk-padding-remove-bottom" uk-navbar>
   <div class="uk-navbar-left">
-    <a class="uk-navbar-item uk-logo" href="#">Bar Services</a>
+    <a class="uk-navbar-item uk-logo" routerLink="/">Bar Services</a>
     <ul class="uk-navbar-nav">
-      <li class="uk-active">
+      <li routerLinkActive="uk-active">
         <a routerLink="/">Dashboard</a>
       </li>
-      <li>
+      <li routerLinkActive="uk-active">
         <a routerLink="/comandas">Comandas</a>
         <!-- <div class="uk-navbar-dropdown">
           <ul class="uk-nav uk-navbar-dropdown-nav">
             <li class="uk-active">
-              <a href="#">Dashboard</a>
+              <a routerLink="/comandas">Dashboard</a>
             </li>
             <li>
-              <a href="#">Comandas</a>
+              <a routerLink="/comandas">Comandas</a>
             </li>
             <li>
-              <a href="#">Inventario</a>
+              <a routerLink="/comandas">Inventario</a>
             </li>
           </ul>
         </div> -->
       </li>
       <li>
-        <a href="#">Inventario</a>
+        <a routerLink="/inventario">Inventario</a>
       </li>
       <li>
-        <a href="#">Menús</a>
+        <a routerLink="/menus">Menús</a>
       </li>
       <li>
-        <a href="#">Alertas</a>
+        <a routerLink="/alertas">Alertas</a>
       </li>
       <li>
-        <a href="#">Reportes</a>
+        <a routerLink="/reportes">Reportes</a>
       </li>
     </ul>
   </div>
   <div class="uk-navbar-right">
     <ul class="uk-navbar-nav">
       <li class="uk-active">
-        <a href="#">Settings</a>
+        <a routerLink="/comandas">Settings</a>
       </li>
       <li>
-        <a href="#">{{user?.username}}</a>
+        <a routerLink="/comandas">{{user?.username}}</a>
         <div class="uk-navbar-dropdown">
           <ul class="uk-nav uk-navbar-dropdown-nav">
             <li>
-              <a href="#">Perfil</a>
+              <a routerLink="/comandas">Perfil</a>
             </li>
             <li>
               <a (click)="logout()">Cerrar sesión</a>
