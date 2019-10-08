@@ -1,6 +1,7 @@
 import { Sequelize, Model, DataTypes, BuildOptions } from 'sequelize';
 import { BarServicesDB } from '../../interfaces/BarServicesDB';
 import { ComandaStatus } from '../../interfaces/ComandaStatus';
+import { PersonaAttributes } from './Persona';
 
 export interface ComandaAttributes extends Model {
   id: string;
@@ -9,6 +10,7 @@ export interface ComandaAttributes extends Model {
   status: ComandaStatus;
   createdAt?: Date;
   updatedAt?: Date;
+  personas: PersonaAttributes[] | any[];
 };
 
 type ComandaModel = typeof Model &
@@ -39,6 +41,10 @@ const comandaFactory = (sequalize: Sequelize) => {
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   })) as ComandaModel;
+
+  Comanda.associate = (db: BarServicesDB) => {
+    Comanda.hasMany(db.Persona, { sourceKey: 'id', foreignKey: 'comandaId',  as: 'personas' })
+  };
 
   return Comanda;
 };

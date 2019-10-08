@@ -115,10 +115,6 @@ export class AuthenticationMiddleware {
   }
 
   private logout(req: Request, res: Response) {
-    // let authToken = req.header('Authorization');
-    // authToken = authToken ? authToken.replace('Bearer ', '') : undefined;
-    // console.log(authToken);
-    // TODO: agregar token black list
     req.logout();
     res.status(200).send('ok');
   }
@@ -130,10 +126,6 @@ export class AuthenticationMiddleware {
 
   private ensureAuthenticate(req: Request, res: Response, next: NextFunction) {
     passport.authenticate('jwt', { session: false }, (err, user, info) => {
-      // let authToken = req.header('Authorization');
-      // authToken = authToken ? authToken.replace('Bearer ', '') : undefined;
-      // console.log(authToken);
-      // if (!this.allowedTokens.some(t => t === authToken)) { return (next(new HTTP401Error('Session expired')))}
       if (info) { return next(new HTTP401Error(info.message)); }
       if (err) { return next(err); }
       if (!user) { return next(new HTTP401Error("You are not allowed to access.")); }
