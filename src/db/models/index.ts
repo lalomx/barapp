@@ -15,7 +15,7 @@ import { comandaFactory } from './Comandas';
 
 export const createDb = (): BarServicesDB => {
   let sequelize: Sequelize.Sequelize;
-  sequelize = new Sequelize.Sequelize(config.db.uri, 
+  sequelize = new Sequelize.Sequelize(process.env.NODE_ENV === 'development' ? config.db.uri : config.prod.uri, 
   // {
   //   logging: (message: string) => {
   //     const healthCheckQuery = 'Executing (default): SELECT 1+1 AS result';

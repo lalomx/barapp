@@ -17,7 +17,7 @@
     "username": "bardb",
     "password": "bardb_pass",
     "database": "bardb",
-    "host": "127.0.0.1",
+    "host": "host.docker.internal",
     "dialect": "postgres"
   }
 }
