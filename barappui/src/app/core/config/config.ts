@@ -1,4 +1,7 @@
-export const server = 'http://localhost:3000';
+import { environment } from 'src/environments/environment';
+
+
+export const server = environment.production ? 'https://api.barservices.com' : 'http://localhost:3000';
 export const config = {
   api: `${ server }/api/v1/`,
   access_token: '',
