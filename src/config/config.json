@@ -4,6 +4,7 @@
     "password": "bardb_pass",
     "database": "bardb",
     "host": "127.0.0.1",
+    "seederStorage": "sequelize",
     "dialect": "postgres"
   },
   "test": {
@@ -17,7 +18,8 @@
     "username": "bardb",
     "password": "bardb_pass",
     "database": "bardb",
-    "host": "127.0.0.1",
+    "host": "database",
+    "seederStorage": "sequelize",
     "dialect": "postgres"
   }
 }
