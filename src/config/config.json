@@ -19,7 +19,6 @@
     "password": "bardb_pass",
     "database": "bardb",
     "host": "database",
-    "seederStorage": "sequelize",
     "dialect": "postgres"
   }
 }
