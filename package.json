@@ -4,11 +4,12 @@
   "description": "codigo fuente del barapp",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production npm run migrate && npm run build && node ./dist/server.js",
+    "start": "NODE_ENV=production npm run unseed && npm run migrate && npm run build && node ./dist/server.js",
     "build": "npx tsc",
     "dev": "tsc-watch --onSuccess \"node ./dist/server.js\"",
     "migrate": "npx sequelize-cli db:migrate",
-    "seed": "npx sequelize-cli db:seed:all"
+    "seed": "npx sequelize-cli db:seed:all",
+    "unseed": "npx sequelize-cli db:seed:undo:all"
   },
   "repository": {
     "type": "git",
