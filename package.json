@@ -36,6 +36,7 @@
     "@types/passport": "^1.0.1",
     "@types/passport-jwt": "^3.0.2",
     "@types/passport-local": "^1.0.33",
+    "@types/uuid": "^3.4.5",
     "@types/validator": "^10.11.3",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
@@ -53,7 +54,8 @@
     "sequelize": "^5.19.0",
     "sequelize-cli": "^5.5.1",
     "tsc-watch": "^3.0.2",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@types/sequelize": "^4.28.4",

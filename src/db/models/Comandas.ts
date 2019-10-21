@@ -10,7 +10,7 @@ export interface ComandaAttributes extends Model {
   status: ComandaStatus;
   createdAt?: Date;
   updatedAt?: Date;
-  personas: PersonaAttributes[] | any[];
+  personas?: PersonaAttributes[] | any[];
 };
 
 type ComandaModel = typeof Model &
