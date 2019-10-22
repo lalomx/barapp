@@ -32,6 +32,7 @@ export class LoginComponent {
   async onSubmit() {
     this.submitted = true;
     if (this.loginForm.invalid) {
+      this.submitted = false;
       return;
     }
 
@@ -44,6 +45,8 @@ export class LoginComponent {
       this.errors = e;
       console.log('error');
       console.log(e);
+    } finally {
+      this.submitted = false;
     }
   }
 }

@@ -1,0 +1,32 @@
+<app-loading [loading]="loading"></app-loading>
+<div *ngIf="!loading" class="uk-animation-fade">
+  <table class="uk-table uk-table-divider uk-width-1-1">
+    <thead>
+      <tr>
+        <th class="uk-width-small">Actions</th>
+        <th>Table Heading</th>
+        <th>Table Heading</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <a href="#" class="uk-icon-link uk-margin-small-right" uk-icon="pencil"></a>
+          <a href="#" class="uk-icon-link uk-margin-small-right" uk-icon="trash"></a>
+        </td>
+        <td>Table Data</td>
+        <td>Table Data</td>
+      </tr>
+      <tr>
+        <td>Table Data</td>
+        <td>Table Data</td>
+        <td>Table Data</td>
+      </tr>
+      <tr>
+        <td>Table Data</td>
+        <td>Table Data</td>
+        <td>Table Data</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
