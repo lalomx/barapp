@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataServiceFactory } from '../core/services/data-service-factory.service';
+import { DataService } from '../core/services/data.service';
 
 @Component({
   selector: 'app-inventario',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventarioComponent implements OnInit {
 
-  constructor() { }
+  private inventarioService: DataService;
 
-  ngOnInit() {
+  constructor(private readonly dataServiceFactory: DataServiceFactory) {
+    this.inventarioService = dataServiceFactory.create('inventario');
   }
 
+  inventario: any[];
+
+  ngOnInit() {
+    this.inventarioService.getAll<any[]>().subscribe(i => {
+      this.inventario = i;
+    });
+  }
 }

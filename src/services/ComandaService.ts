@@ -3,7 +3,6 @@ import { Router, Request, Response } from "express";
 import { BaseService } from "./BaseService";
 import Sequelize from 'sequelize';
 import moment from 'moment';
-import { ComandaStatus } from "../interfaces/ComandaStatus";
 import v4 from 'uuid';
 
 export class ComandaService extends BaseService {

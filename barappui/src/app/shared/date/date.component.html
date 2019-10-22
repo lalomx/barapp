@@ -1,6 +1,6 @@
 <div class="uk-inline">
   <a class="uk-form-icon uk-form-icon-flip" (click)="toggle()" uk-icon="icon: calendar"></a>
-  <input class="uk-input" type="text" [(ngModel)]="dated" [value]="dated"/>
+  <input class="uk-input" type="text" [(ngModel)]="dated" (keypress)="onKeypress($event)"/>
   <div #dateComponentUikit class="uk-position-bottom-left"></div>
   <ng2-flatpickr class="uk-hidden" [config]="datePickerConfig"></ng2-flatpickr>
 </div>

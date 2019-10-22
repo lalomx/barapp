@@ -10,7 +10,6 @@ export class AuthGuard implements CanActivate {
   async canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
-    console.log(next);
     if (await this.auth.isLoggedIn()) {
       return true;
     } else {

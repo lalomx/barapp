@@ -15,6 +15,10 @@ import { DateComponent } from './date/date.component';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { FormsModule, ReactiveFormsModule } from '../../../node_modules/@angular/forms';
 import { BrowserModule } from '../../../node_modules/@angular/platform-browser';
+import { EditComponent } from './edit/edit.component';
+import { PageNavComponent } from './pages/page-nav/page-nav.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { RouterModule } from '../../../node_modules/@angular/router';
 
 
 @NgModule({
@@ -26,11 +30,14 @@ import { BrowserModule } from '../../../node_modules/@angular/platform-browser';
     PieChartComponent,
     TableComponent,
     LoadingComponent,
-    DateComponent
+    DateComponent,
+    EditComponent,
+    PageNavComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     NgChartjsModule,
@@ -39,11 +46,13 @@ import { BrowserModule } from '../../../node_modules/@angular/platform-browser';
   ],
   exports: [
     PageComponent,
+    PageNavComponent,
     LineChartComponent,
     BarChartComponent,
     PieChartComponent,
     TableComponent,
-    DateComponent
+    DateComponent,
+    EditComponent
   ]
 })
 export class SharedModule { }

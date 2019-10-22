@@ -1,15 +1,2 @@
-<app-page title="Inventario">
-  <div class="uk-text-center" uk-grid>
-    <div class="uk-width-auto@m uk-width-1-1">
-        <app-date></app-date>
-    </div>
-    <div class="uk-width-expand@m uk-width-1-1">
-      <p>nuevo</p>
-    </div>
-  </div>
-  <div class="uk-text-left" uk-grid>
-    <div class="uk-width-1-1">
-      <app-table></app-table>
-    </div>
-  </div>
-</app-page>
+<app-edit metadataTableName="InventarioTable" metadataFormName="InventarioForm" [source]="inventario">
+</app-edit>

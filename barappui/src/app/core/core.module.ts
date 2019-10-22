@@ -7,6 +7,8 @@ import { StorageService } from './services/storage.service';
 import { BootstrapperService } from './services/bootstrapper.service';
 import { HttpClientModule } from '../../../node_modules/@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
+import { MetadataTableService } from './services/metadata-table.service';
+import { MetadataFormService } from './services/metadata-form.service';
 
 
 
@@ -22,7 +24,9 @@ import { AuthGuard } from './guards/auth.guard';
     AuthGuard,
     UserService,
     StorageService,
-    BootstrapperService]
+    BootstrapperService,
+    MetadataTableService,
+    MetadataFormService],
 
 })
 export class CoreModule { }

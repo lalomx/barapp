@@ -3,6 +3,7 @@ import { BarServicesDB } from '../../interfaces/BarServicesDB';
 
 export interface InventarioAttributes extends Model {
   id: string;
+  name: string;
   quantity: number;
   unitPrice: number;
   unitLimit: number;
@@ -21,6 +22,10 @@ const inventarioFactory = (sequalize: Sequelize) => {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID
+    },
+    name: {
+      allowNull: false,
+      type: DataTypes.STRING
     },
     quantity: {
       allowNull: false,

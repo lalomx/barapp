@@ -1,7 +1,6 @@
 import { BarServicesDB } from "../interfaces/BarServicesDB";
 import { Router, Request, Response } from "express";
 import { BaseService } from "./BaseService";
-import Sequelize from 'sequelize';
 
 export class InventarioService extends BaseService {
   private db: BarServicesDB;
@@ -17,7 +16,19 @@ export class InventarioService extends BaseService {
     router['get'](`${this.API_BASE}inventario`, this.getInventario.bind(this));
   }
 
-  private getInventario(req: Request, res: Response) {
-    res.send([]);
+  private async getInventario(req: Request, res: Response) {
+    const inventarios = await this.db.Inventario.findAll();
+    
+    res.send(inventarios.map(c => {
+      return {
+        id: c.id,
+        quantity: c.quantity,
+        name: c.name,
+        unitLimit: c.unitLimit,
+        unitPrice: c.unitPrice,
+        createdAt: c.createdAt,
+        updatedAt: c.updatedAt,
+      }
+    }));
   }
 }

@@ -8,15 +8,30 @@ import { ReportesComponent } from './reportes/reportes.component';
 import { MenuComponent } from './menu/menu.component';
 import { AlertaComponent } from './alerta/alerta.component';
 import { InventarioComponent } from './inventario/inventario.component';
+import { PageComponent } from './shared/pages/page/page.component';
+import { PageNavComponent } from './shared/pages/page-nav/page-nav.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, data: { isPublic: true } },
-  { path: '', component: InitComponent,
+  {
+    path: '', component: InitComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'comandas', component: ComandasComponent },
-      { path: 'inventario', component: InventarioComponent },
+      {
+        path: 'inventario', component: PageNavComponent,
+        data: {
+          title: 'Inventario',
+          tabs: [{ title: 'Almacen', path: 'almacen' }, { title: 'Productos', path: 'productos' }],
+          isTabbed: true,
+        },
+        children: [
+          { path: 'almacen', component: InventarioComponent, data: { title: 'Almacen'} },
+          { path: 'productos', component: AlertaComponent, data: { title: 'Produtos'} },
+          { path: '', pathMatch: 'full', redirectTo: 'almacen' },
+        ]
+      },
       { path: 'alertas', component: AlertaComponent },
       { path: 'menus', component: MenuComponent },
       { path: 'reportes', component: ReportesComponent },

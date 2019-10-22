@@ -1,7 +1,6 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import * as moment from 'moment';
 import { FlatpickrOptions, Ng2FlatpickrComponent } from '../../../../node_modules/ng2-flatpickr';
-import Russian from 'flatpickr/dist/l10n/ru.js';
 import { FlatpickrInstance } from '../../../../node_modules/ng2-flatpickr/src/flatpickr-instance';
 
 @Component({
@@ -15,19 +14,18 @@ export class DateComponent implements OnInit, AfterViewInit {
   @ViewChild(Ng2FlatpickrComponent, {static: false}) picker: Ng2FlatpickrComponent;
   @ViewChild('dateComponentUikit', {static: true}) dateP: ElementRef;
 
-  constructor() { }
-
-  selectedDate = moment().format('YYYY-MM-DD');
   datePickerConfig: FlatpickrOptions;
   show = false;
-  dated = 'adsasd';
+  dated = moment().format('YYYY-MM-DD');
 
   private instance: FlatpickrInstance;
 
   ngOnInit() {
     this.datePickerConfig = {
       onChange: this.onChange.bind(this),
-      appendTo: this.dateP.nativeElement
+      appendTo: this.dateP.nativeElement,
+      maxDate: moment().toDate(),
+      defaultDate: this.dated
     };
     this.show = true;
   }
@@ -37,13 +35,14 @@ export class DateComponent implements OnInit, AfterViewInit {
   }
 
   onChange(selectedDates: any, dateStr: any, instance: any) {
-    console.log(dateStr);
     this.dated = dateStr;
-    // this.inputPPP.nativeElement.trigger('input');
   }
 
   toggle() {
     this.instance.toggle();
   }
 
+  onKeypress(event: any) {
+    event.preventDefault();
+  }
 }
