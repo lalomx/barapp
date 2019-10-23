@@ -1,15 +1,17 @@
-<div class="uk-text-center" uk-grid>
-  <div class="uk-width-auto@m uk-width-1-1">
-    <ng-content></ng-content>
+<app-loading [loading]="loading"></app-loading>
+<div *ngIf="!loading">
+  <div class="uk-text-center" uk-grid>
+    <div class="uk-width-auto@m uk-width-1-1">
+      <ng-content></ng-content>
+    </div>
+    <div class="uk-width-expand@m uk-width-1-1">
+      <button class="uk-button uk-button-primary uk-align-right" (click)="onAdd()">
+        <span uk-icon="plus"></span> Nuevo</button>
+    </div>
   </div>
-  <div class="uk-width-expand@m uk-width-1-1">
-    <button class="uk-button uk-button-primary uk-align-right" (click)="onAdd()">
-      <span uk-icon="plus"></span> Nuevo</button>
-  </div>
-</div>
-<div class="uk-text-left" uk-grid>
-  <div class="uk-width-1-1">
-    <app-table [metadata]="tableMetadata"
-               [source]="tableDataSource"></app-table>
+  <div class="uk-text-left" uk-grid>
+    <div class="uk-width-1-1">
+      <app-table [metadata]="tableMetadata" [source]="tableDataSource"></app-table>
+    </div>
   </div>
 </div>

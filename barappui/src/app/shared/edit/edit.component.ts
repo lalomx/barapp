@@ -22,6 +22,7 @@ export class EditComponent implements OnInit, OnChanges {
   tableMetadata: any;
   formMetadata: any;
   tableDataSource: any[];
+  loading = true;
 
   ngOnInit() {
   }
@@ -36,6 +37,7 @@ export class EditComponent implements OnInit, OnChanges {
 
     if (changes.source && changes.source.currentValue) {
       this.tableDataSource = this.source;
+      setTimeout(() => this.loading = false, 3000);
     }
   }
 

@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class PageComponent {
 
   @Input() title: string;
+  @Input() show = true;
 }

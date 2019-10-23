@@ -13,12 +13,10 @@ export class TableComponent implements OnInit, OnChanges {
 
   constructor() { }
 
-  loading = true;
   columns: any[];
   hasData = false;
 
   ngOnInit() {
-    setTimeout(() => this.loading = false, 5000);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -27,8 +25,6 @@ export class TableComponent implements OnInit, OnChanges {
     }
 
     if (changes.source && changes.source.currentValue) {
-      console.log(this.source);
-      console.log('source');
       this.hasData = true;
     } else {
       this.hasData = false;

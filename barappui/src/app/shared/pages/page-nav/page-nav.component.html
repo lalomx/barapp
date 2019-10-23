@@ -1,4 +1,4 @@
-<app-page [title]="title">
+<app-page [title]="title" [show]="false">
   <ul *ngIf="isTabbed" uk-tab>
     <li *ngFor="let route of routes">
       <a [routerLink]="[route.path]">{{route.title}}</a>
