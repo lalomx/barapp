@@ -22,9 +22,11 @@ applyCommonMiddleware(router, db);
 applyRoutes(router, db);
 applyErrorMiddleware(router);
 
-const { PORT = 3000 } = process.env;
-const server = http.createServer(router);
 
-server.listen(PORT, () =>
-  console.log(`Server is running http://localhost:${PORT}...`)
+const server = http.createServer(router);
+const hostname = 'localhost';
+const port = 3000;
+
+server.listen(hostname, port, () =>
+  console.log(`Server is running http://localhost:${port}...`)
 );
