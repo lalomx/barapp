@@ -4,7 +4,7 @@
   "description": "codigo fuente del barapp",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production npm run seed && NODE_ENV=production npm run migrate && npm run build && node ./dist/server.js",
+    "start": "NODE_ENV=production npm run migrate && NODE_ENV=production npm run seed && npm run build && node ./dist/server.js",
     "build": "npx tsc",
     "dev": "tsc-watch --onSuccess \"node ./dist/server.js\"",
     "migrate": "npx sequelize-cli db:migrate",
