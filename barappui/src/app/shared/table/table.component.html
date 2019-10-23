@@ -8,12 +8,12 @@
     </thead>
     <div *ngIf="!hasData">Empty Data</div>
     <tbody *ngIf="hasData">
-      <tr *ngFor="let row of source">
-        <td>
-          <a href="#" class="uk-icon-link uk-margin-small-right" uk-icon="pencil"></a>
-          <a href="#" class="uk-icon-link uk-margin-small-right" uk-icon="trash"></a>
+      <tr *ngFor="let row of source; index as i" [id]="i+'-'+metadata.name">
+        <td [id]="metadata.name+'-actions'">
+          <a (click)="onEdit(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="pencil"></a>
+          <a (click)="onDelete(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="trash"></a>
         </td>
-        <td *ngFor="let column of columns">{{row[column.propertyName]}}</td>
+        <td *ngFor="let column of columns; index as j" [id]="metadata.name+'-'+column.propertyName">{{row[column.propertyName]}}</td>
       </tr>
     </tbody>
   </table>

@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output } from '@angular/core';
-import { EventEmitter } from '../../../../node_modules/@types/events';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-table',
@@ -10,6 +9,9 @@ export class TableComponent implements OnInit, OnChanges {
 
   @Input() source: any[];
   @Input() metadata: any;
+
+  @Output() editEntity = new EventEmitter<any>();
+  @Output() deleteEntity = new EventEmitter<any>();
 
   constructor() { }
 
@@ -29,5 +31,13 @@ export class TableComponent implements OnInit, OnChanges {
     } else {
       this.hasData = false;
     }
+  }
+
+  onEdit(rowData: any, rowIndex: number) {
+    this.editEntity.emit({rowData, rowIndex});
+  }
+
+  onDelete(rowData: any, rowIndex: number) {
+    this.deleteEntity.emit({rowData, rowIndex});
   }
 }

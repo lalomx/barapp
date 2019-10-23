@@ -23,7 +23,7 @@ const routes: Routes = [
         path: 'inventario', component: PageNavComponent,
         data: {
           title: 'Inventario',
-          tabs: [{ title: 'Almacen', path: 'almacen' }, { title: 'Productos', path: 'productos' }],
+          tabs: [{ title: 'Almacen', path: 'almacen' }, { title: 'A venta', path: 'productos' }],
           isTabbed: true,
         },
         children: [

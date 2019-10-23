@@ -1,6 +1,6 @@
 <app-page [title]="title" [show]="false">
   <ul *ngIf="isTabbed" uk-tab>
-    <li *ngFor="let route of routes">
+    <li *ngFor="let route of routes" routerLinkActive="uk-active">
       <a [routerLink]="[route.path]">{{route.title}}</a>
     </li>
   </ul>
