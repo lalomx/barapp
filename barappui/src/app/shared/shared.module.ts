@@ -19,6 +19,7 @@ import { EditComponent } from './edit/edit.component';
 import { PageNavComponent } from './pages/page-nav/page-nav.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '../../../node_modules/@angular/router';
+import { ModalComponent } from './pages/modal/modal.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { RouterModule } from '../../../node_modules/@angular/router';
     LoadingComponent,
     DateComponent,
     EditComponent,
-    PageNavComponent
+    PageNavComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter, ViewChild } from '@angular/core';
 import { MetadataTableService } from '../../core/services/metadata-table.service';
 import { MetadataFormService } from '../../core/services/metadata-form.service';
+import { ModalComponent } from '../pages/modal/modal.component';
 
 @Component({
   selector: 'app-edit',
@@ -8,6 +9,8 @@ import { MetadataFormService } from '../../core/services/metadata-form.service';
   styleUrls: ['./edit.component.less']
 })
 export class EditComponent implements OnInit, OnChanges {
+
+  @ViewChild(ModalComponent, {static: true}) modal: ModalComponent;
 
   constructor(private readonly metadataTableService: MetadataTableService,
               private readonly metadataFormService: MetadataFormService) { }
@@ -44,6 +47,7 @@ export class EditComponent implements OnInit, OnChanges {
   onAdd() {
     console.log('button add');
     this.newEvent.emit();
+    this.modal.show();
   }
 
 }

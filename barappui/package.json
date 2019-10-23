@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~8.2.8",
     "@angular/platform-browser-dynamic": "~8.2.8",
     "@angular/router": "~8.2.8",
+    "@types/uikit": "^2.27.7",
     "chart.js": "^2.8.0",
     "flatpickr": "^4.6.3",
     "jquery": "^3.4.1",
