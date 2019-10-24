@@ -22,8 +22,8 @@ Para le backend
 2. npm install
 3. npm run migrate
 4. npm run seed
-3. npm run dev
-4. navegar a http://localhost:3000
+5. npm run dev
+6. navegar a http://localhost:3000
 
 Para el ui
 

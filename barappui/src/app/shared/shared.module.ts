@@ -20,6 +20,7 @@ import { PageNavComponent } from './pages/page-nav/page-nav.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '../../../node_modules/@angular/router';
 import { ModalComponent } from './pages/modal/modal.component';
+import { FormComponent } from './form/form.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ModalComponent } from './pages/modal/modal.component';
     DateComponent,
     EditComponent,
     PageNavComponent,
-    ModalComponent
+    ModalComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,26 @@
+<form [formGroup]="loginForm" class="uk-form-horizontal uk-margin-large">
+  <div class="uk-margin">
+    <label class="uk-form-label" for="form-horizontal-text">Text</label>
+    <div class="uk-form-controls">
+      <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Some text...">
+    </div>
+  </div>
+
+  <div class="uk-margin">
+    <label class="uk-form-label" for="form-horizontal-select">Select</label>
+    <div class="uk-form-controls">
+      <div class="uk-inline">
+        <button class="uk-button uk-button-default" type="button">Click</button>
+        <div class="selection" uk-dropdown="mode: click">
+            <div>
+              <ul class="uk-list uk-list-divider">
+                <li>List item 1</li>
+                <li>List item 2</li>
+                <li>List item 3</li>
+            </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</form>
