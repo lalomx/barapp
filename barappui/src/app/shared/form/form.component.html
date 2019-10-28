@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" class="uk-form-horizontal uk-margin-large">
+<form [formGroup]="loginForm" class="uk-form-horizontal uk-margin-large uk-height-1-1">
   <div class="uk-margin">
     <label class="uk-form-label" for="form-horizontal-text">Text</label>
     <div class="uk-form-controls">
@@ -9,13 +9,16 @@
   <div class="uk-margin">
     <label class="uk-form-label" for="form-horizontal-select">Select</label>
     <div class="uk-form-controls">
-      <div class="uk-inline">
-        <button class="uk-button uk-button-default" type="button">Click</button>
-        <div class="selection" uk-dropdown="mode: click">
+      <div class="uk-inline uk-width-1-1 uk-text-left">
+        <button class="uk-button uk-button-default uk-width-1-1 uk-text-muted select-box" type="button"><span class="b-text uk-align-left">Selecciona...</span><span class="b-icon uk-align-right" uk-icon="icon: chevron-down"></span></button>
+        <div class="selection uk-width-1-1" uk-dropdown="mode: click" uk-overflow-auto>
             <div>
-              <ul class="uk-list uk-list-divider">
+              <ul class="uk-list uk-list-divider uk-width-1-1 uk-overflow-auto" >
                 <li>List item 1</li>
                 <li>List item 2</li>
+                <li>List item 3</li>
+                <li>List item 3</li>
+                <li>List item 3</li>
                 <li>List item 3</li>
             </ul>
             </div>
