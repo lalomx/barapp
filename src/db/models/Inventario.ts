@@ -39,12 +39,21 @@ const inventarioFactory = (sequalize: Sequelize) => {
       allowNull: false,
       type: DataTypes.DOUBLE
     },
+    tipoId: {
+      allowNull: false,
+      type: DataTypes.UUID,
+      references: {
+        model: 'TipoInventarios',
+        key: 'id'
+      },
+    },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   })) as InventarioModel;
 
   Inventario.associate = (db: BarServicesDB) => {
-    Inventario.belongsToMany(db.Producto, {through: 'InventarioProductos', foreignKey: 'inventarioId', as: 'productos'})
+    Inventario.belongsToMany(db.Producto, {through: 'InventarioProductos', foreignKey: 'inventarioId', as: 'productos'});
+    Inventario.belongsTo(db.TipoInventario, {foreignKey: { name: 'tipoId' }, as: 'tipo' })
   };
 
   return Inventario;

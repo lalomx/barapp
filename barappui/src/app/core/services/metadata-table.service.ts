@@ -17,6 +17,11 @@ export class MetadataTableService {
           type: 'text'
         },
         {
+          caption: 'Tipo',
+          propertyName: 'tipo',
+          type: 'text'
+        },
+        {
           caption: 'Cantidad',
           propertyName: 'quantity',
           type: 'number'

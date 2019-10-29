@@ -17,15 +17,23 @@ export class InventarioService extends BaseService {
   }
 
   private async getInventario(req: Request, res: Response) {
-    const inventarios = await this.db.Inventario.findAll();
+    const inventarios = await this.db.Inventario.findAll({include: [
+      {
+        association: 'tipo',
+        attributes: [
+          'name',
+        ]
+      }]
+    });
     
-    res.send(inventarios.map(c => {
+    res.send(inventarios.map((c:any) => {
       return {
         id: c.id,
         quantity: c.quantity,
         name: c.name,
         unitLimit: c.unitLimit,
         unitPrice: c.unitPrice,
+        tipo: c.tipo.name,
         createdAt: c.createdAt,
         updatedAt: c.updatedAt,
       }

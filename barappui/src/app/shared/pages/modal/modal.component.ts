@@ -31,12 +31,17 @@ export class ModalComponent implements OnInit, AfterViewInit {
     }
   }
   ngOnInit() {
+    console.log(this.formMetadata);
   }
 
   ngAfterViewInit(): void {
     this.modalObject = UIkit.modal(this.modal.nativeElement);
-    UIkit.util.on(this.modal.nativeElement, 'shown', () => console.log('shown'));
-    UIkit.util.on(this.modal.nativeElement, 'hidden', () => console.log('hidden'));
+    console.log(this.modal.nativeElement);
+    UIkit.util.on(this.modal.nativeElement, 'shown', (event) => {
+      console.log('shown');
+      console.log(event.target);
+    });
+    UIkit.util.on(this.modal.nativeElement, 'hidden', () => console.log('hidden')) ;
   }
 
   show() {

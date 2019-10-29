@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../core/services/auth.service';
 import { Router } from '../../../node_modules/@angular/router';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   submitted = false;
   errors: {} = null;
+  u = uuid();
 
   constructor(private readonly auth: AuthService,
               private fb: FormBuilder,

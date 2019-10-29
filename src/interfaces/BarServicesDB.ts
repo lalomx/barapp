@@ -9,6 +9,7 @@ import { ProductoModel } from '../db/models/Productos';
 import { InventarioProductosModel } from '../db/models/InventarioProductos';
 import { PersonaProductosModel } from '../db/models/PersonaProductos';
 import { ComandaModel } from '../db/models/Comandas';
+import { TipoInventarioModel } from '../db/models/TipoInventario';
 
 export interface BarServicesDB {
     [key: string]: any;
@@ -23,4 +24,5 @@ export interface BarServicesDB {
     InventarioProducto: InventarioProductosModel;
     PersonaProducto: PersonaProductosModel;
     Comanda: ComandaModel;
+    TipoInventario: TipoInventarioModel;
 }

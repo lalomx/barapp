@@ -56,7 +56,8 @@ import { FormComponent } from './form/form.component';
     PieChartComponent,
     TableComponent,
     DateComponent,
-    EditComponent
+    EditComponent,
+    FormComponent
   ]
 })
 export class SharedModule { }

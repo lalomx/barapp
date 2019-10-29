@@ -12,6 +12,7 @@ import { productoFactory } from './Productos';
 import { inventarioProductosFactory } from './InventarioProductos';
 import { PersonaProductosFactory } from './PersonaProductos';
 import { comandaFactory } from './Comandas';
+import { tipoInventarioFactory } from './TipoInventario';
 
 export const createDb = (): BarServicesDB => {
   let sequelize: Sequelize.Sequelize;
@@ -39,7 +40,8 @@ export const createDb = (): BarServicesDB => {
     Producto: productoFactory(sequelize),
     InventarioProducto: inventarioProductosFactory(sequelize),
     PersonaProducto: PersonaProductosFactory(sequelize),
-    Comanda: comandaFactory(sequelize)
+    Comanda: comandaFactory(sequelize),
+    TipoInventario: tipoInventarioFactory(sequelize)
   }
 
   Object.keys(db).forEach(modelName => {

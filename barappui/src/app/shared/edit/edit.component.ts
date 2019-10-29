@@ -12,8 +12,7 @@ export class EditComponent implements OnInit, OnChanges {
 
   @ViewChild(ModalComponent, {static: true}) modal: ModalComponent;
 
-  constructor(private readonly metadataTableService: MetadataTableService,
-              private readonly metadataFormService: MetadataFormService) { }
+  constructor(private readonly metadataTableService: MetadataTableService) { }
 
   @Input() source: any[];
   @Input() metadataTableName: string;
@@ -28,14 +27,12 @@ export class EditComponent implements OnInit, OnChanges {
   loading = true;
 
   ngOnInit() {
+    console.log(this.metadataFormName);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.metadataFormName && changes.metadataFormName.currentValue) {
+    if (changes.metadataTableName && changes.metadataTableName.currentValue) {
       this.tableMetadata = this.metadataTableService.getMetadata(this.metadataTableName);
-    }
-    if (changes.metadataFormService && changes.metadataFormService.currentValue) {
-      this.formMetadata = this.metadataFormService.getMetadata(this.metadataFormName);
     }
 
     if (changes.source && changes.source.currentValue) {
