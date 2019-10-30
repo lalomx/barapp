@@ -21,6 +21,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '../../../node_modules/@angular/router';
 import { ModalComponent } from './pages/modal/modal.component';
 import { FormComponent } from './form/form.component';
+import { InputNumericDirective } from './directives/input-numeric.directive';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { FormComponent } from './form/form.component';
     EditComponent,
     PageNavComponent,
     ModalComponent,
-    FormComponent
+    FormComponent,
+    InputNumericDirective
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { FormComponent } from './form/form.component';
     TableComponent,
     DateComponent,
     EditComponent,
-    FormComponent
+    FormComponent,
+    InputNumericDirective
   ]
 })
 export class SharedModule { }
