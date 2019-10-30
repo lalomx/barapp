@@ -11,14 +11,14 @@
     <div class="uk-form-controls">
       <div class="uk-inline uk-width-1-1 uk-text-left">
         <button class="uk-button uk-button-default uk-width-1-1 uk-text-muted select-box" type="button">
-          <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Some text..." hidden>
-          <span class="b-text uk-align-left">Selecciona...</span>
+          <input class="uk-input d-input" id="form-horizontal-text" type="text" placeholder="Some text..." #dropdownInput hidden>
+          <span class="b-text uk-align-left ">{{dropdownValue}}</span>
           <span class="b-icon uk-align-right" uk-icon="icon: chevron-down"></span>
         </button>
-        <div class="selection uk-width-1-1" uk-dropdown="mode: click" uk-overflow-auto #dropdownO>
+        <div class="b-dropdown uk-width-1-1" uk-dropdown="mode: click" uk-overflow-auto #dropdownO>
           <div>
             <ul class="uk-list uk-list-divider uk-width-1-1 uk-overflow-auto">
-              <li (click)="onSelected()">List item 1</li>
+              <li (click)="onSelected('10', $event)" id="s1">List item 1</li>
               <li>List item 2</li>
               <li>List item 3</li>
               <li>List item 3</li>
