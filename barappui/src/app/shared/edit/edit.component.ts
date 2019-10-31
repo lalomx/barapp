@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitte
 import { MetadataTableService } from '../../core/services/metadata-table.service';
 import { MetadataFormService } from '../../core/services/metadata-form.service';
 import { ModalComponent } from '../pages/modal/modal.component';
+import { ModifyInputEventArgs } from '../interfaces/form/modifyInputEventArgs';
 
 @Component({
   selector: 'app-edit',
@@ -18,6 +19,7 @@ export class EditComponent implements OnInit, OnChanges {
   @Input() metadataTableName: string;
   @Input() metadataFormName: string;
 
+  @Output() modifyInput = new EventEmitter<ModifyInputEventArgs>();
   @Output() newEvent = new EventEmitter();
 
 
@@ -27,7 +29,6 @@ export class EditComponent implements OnInit, OnChanges {
   loading = true;
 
   ngOnInit() {
-    console.log(this.metadataFormName);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -42,9 +43,12 @@ export class EditComponent implements OnInit, OnChanges {
   }
 
   onAdd() {
-    console.log('button add');
     this.newEvent.emit();
     this.modal.show();
+  }
+
+  onModifyInput(args: ModifyInputEventArgs) {
+    this.modifyInput.emit(args);
   }
 
 }

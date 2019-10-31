@@ -1,0 +1,26 @@
+<label class="uk-form-label" for="form-horizontal-select">{{label}}</label>
+<div class="uk-form-controls">
+  <div class="uk-inline uk-width-1-1 uk-text-left">
+    <div *ngIf="loading" class="uk-overlay uk-overlay-default uk-position-top-left b-loading">
+      <span class="uk-margin-small-right" uk-spinner="ratio: 0.5"></span>
+      <span class="loading-text uk-text-muted">Cargando datos...</span>
+    </div>
+    <button class="uk-button uk-button-default uk-width-1-1 uk-text-muted select-box" type="button">
+      <input class="uk-input d-input" id="form-horizontal-text" type="text" placeholder="Some text..." #dropdownInput hidden>
+      <span [class]="loading ? 'b-text uk-align-left loading': 'b-text uk-align-left'">{{(text || placeholder)}}</span>
+      <span *ngIf="!loading" class="b-icon uk-align-right" uk-icon="icon: chevron-down"></span>
+    </button>
+    <div class="b-dropdown uk-width-1-1" uk-dropdown="mode: click" uk-overflow-auto #dropdownO>
+      <div *ngIf="datasource?.length == 0">
+        <ul class="uk-list uk-list-divider uk-width-1-1 uk-overflow-auto">
+          <li>No hay datos</li>
+        </ul>
+      </div>
+      <div *ngIf="datasource?.length > 0">
+        <ul class="uk-list uk-list-divider uk-width-1-1 uk-overflow-auto">
+          <li *ngFor="let item of datasource;let i = index" (click)="onSelected(item, $event)" [id]="i+'-'+item.text">{{item.text}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

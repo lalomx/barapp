@@ -14,6 +14,7 @@ export class InventarioService extends BaseService {
 
   init(router: Router) {
     router['get'](`${this.API_BASE}inventario`, this.getInventario.bind(this));
+    router['get'](`${this.API_BASE}inventario/tipos`, this.getInventarioTipos.bind(this));
   }
 
   private async getInventario(req: Request, res: Response) {
@@ -38,5 +39,10 @@ export class InventarioService extends BaseService {
         updatedAt: c.updatedAt,
       }
     }));
+  }
+
+  private async getInventarioTipos(req: Request, res: Response) {
+    const tipoInventarios = await this.db.TipoInventario.findAll({ attributes: ['id', 'name']});
+    res.send(tipoInventarios);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServiceFactory } from '../core/services/data-service-factory.service';
 import { DataService } from '../core/services/data.service';
+import { ModifyInputEventArgs } from '../shared/interfaces/form/modifyInputEventArgs';
 
 @Component({
   selector: 'app-inventario',
@@ -21,5 +22,18 @@ export class InventarioComponent implements OnInit {
     this.inventarioService.getAll<any[]>().subscribe(i => {
       this.inventario = i;
     });
+  }
+
+  onModifyInput(args: ModifyInputEventArgs) {
+    if (args.input.propertyName !== 'tipo') {
+      return;
+    }
+
+    args.input.dropdownOptions = {
+      multiselect: false,
+      deselect: false,
+      dataSource: this.inventarioService.getRoute('tipos'),
+      dataSourceOptions: { text: 'name', propertyName: 'id' }
+    };
   }
 }

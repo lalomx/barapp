@@ -1,40 +1,15 @@
 <form class="uk-form-horizontal uk-margin-large uk-height-1-1">
-  <div class="uk-margin">
-    <label class="uk-form-label" for="form-horizontal-text">Text</label>
-    <div class="uk-form-controls">
-      <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Some text...">
-    </div>
-  </div>
-  <div class="uk-margin">
-      <label class="uk-form-label" for="form-horizontal-text">Text</label>
-      <div class="uk-form-controls">
-          <input class="uk-input" type="text" appInputNumeric required placeholder="Numeric">
-      </div>
-    </div>
-  
-
-  <div class="uk-margin">
-    <label class="uk-form-label" for="form-horizontal-select">Select</label>
-    <div class="uk-form-controls">
-      <div class="uk-inline uk-width-1-1 uk-text-left">
-        <button class="uk-button uk-button-default uk-width-1-1 uk-text-muted select-box" type="button">
-          <input class="uk-input d-input" id="form-horizontal-text" type="text" placeholder="Some text..." #dropdownInput hidden>
-          <span class="b-text uk-align-left ">{{dropdownValue}}</span>
-          <span class="b-icon uk-align-right" uk-icon="icon: chevron-down"></span>
-        </button>
-        <div class="b-dropdown uk-width-1-1" uk-dropdown="mode: click" uk-overflow-auto #dropdownO>
-          <div>
-            <ul class="uk-list uk-list-divider uk-width-1-1 uk-overflow-auto">
-              <li (click)="onSelected('10', $event)" id="s1">List item 1</li>
-              <li>List item 2</li>
-              <li>List item 3</li>
-              <li>List item 3</li>
-              <li>List item 3</li>
-              <li>List item 3</li>
-            </ul>
-          </div>
+  <div *ngFor="let item of inputs;" class="uk-margin">
+    <div [ngSwitch]="item.editor">
+      <div *ngSwitchCase="editor.Text">
+        <label class="uk-form-label" for="form-horizontal-text">{{item.caption}}</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="form-horizontal-text" type="text" [placeholder]="item.placeholder">
         </div>
       </div>
+      <app-numeric *ngSwitchCase="editor.Number" [label]="item.caption"></app-numeric>
+      <app-dropdown *ngSwitchCase="editor.Select" [label]="item.caption" [options]="item.dropdownOptions"></app-dropdown>
     </div>
+
   </div>
 </form>

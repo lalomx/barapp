@@ -1,28 +1,26 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MetadataFormService } from '../../core/services/metadata-form.service';
-import * as UIkit from 'uikit';
+import { ModifyInputEventArgs } from '../interfaces/form/modifyInputEventArgs';
+import { FormEditor } from '../../core/interfaces/FormEditor';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.less']
 })
-export class FormComponent implements OnChanges, AfterViewInit {
+export class FormComponent implements OnChanges {
 
-  @ViewChild('dropdownO', { static: true }) dropdown: ElementRef;
-  @ViewChild('dropdownInput', { static: false }) dropdownInput: ElementRef;
   @Input() formMetadataKey: string;
+  @Output() modifyInput = new EventEmitter<ModifyInputEventArgs>();
 
-  constructor(private readonly metadataFormService: MetadataFormService, private fb: FormBuilder, private render: Renderer2) { }
+  constructor(private readonly metadataFormService: MetadataFormService, private fb: FormBuilder) { }
 
   formGroup: FormGroup;
   hasMetadata = false;
   formMetadata: any;
-  dropdownObject: any;
-  hideIcon = false;
-  dropdownValue = 'Selecciona...';
-  dropdownCurrentId: string;
+  inputs = [];
+  editor = FormEditor;
 
   createForm() {
     this.formGroup = this.fb.group({
@@ -37,34 +35,14 @@ export class FormComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    this.dropdownObject = UIkit.dropdown(this.dropdown.nativeElement);
-    UIkit.util.on(this.dropdown.nativeElement, 'shown', e => e.stopPropagation());
-    UIkit.util.on(this.dropdown.nativeElement, 'hidden', e => e.stopPropagation());
-  }
-
-  onSelected(value, event) {
-    if (this.dropdownCurrentId === event.target.id) {
-      this.render.removeClass(event.target, 'b-selected');
-      this.dropdownValue = 'Selecciona...';
-      this.dropdownCurrentId = null;
-      this.dropdownTriggerValue(null);
-    } else {
-      this.render.addClass(event.target, 'b-selected');
-      this.dropdownTriggerValue(value);
-      this.dropdownValue = value;
-      this.dropdownCurrentId = event.target.id;
-    }
-    this.dropdownObject.hide(false);
-    event.stopPropagation();
-  }
-
-  private dropdownTriggerValue(value) {
-    this.dropdownInput.nativeElement.value = value;
-    this.dropdownInput.nativeElement.dispatchEvent(new Event('input', { bubbles: true }));
-  }
-
   private getMetadata() {
     this.formMetadata = this.metadataFormService.getMetadata(this.formMetadataKey);
+    this.formMetadata.inputs.forEach(i => {
+      this.modifyInput.emit({
+        input: i,
+      });
+    });
+
+    this.inputs = this.formMetadata.inputs.map(i => i);
   }
 }

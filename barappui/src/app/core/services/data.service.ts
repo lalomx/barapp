@@ -53,8 +53,8 @@ export class DataService {
       );
   }
 
-  public getRoute(route: string, routeParam: string | number) {
-    return this.httpClient.get(`${this.getUrl()}${routeParam}/${route}/`, this.httpOptions)
+  public getRoute<T>(route: string) {
+    return this.httpClient.get<T>(`${this.getUrl()}${route}/`, this.httpOptions)
       .pipe(
         catchError(e => this.handleError(e))
       );

@@ -22,6 +22,8 @@ import { RouterModule } from '../../../node_modules/@angular/router';
 import { ModalComponent } from './pages/modal/modal.component';
 import { FormComponent } from './form/form.component';
 import { InputNumericDirective } from './directives/input-numeric.directive';
+import { DropdownComponent } from './form/controls/dropdown/dropdown.component';
+import { NumericComponent } from './form/controls/numeric/numeric.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { InputNumericDirective } from './directives/input-numeric.directive';
     PageNavComponent,
     ModalComponent,
     FormComponent,
-    InputNumericDirective
+    InputNumericDirective,
+    DropdownComponent,
+    NumericComponent
   ],
   imports: [
     BrowserModule,

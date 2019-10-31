@@ -1,4 +1,5 @@
 <app-edit metadataTableName="InventarioTable"
           metadataFormName="InventarioForm"
-          [source]="inventario">
+          [source]="inventario"
+          (modifyInput)="onModifyInput($event)">
 </app-edit>
