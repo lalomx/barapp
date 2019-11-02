@@ -25,6 +25,7 @@ export class FormComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Output() modifyInput = new EventEmitter<ModifyInputEventArgs>();
   @Output() propertyChanged = new EventEmitter<PropertyChangedEventArgs>();
+  @Output() saved = new EventEmitter<any>();
 
   private originalEntity: any;
   private entityDiffer: KeyValueDiffer<string, string>;

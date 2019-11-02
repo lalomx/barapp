@@ -31,13 +31,14 @@ export class NumericComponent implements ControlValueAccessor {
     if (value === '') {
       return;
     }
-    this.value = value;
+    this.value = +value;
     console.log(this.value);
     this.onTouch();
     this.onChange(this.value);
   }
 
   numUp(e) {
+    console.log(typeof this.value);
     const innerValue = this.value + 1;
     if (innerValue > this.max) {
       this.value = this.max;

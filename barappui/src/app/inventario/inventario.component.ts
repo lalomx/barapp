@@ -6,14 +6,14 @@ import { ModifyInputEventArgs } from '../shared/interfaces/form/modifyInputEvent
 @Component({
   selector: 'app-inventario',
   templateUrl: './inventario.component.html',
-  styleUrls: ['./inventario.component.less']
+  styleUrls: ['./inventario.component.less'],
 })
 export class InventarioComponent implements OnInit {
 
   private inventarioService: DataService;
 
   constructor(private readonly dataServiceFactory: DataServiceFactory) {
-    this.inventarioService = dataServiceFactory.create('inventario');
+    this.inventarioService = this.dataServiceFactory.create('inventario');
   }
 
   inventario: any[];

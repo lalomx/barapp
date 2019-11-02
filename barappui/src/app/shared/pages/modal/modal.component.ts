@@ -24,6 +24,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
   @Output() modifyInput = new EventEmitter<ModifyInputEventArgs>();
   @Output() propertyChanged = new EventEmitter<PropertyChangedEventArgs>();
+  @Output() formSaved = new EventEmitter<any>();
 
   private modalObject: any;
 
@@ -76,5 +77,9 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
   onCancel() {
     this.form.cancel();
+  }
+
+  onSaved() {
+    this.formSaved.emit();
   }
 }
