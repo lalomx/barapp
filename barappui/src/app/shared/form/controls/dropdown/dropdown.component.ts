@@ -97,10 +97,14 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Cont
   }
 
   writeValue(value: any): void {
+    console.log(value);
     if (value) {
       this.value = value || null;
     } else {
       this.value = null;
+      this.text = null;
+      this.dropdownCurrentEl = null;
+      this.dropdownTriggerValue(null);
     }
   }
   registerOnChange(fn: any): void {
