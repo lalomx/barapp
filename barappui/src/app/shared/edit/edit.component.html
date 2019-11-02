@@ -15,4 +15,9 @@
     </div>
   </div>
 </div>
-<app-modal [formMetadata]="metadataFormName" (modifyInput)="onModifyInput($event)"></app-modal>
+<app-modal [entity]="entity"
+  [mode]="mode"
+  [entityTitle]="title"
+  [formMetadata]="metadataFormName"
+  (modifyInput)="onModifyInput($event)"
+  (propertyChanged)="onPropertyChanged($event)"></app-modal>

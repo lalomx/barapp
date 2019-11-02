@@ -12,6 +12,7 @@ export class MetadataFormService {
   constructor() {
     this.metadata.InventarioForm = {
       name: 'InventarioForm',
+      entityName: 'Inventario Item',
       inputs: [
         {
           caption: 'Nombre',

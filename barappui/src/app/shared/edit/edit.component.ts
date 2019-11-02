@@ -3,6 +3,7 @@ import { MetadataTableService } from '../../core/services/metadata-table.service
 import { MetadataFormService } from '../../core/services/metadata-form.service';
 import { ModalComponent } from '../pages/modal/modal.component';
 import { ModifyInputEventArgs } from '../interfaces/form/modifyInputEventArgs';
+import { PropertyChangedEventArgs } from '../interfaces/form/propertyChangedEventArgs';
 
 @Component({
   selector: 'app-edit',
@@ -18,15 +19,17 @@ export class EditComponent implements OnInit, OnChanges {
   @Input() source: any[];
   @Input() metadataTableName: string;
   @Input() metadataFormName: string;
+  @Input() title: string;
 
   @Output() modifyInput = new EventEmitter<ModifyInputEventArgs>();
   @Output() newEvent = new EventEmitter();
-
+  @Output() propertyChanged = new EventEmitter<PropertyChangedEventArgs>();
 
   tableMetadata: any;
-  formMetadata: any;
   tableDataSource: any[];
   loading = true;
+  entity: any;
+  mode: 'add' | 'edit' = 'add';
 
   ngOnInit() {
   }
@@ -43,12 +46,17 @@ export class EditComponent implements OnInit, OnChanges {
   }
 
   onAdd() {
-    this.newEvent.emit();
+    this.entity = {};
     this.modal.show();
   }
 
   onModifyInput(args: ModifyInputEventArgs) {
     this.modifyInput.emit(args);
+  }
+
+  onPropertyChanged(args: PropertyChangedEventArgs) {
+    console.log(args);
+    this.propertyChanged.emit(args);
   }
 
 }

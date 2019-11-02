@@ -27,8 +27,12 @@ export class NumericComponent implements ControlValueAccessor {
   onChange = (_: any) => { };
   onTouch = () => { };
 
-  onInput(value: number) {
+  onInput(value: number | '') {
+    if (value === '') {
+      return;
+    }
     this.value = value;
+    console.log(this.value);
     this.onTouch();
     this.onChange(this.value);
   }
@@ -39,6 +43,7 @@ export class NumericComponent implements ControlValueAccessor {
       this.value = this.max;
     } else {
       this.value = innerValue;
+      this.onChange(this.value);
     }
     e.preventDefault();
   }
@@ -49,6 +54,7 @@ export class NumericComponent implements ControlValueAccessor {
       this.value = this.min;
     } else {
       this.value = innerValue;
+      this.onChange(this.value);
     }
     e.preventDefault();
   }
