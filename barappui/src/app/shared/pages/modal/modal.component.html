@@ -6,7 +6,7 @@
     </div>
     <div class="uk-modal-body uk-height-large" uk-overflow-auto>
       <app-form
-        [entity]=""
+        [entity]="entity"
         [formMetadataKey]="formMetadata"
         (modifyInput)="onModifyInput($event)"
         (propertyChanged)="onPropertyChanged($event)"
@@ -14,7 +14,8 @@
     </div>
     <div class="uk-modal-footer uk-text-right">
       <button class="uk-button uk-button-default uk-modal-close uk-margin-right" type="button" (click)="onCancel()">Cancel</button>
-      <button class="uk-button uk-button-primary" type="button" (click)="save()" [disabled]="!hasChanges">Save</button>
+      <button class="uk-button uk-button-primary" type="button" (click)="save()" [disabled]="!hasChanges">
+          <div *ngIf="submitting" uk-spinner></div> Save</button>
     </div>
   </div>
 </div>

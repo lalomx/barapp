@@ -1,27 +1,25 @@
 <form #form="ngForm" class="uk-form-horizontal uk-margin-large uk-height-1-1">
-  <div *ngFor="let item of inputs;" class="uk-margin">
-    <div [ngSwitch]="item.editor">
-      <div *ngSwitchCase="editor.Text">
-        <label class="uk-form-label" [for]="item.propertyName">{{item.caption}}</label>
-        <div class="uk-form-controls">
-          <input class="uk-input"
-            [name]="item.propertyName"
-            [(ngModel)]="entity[item.propertyName]"
-            [id]="formMetadataKey+'-'+item.propertyName"
-            type="text"
-            [placeholder]="item.placeholder">
+  <div *ngIf="errors?.errors.length" class="errors-container">
+    <p><span class="uk-margin-small-right" uk-icon="icon: warning; ratio: 2"></span>
+      Se encontraron los siguientes errores: </p>
+    <ul class="uk-list uk-list-bullet">
+        <li *ngFor="let error of errors.errors">{{ error.msg}}</li>
+    </ul>
+  </div>
+  <div *ngIf="!!entity">
+    <div *ngFor="let item of inputs;" class="uk-margin">
+      <div [ngSwitch]="item.editor">
+        <div *ngSwitchCase="editor.Text">
+          <label class="uk-form-label" [for]="item.propertyName">{{item.caption}}</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" [name]="item.propertyName" [(ngModel)]="entity[item.propertyName]" [id]="formMetadataKey+'-'+item.propertyName"
+              type="text" [placeholder]="item.placeholder">
+          </div>
         </div>
+        <app-numeric *ngSwitchCase="editor.Number" [label]="item.caption" [name]="item.propertyName" [(ngModel)]="entity[item.propertyName]"></app-numeric>
+        <app-dropdown *ngSwitchCase="editor.Select" [label]="item.caption" [options]="item.dropdownOptions" [name]="item.propertyName"
+          [(ngModel)]="entity[item.propertyName]"></app-dropdown>
       </div>
-      <app-numeric *ngSwitchCase="editor.Number"
-        [label]="item.caption"
-        [name]="item.propertyName"
-        [(ngModel)]="entity[item.propertyName]"></app-numeric>
-      <app-dropdown *ngSwitchCase="editor.Select"
-        [label]="item.caption"
-        [options]="item.dropdownOptions"
-        [name]="item.propertyName"
-        [(ngModel)]="entity[item.propertyName]"></app-dropdown>
     </div>
   </div>
-  {{entity | json}}
 </form>

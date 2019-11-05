@@ -4,6 +4,7 @@ import { MetadataFormService } from '../../core/services/metadata-form.service';
 import { ModalComponent } from '../pages/modal/modal.component';
 import { ModifyInputEventArgs } from '../interfaces/form/modifyInputEventArgs';
 import { PropertyChangedEventArgs } from '../interfaces/form/propertyChangedEventArgs';
+import { DataService } from '../../core/services/data.service';
 
 @Component({
   selector: 'app-edit',
@@ -20,10 +21,12 @@ export class EditComponent implements OnInit, OnChanges {
   @Input() metadataTableName: string;
   @Input() metadataFormName: string;
   @Input() title: string;
+  @Input() dataService: DataService;
 
   @Output() modifyInput = new EventEmitter<ModifyInputEventArgs>();
   @Output() newEvent = new EventEmitter();
   @Output() propertyChanged = new EventEmitter<PropertyChangedEventArgs>();
+  @Output() saved = new EventEmitter<any>();
 
   tableMetadata: any;
   tableDataSource: any[];
@@ -48,6 +51,11 @@ export class EditComponent implements OnInit, OnChanges {
   onAdd() {
     this.entity = {};
     this.modal.show();
+  }
+
+  onSaved() {
+    this.loading = true;
+    this.saved.emit();
   }
 
   onModifyInput(args: ModifyInputEventArgs) {

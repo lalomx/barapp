@@ -18,6 +18,9 @@
 <app-modal [entity]="entity"
   [mode]="mode"
   [entityTitle]="title"
+  [entity]="entity"
+  [dataService]="dataService"
   [formMetadata]="metadataFormName"
+  (saved)="onSaved($event)"
   (modifyInput)="onModifyInput($event)"
   (propertyChanged)="onPropertyChanged($event)"></app-modal>

@@ -4,6 +4,8 @@ import { ModifyInputEventArgs } from '../../interfaces/form/modifyInputEventArgs
 import { PropertyChangedEventArgs } from '../../interfaces/form/propertyChangedEventArgs';
 import { FormComponent } from '../../form/form.component';
 import { HasChangesService } from '../../../core/services/has-changes.service';
+import { DataService } from '../../../core/services/data.service';
+import { ErrorResult } from '../../interfaces/form/errorResult';
 
 
 @Component({
@@ -21,16 +23,18 @@ export class ModalComponent implements OnInit, AfterViewInit {
   @Input() entity: any;
   @Input() formMetadata: any;
   @Input() entityTitle: string;
+  @Input() dataService: DataService;
 
   @Output() modifyInput = new EventEmitter<ModifyInputEventArgs>();
   @Output() propertyChanged = new EventEmitter<PropertyChangedEventArgs>();
-  @Output() formSaved = new EventEmitter<any>();
+  @Output() saved = new EventEmitter<any>();
 
   private modalObject: any;
 
   constructor(private hasChangesService: HasChangesService) { }
 
   open = false;
+  submitting = false;
 
   get title() {
     if (this.mode === 'add') {
@@ -47,7 +51,6 @@ export class ModalComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log(this.formMetadata);
   }
 
   ngAfterViewInit(): void {
@@ -71,15 +74,25 @@ export class ModalComponent implements OnInit, AfterViewInit {
     this.propertyChanged.emit(args);
   }
 
-  save() {
-    this.form.save();
+  async save() {
+    this.form.errors = null;
+    this.submitting = true;
+    try {
+      const savedEntity = await this.dataService.save(this.entity).toPromise();
+      this.saved.emit(savedEntity);
+      this.submitting = false;
+      this.close();
+    } catch (e) {
+      this.submitting = false;
+      this.form.errors = e;
+    }
   }
 
   onCancel() {
     this.form.cancel();
   }
 
-  onSaved() {
-    this.formSaved.emit();
+  close() {
+    setTimeout(() => this.modalObject.hide(), 500);
   }
 }

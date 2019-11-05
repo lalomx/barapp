@@ -65,8 +65,6 @@ export class DataService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.log(error);
-    // TODO: Show a toaster
-    return throwError(error.error);
+    return throwError(error);
   }
 }

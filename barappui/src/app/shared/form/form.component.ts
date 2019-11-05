@@ -11,6 +11,7 @@ import { FormEditor } from '../../core/interfaces/FormEditor';
 import { debounceTime } from 'rxjs/operators';
 import { PropertyChangedEventArgs } from '../interfaces/form/propertyChangedEventArgs';
 import { HasChangesService } from '../../core/services/has-changes.service';
+import { ErrorResult } from '../interfaces/form/errorResult';
 
 @Component({
   selector: 'app-form',
@@ -25,7 +26,6 @@ export class FormComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Output() modifyInput = new EventEmitter<ModifyInputEventArgs>();
   @Output() propertyChanged = new EventEmitter<PropertyChangedEventArgs>();
-  @Output() saved = new EventEmitter<any>();
 
   private originalEntity: any;
   private entityDiffer: KeyValueDiffer<string, string>;
@@ -38,6 +38,7 @@ export class FormComponent implements OnInit, OnChanges, AfterViewInit {
   formMetadata: any;
   inputs = [];
   editor = FormEditor;
+  errors: ErrorResult;
 
   ngOnInit() {
     this.originalEntity = Object.assign({}, this.entity);
@@ -75,10 +76,6 @@ export class FormComponent implements OnInit, OnChanges, AfterViewInit {
         this.hasChangesService.hasChanges = true;
       });
     });
-  }
-
-  save() {
-    console.log(this.entity);
   }
 
   cancel() {

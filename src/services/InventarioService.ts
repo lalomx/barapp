@@ -1,6 +1,7 @@
 import { BarServicesDB } from "../interfaces/BarServicesDB";
 import { Router, Request, Response } from "express";
 import { BaseService } from "./BaseService";
+import uuid from 'uuid';
 
 export class InventarioService extends BaseService {
   private db: BarServicesDB;
@@ -14,6 +15,7 @@ export class InventarioService extends BaseService {
 
   init(router: Router) {
     router['get'](`${this.API_BASE}inventario`, this.getInventario.bind(this));
+    router['post'](`${this.API_BASE}inventario`, this.createInventario.bind(this));
     router['get'](`${this.API_BASE}inventario/tipos`, this.getInventarioTipos.bind(this));
   }
 
@@ -44,5 +46,24 @@ export class InventarioService extends BaseService {
   private async getInventarioTipos(req: Request, res: Response) {
     const tipoInventarios = await this.db.TipoInventario.findAll({ attributes: ['id', 'name']});
     res.send(tipoInventarios);
+  }
+
+  private async createInventario(req: Request, res: Response){
+    const inventario = req.body;
+    inventario.id = uuid();
+    const items = await this.db.Inventario.findAll({ 
+      where: { name: inventario.name, tipoId: inventario.tipo }
+    });
+    if (items.length > 0) {
+      res.status(400).send({
+        errors: [{ msg: 'Ya existe un registro de inventario con ese nombre' }]
+      })
+    } else {
+      inventario.createdAt = new Date();
+      inventario.updatedAt = new Date();
+      inventario.tipoId = inventario.tipo;
+      const nuevo = await this.db.Inventario.create(inventario);
+      res.status(201).send(inventario);
+    }
   }
 }
