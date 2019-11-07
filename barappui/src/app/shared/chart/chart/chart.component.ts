@@ -18,7 +18,6 @@ export class ChartComponent implements OnInit, OnChanges {
   show = false;
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     if (changes.data && changes.data.currentValue && changes.data.currentValue.length > 0) {
       this.chartData = null;
     }
@@ -27,10 +26,8 @@ export class ChartComponent implements OnInit, OnChanges {
 
 
   private initChart() {
-    console.log('init chart');
     this.showNoRecordsMessage = false;
     setTimeout(() => {
-      console.log(this.data);
       if (!this.data || !this.data.length) {
         this.showNoRecordsMessage = true;
         this.noRecordsMsg = 'No Data';

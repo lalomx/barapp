@@ -49,7 +49,14 @@ export class EditComponent implements OnInit, OnChanges {
   }
 
   onAdd() {
+    this.mode = 'add';
     this.entity = {};
+    this.modal.show();
+  }
+
+  onEditEntity(args) {
+    this.mode = 'edit';
+    this.entity = args.rowData;
     this.modal.show();
   }
 

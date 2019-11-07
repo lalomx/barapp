@@ -3,6 +3,7 @@ import { Router, Request, Response } from "express";
 import { BaseService } from "./BaseService";
 import Sequelize from 'sequelize';
 import moment from 'moment';
+import { Dropdown } from "../interfaces/Dropdown";
 
 export class SettingsService extends BaseService {
   private db: BarServicesDB;
@@ -16,5 +17,17 @@ export class SettingsService extends BaseService {
 
   init(router: Router) {
     router['get'](`${this.API_BASE}settings`, (req: Request, res: Response) => res.send([]));
+    router['get'](`${this.API_BASE}settings/dropdowns`, this.getDropdownValues.bind(this));
+  }
+
+  private getDropdownValues(req: Request, res: Response) {
+    Promise.all([this.getTipoInventarios()]).then((data: any) => {
+      const dropdowns = [].concat.apply([], data);
+      res.send(dropdowns);
+    })
+  }
+
+  private getTipoInventarios() {
+    return this.db.TipoInventario.findAll({ attributes: ['id', 'name']});
   }
 }

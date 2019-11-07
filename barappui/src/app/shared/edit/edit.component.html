@@ -11,7 +11,7 @@
   </div>
   <div class="uk-text-left" uk-grid>
     <div class="uk-width-1-1">
-      <app-table [metadata]="tableMetadata" [source]="tableDataSource"></app-table>
+      <app-table [metadata]="tableMetadata" [source]="tableDataSource" (editEntity)="onEditEntity($event)"></app-table>
     </div>
   </div>
 </div>

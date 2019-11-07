@@ -27,7 +27,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.dashboardService.getAll<any>().subscribe(p => {
-      console.log(p);
       this.salesChart = [{
         label: 'Ventas por día',
         data: p.sales.map(s => s.total)

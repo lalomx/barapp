@@ -36,7 +36,7 @@ export class InventarioService extends BaseService {
         name: c.name,
         unitLimit: c.unitLimit,
         unitPrice: c.unitPrice,
-        tipo: c.tipo.name,
+        tipoId: c.tipoId,
         createdAt: c.createdAt,
         updatedAt: c.updatedAt,
       }

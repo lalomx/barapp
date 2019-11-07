@@ -9,6 +9,7 @@ import { HttpClientModule } from '../../../node_modules/@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
 import { MetadataTableService } from './services/metadata-table.service';
 import { MetadataFormService } from './services/metadata-form.service';
+import { DropdownService } from './services/dropdown.service';
 
 
 
@@ -24,6 +25,7 @@ import { MetadataFormService } from './services/metadata-form.service';
     AuthGuard,
     UserService,
     StorageService,
+    DropdownService,
     BootstrapperService,
     MetadataTableService,
     MetadataFormService],

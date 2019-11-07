@@ -1,5 +1,5 @@
 <div class="uk-animation-fade">
-  <table class="uk-table uk-table-divider uk-width-1-1">
+  <table class="uk-table uk-table-divider uk-width-1-1" #table>
     <thead>
       <tr>
         <th class="uk-width-small">Actions</th>
@@ -8,8 +8,8 @@
     </thead>
     <div *ngIf="!hasData">Empty Data</div>
     <tbody *ngIf="hasData">
-      <tr *ngFor="let row of source; index as i" [id]="i+'-'+metadata.name">
-        <td [id]="metadata.name+'-actions'">
+      <tr *ngFor="let row of source; index as i" [id]="i+'-'+metadata.name" class="row">
+        <td [id]="metadata.name+'-actions'" class="cell">
           <a (click)="onEdit(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="pencil"></a>
           <a (click)="onDelete(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="trash"></a>
         </td>

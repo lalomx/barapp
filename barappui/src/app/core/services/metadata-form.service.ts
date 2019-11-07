@@ -24,7 +24,7 @@ export class MetadataFormService {
         },
         {
           caption: 'Tipo',
-          propertyName: 'tipo',
+          propertyName: 'tipoId',
           visible: true,
           readonly: true,
           editor: FormEditor.Select,

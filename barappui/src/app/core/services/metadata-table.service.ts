@@ -18,8 +18,8 @@ export class MetadataTableService {
         },
         {
           caption: 'Tipo',
-          propertyName: 'tipo',
-          type: 'text'
+          propertyName: 'tipoId',
+          type: 'enum'
         },
         {
           caption: 'Cantidad',
