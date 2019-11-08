@@ -10,13 +10,12 @@ import { ModifyInputEventArgs } from '../shared/interfaces/form/modifyInputEvent
 })
 export class InventarioComponent implements OnInit {
 
-  private inventarioService: DataService;
-
   constructor(private readonly dataServiceFactory: DataServiceFactory) {
     this.inventarioService = this.dataServiceFactory.create('inventario');
   }
 
   inventario: any[];
+  inventarioService: DataService;
 
   ngOnInit() {
     this.inventarioService.getAll<any[]>().subscribe(i => {
