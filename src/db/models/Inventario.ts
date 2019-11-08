@@ -5,6 +5,7 @@ export interface InventarioAttributes extends Model {
   id: string;
   name: string;
   quantity: number;
+  tipoId: string;
   unitPrice: number;
   unitLimit: number;
   createdAt?: Date;

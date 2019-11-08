@@ -16,6 +16,7 @@ export class InventarioService extends BaseService {
   init(router: Router) {
     router['get'](`${this.API_BASE}inventario`, this.getInventario.bind(this));
     router['post'](`${this.API_BASE}inventario`, this.createInventario.bind(this));
+    router['put'](`${this.API_BASE}inventario/:id`, this.updateInventario.bind(this));
     router['get'](`${this.API_BASE}inventario/tipos`, this.getInventarioTipos.bind(this));
   }
 
@@ -52,7 +53,7 @@ export class InventarioService extends BaseService {
     const inventario = req.body;
     inventario.id = uuid();
     const items = await this.db.Inventario.findAll({ 
-      where: { name: inventario.name, tipoId: inventario.tipo }
+      where: { name: inventario.name, tipoId: inventario.tipoId }
     });
     if (items.length > 0) {
       res.status(400).send({
@@ -61,9 +62,33 @@ export class InventarioService extends BaseService {
     } else {
       inventario.createdAt = new Date();
       inventario.updatedAt = new Date();
-      inventario.tipoId = inventario.tipo;
+      inventario.tipoId = inventario.tipoId;
       const nuevo = await this.db.Inventario.create(inventario);
       res.status(201).send(inventario);
     }
+  }
+
+  private async updateInventario(req: Request, res: Response) {
+    const inventario = req.body;
+    const inventarioRecord = await this.db.Inventario.findOne({ where: { id: inventario.id }});
+    if (!inventarioRecord) {
+      res.status(400).send({
+        errors: [{ msg: 'No existe el inventario' }]
+      });
+      return;
+    }
+
+    
+
+    inventarioRecord.quantity = inventario.quantity;
+    inventarioRecord.name = inventario.name ;
+    inventarioRecord.unitLimit = inventario.unitLimit;
+    inventarioRecord.unitPrice = inventario.unitPrice;
+    inventarioRecord.tipoId = inventario.tipoId;
+    inventarioRecord.updatedAt = new Date();
+    console.log(inventarioRecord);
+    await inventarioRecord.save();
+
+    res.status(200).send(inventario);
   }
 }

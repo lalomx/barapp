@@ -18,18 +18,17 @@ export class DataService {
 
   public save(data: any) {
     const body = JSON.stringify(data);
-    return this.httpClient.post(this.getUrl(), body, this.httpOptions)
+    if (data.id) {
+      return this.httpClient.put(`${this.getUrl()}${data.id}`, body, this.httpOptions)
       .pipe(
         catchError(e => this.handleError(e))
       );
-  }
-
-  public update(data: any, id: string) {
-    const body = JSON.stringify(data);
-    return this.httpClient.put(`${this.getUrl()}${id}`, body, this.httpOptions)
+    } else {
+      return this.httpClient.post(this.getUrl(), body, this.httpOptions)
       .pipe(
         catchError(e => this.handleError(e))
       );
+    }
   }
 
   public get<T>(id: string) {
