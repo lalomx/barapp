@@ -1,7 +1,7 @@
 import {
   Component, OnInit, ViewChild, ElementRef,
   OnChanges, AfterViewInit, SimpleChanges,
-  Renderer2, Input, forwardRef
+  Renderer2, Input, forwardRef, AfterViewChecked
 } from '@angular/core';
 import * as UIkit from 'uikit';
 import { DropdownOptions } from '../../../interfaces/form/dropDownOptions';
@@ -19,9 +19,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
-export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
+export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, AfterViewChecked, ControlValueAccessor {
 
-  @ViewChild('dropdownO', { static: true }) dropdown: ElementRef;
+  @ViewChild('dropdownO', { static: false }) dropdown: ElementRef;
   @ViewChild('dropdownInput', { static: false }) dropdownInput: ElementRef;
 
   @Input() options: DropdownOptions;
@@ -44,9 +44,9 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Cont
   ngOnInit() {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  async ngOnChanges(changes: SimpleChanges) {
     if (changes.options && changes.options.currentValue) {
-      this.initDatasource();
+      await this.initDatasource();
     }
   }
 
@@ -74,6 +74,10 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Cont
     UIkit.util.on(this.dropdown.nativeElement, 'hidden', e => e.stopPropagation());
   }
 
+  ngAfterViewChecked() {
+    this.selectItem();
+  }
+
   onSelected(item, event) {
     if ( this.dropdownCurrentEl) {
       this.render.removeClass(this.dropdownCurrentEl, 'b-selected');
@@ -97,7 +101,6 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Cont
   }
 
   writeValue(value: any): void {
-    console.log(value);
     if (value) {
       this.value = value || null;
     } else {
@@ -118,6 +121,23 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Cont
   }
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
+  }
+
+  private selectItem() {
+    if (!this.value) {
+      setTimeout(() => this.text = null);
+      return;
+    }
+    const selected = Array.from(this.dropdown.nativeElement.querySelectorAll('.b-dropdown-item'))
+      .find((item: HTMLElement) => item.id === this.value) as HTMLElement;
+
+    if (!selected) {
+      return;
+    }
+
+    setTimeout(() => this.text = selected.innerText);
+    this.dropdownCurrentEl = selected;
+    this.render.addClass(this.dropdownCurrentEl, 'b-selected');
   }
 
   private dropdownTriggerValue(value) {

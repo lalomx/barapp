@@ -1,7 +1,7 @@
 import {
   Component, Input, OnChanges,
   SimpleChanges, Output,
-  EventEmitter, OnInit, ViewChild,
+  EventEmitter, ViewChild,
   AfterViewInit, KeyValueDiffers, KeyValueDiffer
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -18,7 +18,7 @@ import { ErrorResult } from '../interfaces/form/errorResult';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.less']
 })
-export class FormComponent implements OnInit, OnChanges, AfterViewInit {
+export class FormComponent implements OnChanges, AfterViewInit {
 
   @ViewChild('form', { static: true }) form: NgForm;
   @Input() formMetadataKey: string;
@@ -40,15 +40,13 @@ export class FormComponent implements OnInit, OnChanges, AfterViewInit {
   editor = FormEditor;
   errors: ErrorResult;
 
-  ngOnInit() {
-    this.originalEntity = Object.assign({}, this.entity);
-    this.form.reset();
-    this.entityDiffer = this.kvDiffers.find(this.originalEntity).create();
-  }
-
   ngOnChanges(changes: SimpleChanges) {
     if (changes.formMetadataKey && changes.formMetadataKey.currentValue) {
       this.getMetadata();
+    }
+    if (changes.entity && changes.entity.currentValue) {
+      this.originalEntity = Object.assign({}, this.entity);
+      this.entityDiffer = this.kvDiffers.find(this.originalEntity).create();
     }
   }
 
@@ -56,6 +54,9 @@ export class FormComponent implements OnInit, OnChanges, AfterViewInit {
     this.form.valueChanges.pipe(
       debounceTime(500)
     ).subscribe(entity => {
+      if (!Object.keys(this.entity).length) {
+        return;
+      }
       const changes = this.entityDiffer.diff(entity);
       if (!changes) {
         return;

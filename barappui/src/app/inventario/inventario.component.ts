@@ -25,7 +25,7 @@ export class InventarioComponent implements OnInit {
   }
 
   onModifyInput(args: ModifyInputEventArgs) {
-    if (args.input.propertyName !== 'tipo') {
+    if (args.input.propertyName !== 'tipoId') {
       return;
     }
 

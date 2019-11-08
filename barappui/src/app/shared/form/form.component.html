@@ -16,8 +16,14 @@
               type="text" [placeholder]="item.placeholder">
           </div>
         </div>
-        <app-numeric *ngSwitchCase="editor.Number" [label]="item.caption" [name]="item.propertyName" [(ngModel)]="entity[item.propertyName]"></app-numeric>
-        <app-dropdown *ngSwitchCase="editor.Select" [label]="item.caption" [options]="item.dropdownOptions" [name]="item.propertyName"
+        <app-numeric *ngSwitchCase="editor.Number"
+          [label]="item.caption"
+          [name]="item.propertyName"
+          [(ngModel)]="entity[item.propertyName]"></app-numeric>
+        <app-dropdown *ngSwitchCase="editor.Select"
+          [label]="item.caption"
+          [options]="item.dropdownOptions"
+          [name]="item.propertyName"
           [(ngModel)]="entity[item.propertyName]"></app-dropdown>
       </div>
     </div>
