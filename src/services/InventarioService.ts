@@ -17,6 +17,7 @@ export class InventarioService extends BaseService {
     router['get'](`${this.API_BASE}inventario`, this.getInventario.bind(this));
     router['post'](`${this.API_BASE}inventario`, this.createInventario.bind(this));
     router['put'](`${this.API_BASE}inventario/:id`, this.updateInventario.bind(this));
+    router['delete'](`${this.API_BASE}inventario/:id`, this.deleteInventario.bind(this));
     router['get'](`${this.API_BASE}inventario/tipos`, this.getInventarioTipos.bind(this));
   }
 
@@ -90,5 +91,19 @@ export class InventarioService extends BaseService {
     await inventarioRecord.save();
 
     res.status(200).send(inventario);
+  }
+
+  private async deleteInventario(req: Request, res: Response) {
+    console.log(req)
+    const inventarioRecord = await this.db.Inventario.findOne({ where: { id: req.params.id }});
+    if (!inventarioRecord) {
+      res.status(400).send({
+        errors: [{ msg: 'No existe el inventario' }]
+      });
+      return;
+    }
+    await inventarioRecord.save();
+
+    res.sendStatus(200);
   }
 }

@@ -33,6 +33,7 @@ export class EditComponent implements OnInit, OnChanges {
   loading = true;
   entity: any;
   mode: 'add' | 'edit' = 'add';
+  errors: any;
 
   ngOnInit() {
   }
@@ -58,6 +59,20 @@ export class EditComponent implements OnInit, OnChanges {
     this.mode = 'edit';
     this.entity = Object.assign({}, args.rowData);
     this.modal.show();
+  }
+
+  async onDeleteEntity(args) {
+    this.errors = null;
+    try {
+      await this.dataService.delete(args.rowData.id);
+      if (args.rowIndex === 0) {
+        this.tableDataSource.splice(args.rowIndex);
+      } else {
+        this.tableDataSource.splice(args.rowIndex);
+      }
+    } catch (e) {
+      this.errors = e;
+    }
   }
 
   onSaved() {

@@ -9,9 +9,19 @@
         <span uk-icon="plus"></span> Nuevo</button>
     </div>
   </div>
+  <div *ngIf="errors?.errors.length" class="errors-container">
+    <p><span class="uk-margin-small-right" uk-icon="icon: warning; ratio: 2"></span>
+      Se encontraron los siguientes errores: </p>
+    <ul class="uk-list uk-list-bullet">
+        <li *ngFor="let error of errors.errors">{{ error.msg}}</li>
+    </ul>
+  </div>
   <div class="uk-text-left" uk-grid>
     <div class="uk-width-1-1">
-      <app-table [metadata]="tableMetadata" [source]="tableDataSource" (editEntity)="onEditEntity($event)"></app-table>
+      <app-table [metadata]="tableMetadata"
+      [source]="tableDataSource"
+      (editEntity)="onEditEntity($event)"
+      (deleteEntity)="onDeleteEntity($event)"></app-table>
     </div>
   </div>
 </div>
