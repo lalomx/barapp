@@ -70,7 +70,7 @@ export class EditComponent implements OnInit, OnChanges {
     }
     this.errors = null;
     try {
-      await this.dataService.delete(args.rowData.id);
+      await this.dataService.delete(args.rowData.id).toPromise();
       if (args.rowIndex === 0) {
         this.tableDataSource.splice(args.rowIndex);
       } else {
@@ -91,7 +91,6 @@ export class EditComponent implements OnInit, OnChanges {
   }
 
   onPropertyChanged(args: PropertyChangedEventArgs) {
-    console.log(args);
     this.propertyChanged.emit(args);
   }
 

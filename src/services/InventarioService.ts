@@ -64,7 +64,7 @@ export class InventarioService extends BaseService {
       inventario.createdAt = new Date();
       inventario.updatedAt = new Date();
       inventario.tipoId = inventario.tipoId;
-      const nuevo = await this.db.Inventario.create(inventario);
+      await this.db.Inventario.create(inventario);
       res.status(201).send(inventario);
     }
   }
@@ -87,14 +87,12 @@ export class InventarioService extends BaseService {
     inventarioRecord.unitPrice = inventario.unitPrice;
     inventarioRecord.tipoId = inventario.tipoId;
     inventarioRecord.updatedAt = new Date();
-    console.log(inventarioRecord);
     await inventarioRecord.save();
 
     res.status(200).send(inventario);
   }
 
   private async deleteInventario(req: Request, res: Response) {
-    console.log(req)
     const inventarioRecord = await this.db.Inventario.findOne({ where: { id: req.params.id }});
     if (!inventarioRecord) {
       res.status(400).send({
@@ -102,8 +100,8 @@ export class InventarioService extends BaseService {
       });
       return;
     }
-    await inventarioRecord.save();
+    await inventarioRecord.destroy();
 
-    res.sendStatus(200);
+    res.status(200).send({});
   }
 }

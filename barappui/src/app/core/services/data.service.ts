@@ -16,7 +16,7 @@ export class DataService {
     private readonly args: { endPoint: string },
     private readonly httpClient: HttpClient) { }
 
-  public save(data: any) {
+  save(data: any) {
     const body = JSON.stringify(data);
     if (data.id) {
       return this.httpClient.put(`${this.getUrl()}${data.id}`, body, this.httpOptions)
@@ -31,28 +31,28 @@ export class DataService {
     }
   }
 
-  public get<T>(id: string) {
+  get<T>(id: string) {
     return this.httpClient.get<T>(`${this.getUrl()}${id}/`, this.httpOptions)
       .pipe(
         catchError(e => this.handleError(e))
       );
   }
 
-  public getAll<T>() {
+  getAll<T>() {
     return this.httpClient.get<T>(`${this.getUrl()}`, this.httpOptions)
       .pipe(
         catchError(e => this.handleError(e))
       );
   }
 
-  public delete(id: string) {
+  delete(id: string) {
     return this.httpClient.delete(`${this.getUrl()}${id}`, this.httpOptions)
       .pipe(
         catchError(e => this.handleError(e))
       );
   }
 
-  public getRoute<T>(route: string) {
+  getRoute<T>(route: string) {
     return this.httpClient.get<T>(`${this.getUrl()}${route}/`, this.httpOptions)
       .pipe(
         catchError(e => this.handleError(e))
