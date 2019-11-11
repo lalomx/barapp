@@ -24,6 +24,8 @@ import { FormComponent } from './form/form.component';
 import { InputNumericDirective } from './directives/input-numeric.directive';
 import { DropdownComponent } from './form/controls/dropdown/dropdown.component';
 import { NumericComponent } from './form/controls/numeric/numeric.component';
+import { DialogComponent } from './pages/dialog/dialog.component';
+import { ConfirmDialogComponent } from './pages/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { NumericComponent } from './form/controls/numeric/numeric.component';
     FormComponent,
     InputNumericDirective,
     DropdownComponent,
-    NumericComponent
+    NumericComponent,
+    DialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

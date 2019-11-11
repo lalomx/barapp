@@ -14,7 +14,7 @@ export class BootstrapperService {
       const dropdownService = this.injector.get(DropdownService);
       if (await authService.isLoggedIn()) {
          await userService.bootstrap();
-         dropdownService.init();
+         await dropdownService.init();
       }
    }
 }

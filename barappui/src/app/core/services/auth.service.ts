@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
@@ -7,6 +7,8 @@ import { tap, catchError } from 'rxjs/operators';
 
 import { StorageService } from './storage.service';
 import { config } from '../config/config';
+import { UserService } from './user.service';
+import { DropdownService } from './dropdown.service';
 
 @Injectable()
 export class AuthService {
@@ -32,7 +34,7 @@ export class AuthService {
       JSON.stringify({ username, password }),
       this.httpOptions)
       .pipe(
-        tap(res => {
+        tap(async res => {
           if (res.token) {
             this.storageService.setEntity('id_token', res.token);
             this.storageService.setEntity('username', username);

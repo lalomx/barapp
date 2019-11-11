@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../core/services/auth.service';
 import { Router } from '../../../node_modules/@angular/router';
 import * as uuid from 'uuid';
+import { UserService } from '../core/services/user.service';
+import { DropdownService } from '../core/services/dropdown.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +19,8 @@ export class LoginComponent {
   u = uuid();
 
   constructor(private readonly auth: AuthService,
+              private readonly userService: UserService,
+              private readonly dropdownService: DropdownService,
               private fb: FormBuilder,
               private readonly router: Router) {
     this.createForm();
@@ -40,13 +44,12 @@ export class LoginComponent {
 
     try {
       this.errors = null;
-      const data = await this.auth.login(this.loginForm.value.username, this.loginForm.value.password);
-      console.log(data);
+      await this.auth.login(this.loginForm.value.username, this.loginForm.value.password);
+      await this.userService.bootstrap();
+      await this.dropdownService.init();
       this.router.navigate(['']);
     } catch (e) {
       this.errors = e;
-      console.log('error');
-      console.log(e);
     } finally {
       this.submitted = false;
     }

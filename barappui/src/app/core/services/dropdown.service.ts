@@ -20,8 +20,8 @@ export class DropdownService {
     console.log('crated');
   }
 
-  init() {
-    this.getAllDropdowns().subscribe(data => this.data = data);
+  async init() {
+    this.data = await this.getAllDropdowns().toPromise();
   }
 
   get dropdowns() {

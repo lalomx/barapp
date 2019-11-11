@@ -1,7 +1,7 @@
 import { BarServicesDB } from "../interfaces/BarServicesDB";
 import { Router, Request, Response } from "express";
 import { BaseService } from "./BaseService";
-import uuid from 'uuid';
+import uuid from "uuid";
 
 export class InventarioService extends BaseService {
   private db: BarServicesDB;

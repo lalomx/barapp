@@ -5,6 +5,7 @@ import { ModalComponent } from '../pages/modal/modal.component';
 import { ModifyInputEventArgs } from '../interfaces/form/modifyInputEventArgs';
 import { PropertyChangedEventArgs } from '../interfaces/form/propertyChangedEventArgs';
 import { DataService } from '../../core/services/data.service';
+import { ConfirmDialogComponent } from '../pages/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-edit',
@@ -14,6 +15,7 @@ import { DataService } from '../../core/services/data.service';
 export class EditComponent implements OnInit, OnChanges {
 
   @ViewChild(ModalComponent, {static: true}) modal: ModalComponent;
+  @ViewChild(ConfirmDialogComponent, { static: true}) confirm: ConfirmDialogComponent;
 
   constructor(private readonly metadataTableService: MetadataTableService) { }
 
@@ -62,17 +64,18 @@ export class EditComponent implements OnInit, OnChanges {
   }
 
   async onDeleteEntity(args) {
-    this.errors = null;
-    try {
-      await this.dataService.delete(args.rowData.id);
-      if (args.rowIndex === 0) {
-        this.tableDataSource.splice(args.rowIndex);
-      } else {
-        this.tableDataSource.splice(args.rowIndex);
-      }
-    } catch (e) {
-      this.errors = e;
-    }
+    this.confirm.show();
+    // this.errors = null;
+    // try {
+    //   await this.dataService.delete(args.rowData.id);
+    //   if (args.rowIndex === 0) {
+    //     this.tableDataSource.splice(args.rowIndex);
+    //   } else {
+    //     this.tableDataSource.splice(args.rowIndex);
+    //   }
+    // } catch (e) {
+    //   this.errors = e;
+    // }
   }
 
   onSaved() {
