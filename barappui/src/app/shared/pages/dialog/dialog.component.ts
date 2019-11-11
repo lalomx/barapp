@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import * as UIkit from 'uikit';
 
 @Component({
@@ -10,6 +10,7 @@ export class DialogComponent implements AfterViewInit {
 
   @ViewChild('modal', { static: true}) modal: ElementRef;
 
+  @Output() closed = new EventEmitter();
   constructor() { }
 
   private modalObject: any;
@@ -20,17 +21,23 @@ export class DialogComponent implements AfterViewInit {
     UIkit.util.on(this.modal.nativeElement, 'shown', (event) => {
       event.preventDefault();
     });
-    UIkit.util.on(this.modal.nativeElement, 'hidden', e => e.preventDefault()) ;
+    UIkit.util.on(this.modal.nativeElement, 'hidden', e => {
+      e.preventDefault();
+      this.closed.emit();
+    });
   }
 
   show() {
-    this.open = true;
-    setTimeout(() => this.modalObject.show(), 500);
+    setTimeout(() => {
+      this.modalObject.show();
+      this.open = true;
+    }, 500);
   }
 
   close() {
-    this.open = true;
-    setTimeout(() => this.modalObject.hide(), 500);
+    setTimeout(() => {
+      this.modalObject.hide();
+      this.open = false;
+    }, 500);
   }
-
 }

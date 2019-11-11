@@ -64,18 +64,21 @@ export class EditComponent implements OnInit, OnChanges {
   }
 
   async onDeleteEntity(args) {
-    this.confirm.show();
-    // this.errors = null;
-    // try {
-    //   await this.dataService.delete(args.rowData.id);
-    //   if (args.rowIndex === 0) {
-    //     this.tableDataSource.splice(args.rowIndex);
-    //   } else {
-    //     this.tableDataSource.splice(args.rowIndex);
-    //   }
-    // } catch (e) {
-    //   this.errors = e;
-    // }
+    const confirm = await this.confirm.confirm();
+    if (!confirm) {
+      return;
+    }
+    this.errors = null;
+    try {
+      await this.dataService.delete(args.rowData.id);
+      if (args.rowIndex === 0) {
+        this.tableDataSource.splice(args.rowIndex);
+      } else {
+        this.tableDataSource.splice(args.rowIndex);
+      }
+    } catch (e) {
+      this.errors = e;
+    }
   }
 
   onSaved() {

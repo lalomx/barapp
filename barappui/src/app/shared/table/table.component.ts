@@ -54,12 +54,10 @@ export class TableComponent implements AfterViewInit, OnChanges {
   }
 
   private queryCellInfo(cell: HTMLElement) {
-    console.log(cell);
     const propertyName = cell.id.replace(`${this.metadata.name}-`, '');
     const metadata = this.metadata.columns.find(c => c.propertyName === propertyName);
     switch (metadata.type) {
       case 'enum':
-        console.log(this.dropdownService.dropdowns);
         cell.innerText = this.dropdownService.dropdowns.find(d => d.id === cell.innerText).name;
         break;
       default:

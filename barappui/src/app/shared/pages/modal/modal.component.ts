@@ -5,7 +5,6 @@ import { PropertyChangedEventArgs } from '../../interfaces/form/propertyChangedE
 import { FormComponent } from '../../form/form.component';
 import { HasChangesService } from '../../../core/services/has-changes.service';
 import { DataService } from '../../../core/services/data.service';
-import { ErrorResult } from '../../interfaces/form/errorResult';
 
 
 @Component({
