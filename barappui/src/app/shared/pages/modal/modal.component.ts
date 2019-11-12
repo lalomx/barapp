@@ -62,6 +62,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
   show() {
     this.open = true;
+    this.form.errors = null;
     setTimeout(() => this.modalObject.show(), 500);
   }
 
