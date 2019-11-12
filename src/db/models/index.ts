@@ -16,7 +16,7 @@ import { tipoInventarioFactory } from './TipoInventario';
 
 export const createDb = (): BarServicesDB => {
   let sequelize: Sequelize.Sequelize;
-  sequelize = new Sequelize.Sequelize(process.env.NODE_ENV === 'development' ? config.db.uri : config.prod.uri, 
+  sequelize = new Sequelize.Sequelize(process.env.NODE_ENV === 'production' ? config.prod.uri : config.db.uri, 
   // {
   //   logging: (message: string) => {
   //     const healthCheckQuery = 'Executing (default): SELECT 1+1 AS result';
