@@ -16,6 +16,9 @@ export abstract class BaseService {
         }
         errors.push({ msg: `El campo [${v.propertyName}] no debe de estar vacio`, param: v.propertyName });
       } else if (v.validation === Validators.MoreThanZero) {
+        if (prop > 0) {
+          return;
+        }
         errors.push({ msg: `El campo [${v.propertyName}] no debe ser mayor que 0`, param: v.propertyName });
       }
     });
