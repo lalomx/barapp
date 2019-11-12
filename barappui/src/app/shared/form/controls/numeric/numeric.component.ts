@@ -16,7 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class NumericComponent implements ControlValueAccessor {
 
   @Input() label: string;
-  @Input() max = 99999999999;
+  @Input() max = 99999;
   @Input() min = 0;
   @Input() format: string;
 

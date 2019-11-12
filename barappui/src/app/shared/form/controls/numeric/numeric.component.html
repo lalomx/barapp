@@ -7,6 +7,7 @@
       type="text"
       appInputNumeric
       required placeholder="Numeric"
+      maxlength="5"
       (input)="onInput($event.target.value)">
     <a href class="uk-icon-link uk-position-small uk-position-bottom-right" uk-icon="triangle-up" (click)="numUp($event)"></a>
     <a href class="uk-icon-link uk-position-small uk-position-top-right b-num-down" uk-icon="triangle-down" (click)="numDown($event)"></a>
