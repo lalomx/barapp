@@ -36,13 +36,8 @@ export class TableComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  ngAfterViewInit(): void {
-    Array.from(this.table.nativeElement.querySelectorAll('.row'))
-      .forEach((r: any) => {
-        Array.from(r.cells)
-          .filter((c: any) => c.id !== `${this.metadata.name}-actions`)
-          .forEach((c: HTMLElement) => this.queryCellInfo(c));
-      });
+  ngAfterViewInit() {
+    this.updateRows();
   }
 
   onEdit(rowData: any, rowIndex: number) {
@@ -51,6 +46,15 @@ export class TableComponent implements AfterViewInit, OnChanges {
 
   onDelete(rowData: any, rowIndex: number) {
     this.deleteEntity.emit({ rowData, rowIndex });
+  }
+
+  private updateRows() {
+    Array.from(this.table.nativeElement.querySelectorAll('.row'))
+      .forEach((r: any) => {
+        Array.from(r.cells)
+          .filter((c: any) => c.id !== `${this.metadata.name}-actions`)
+          .forEach((c: HTMLElement) => this.queryCellInfo(c));
+      });
   }
 
   private queryCellInfo(cell: HTMLElement) {

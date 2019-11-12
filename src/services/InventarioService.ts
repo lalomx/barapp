@@ -3,6 +3,7 @@ import { Router, Request, Response } from "express";
 import { BaseService } from "./BaseService";
 import uuid from "uuid";
 import { Validators } from "../interfaces/Validators";
+import { Op } from 'sequelize';
 
 export class InventarioService extends BaseService {
   private db: BarServicesDB;
@@ -99,7 +100,7 @@ export class InventarioService extends BaseService {
       return;
     }
     const items = await this.db.Inventario.findAll({ 
-      where: { name: inventario.name, tipoId: inventario.tipoId }
+      where: { name: inventario.name, tipoId: inventario.tipoId, id: { [Op.ne]: inventario.id } }
     });
     if (items.length > 0) {
       res.status(400).send({

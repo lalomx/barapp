@@ -35,8 +35,4 @@ export class InventarioComponent implements OnInit {
       dataSourceOptions: { text: 'name', propertyName: 'id' }
     };
   }
-
-  async onSaved() {
-    this.inventario = await this.inventarioService.getAll<any[]>().toPromise();
-  }
 }
