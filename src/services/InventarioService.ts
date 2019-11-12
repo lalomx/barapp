@@ -58,7 +58,7 @@ export class InventarioService extends BaseService {
     });
     if (items.length > 0) {
       res.status(400).send({
-        errors: [{ msg: 'Ya existe un registro de inventario con ese nombre' }]
+        errors: [{ msg: 'Ya existe un registro de inventario con ese nombre y tipo' }]
       })
     } else {
       inventario.createdAt = new Date();
@@ -71,6 +71,15 @@ export class InventarioService extends BaseService {
 
   private async updateInventario(req: Request, res: Response) {
     const inventario = req.body;
+    const items = await this.db.Inventario.findAll({ 
+      where: { name: inventario.name, tipoId: inventario.tipoId }
+    });
+    if (items.length > 0) {
+      res.status(400).send({
+        errors: [{ msg: 'Ya existe un registro de inventario con ese nombre y tipo' }]
+      })
+      return;
+    }
     const inventarioRecord = await this.db.Inventario.findOne({ where: { id: inventario.id }});
     if (!inventarioRecord) {
       res.status(400).send({
