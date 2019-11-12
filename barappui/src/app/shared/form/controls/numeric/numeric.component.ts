@@ -60,9 +60,9 @@ export class NumericComponent implements ControlValueAccessor {
     e.preventDefault();
   }
 
-  writeValue(value: any): void {
-    if (value) {
-      this.value = value || null;
+  writeValue(value: number): void {
+    if (value !== null && value !== undefined) {
+      this.value = value;
     } else {
       this.value = null;
     }
