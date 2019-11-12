@@ -32,13 +32,11 @@ export class NumericComponent implements ControlValueAccessor {
       return;
     }
     this.value = +value;
-    console.log(this.value);
     this.onTouch();
     this.onChange(this.value);
   }
 
   numUp(e) {
-    console.log(typeof this.value);
     const innerValue = this.value + 1;
     if (innerValue > this.max) {
       this.value = this.max;
@@ -64,7 +62,7 @@ export class NumericComponent implements ControlValueAccessor {
     if (value !== null && value !== undefined) {
       this.value = value;
     } else {
-      this.value = null;
+      this.value = 0;
     }
   }
   registerOnChange(fn: any): void {

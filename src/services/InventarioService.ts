@@ -2,9 +2,26 @@ import { BarServicesDB } from "../interfaces/BarServicesDB";
 import { Router, Request, Response } from "express";
 import { BaseService } from "./BaseService";
 import uuid from "uuid";
+import { Validators } from "../interfaces/Validators";
 
 export class InventarioService extends BaseService {
   private db: BarServicesDB;
+  private validations = [{
+    propertyName: 'name',
+    validation: Validators.NotNull
+  }, {
+    propertyName: 'tipoId',
+    validation: Validators.NotNull
+  }, {
+    propertyName: 'quantity',
+    validation: Validators.MoreThanZero
+  }, {
+    propertyName: 'unitPrice',
+    validation: Validators.MoreThanZero
+  }, {
+    propertyName: 'unitLimit',
+    validation: Validators.MoreThanZero
+  }];
   private constructor(db: BarServicesDB) {
     super();
     this.db = db;
@@ -52,6 +69,11 @@ export class InventarioService extends BaseService {
 
   private async createInventario(req: Request, res: Response){
     const inventario = req.body;
+    const errors = this.validateEntity(inventario, this.validations);
+    if(errors.length) {
+      res.status(400).send({ errors });
+      return;
+    }
     inventario.id = uuid();
     const items = await this.db.Inventario.findAll({ 
       where: { name: inventario.name, tipoId: inventario.tipoId }
@@ -71,6 +93,11 @@ export class InventarioService extends BaseService {
 
   private async updateInventario(req: Request, res: Response) {
     const inventario = req.body;
+    const errors = this.validateEntity(inventario, this.validations);
+    if(errors.length) {
+      res.status(400).send({ errors });
+      return;
+    }
     const items = await this.db.Inventario.findAll({ 
       where: { name: inventario.name, tipoId: inventario.tipoId }
     });
@@ -87,8 +114,6 @@ export class InventarioService extends BaseService {
       });
       return;
     }
-
-    
 
     inventarioRecord.quantity = inventario.quantity;
     inventarioRecord.name = inventario.name ;

@@ -61,11 +61,12 @@ export class FormComponent implements OnChanges, AfterViewInit {
       if (!changes) {
         return;
       }
-      changes.forEachChangedItem((record) => {
+      changes.forEachItem((record) => {
         if (record.currentValue === record.previousValue) {
           return;
         }
-        if (!record.currentValue && !record.previousValue) {
+        if ((record.currentValue === null || record.currentValue === undefined) &&
+          (record.previousValue === null || record.previousValue === undefined)) {
           return;
         }
         this.propertyChanged.emit({
@@ -94,5 +95,9 @@ export class FormComponent implements OnChanges, AfterViewInit {
     });
 
     this.inputs = this.formMetadata.inputs.map(i => i);
+  }
+
+  reset() {
+    this.form.reset();
   }
 }
