@@ -22,7 +22,6 @@ export class SettingsService extends BaseService {
 
   private getDropdownValues(req: Request, res: Response) {
     Promise.all([this.getTipoInventarios(), this.getGranularidad()]).then((data: any) => {
-      console.log(data);
       const dropdowns = [].concat.apply([], data);
       res.send(dropdowns);
     })
