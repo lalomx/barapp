@@ -1,11 +1,12 @@
 import {
   Component, OnInit, ViewChild, ElementRef,
   OnChanges, AfterViewInit, SimpleChanges,
-  Renderer2, Input, forwardRef, AfterViewChecked
+  Renderer2, Input, forwardRef, AfterViewChecked, TemplateRef
 } from '@angular/core';
 import * as UIkit from 'uikit';
 import { DropdownOptions } from '../../../interfaces/form/dropDownOptions';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DropdownService } from '../../../../core/services/dropdown.service';
 
 @Component({
   selector: 'app-dropdown',
@@ -23,12 +24,13 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Afte
 
   @ViewChild('dropdownO', { static: false }) dropdown: ElementRef;
   @ViewChild('dropdownInput', { static: false }) dropdownInput: ElementRef;
+  @ViewChild('data', { static: true}) data: ElementRef;
 
   @Input() options: DropdownOptions;
   @Input() label: string;
   @Input() placeholder = 'Selecciona...';
 
-  constructor(private render: Renderer2) { }
+  constructor(private render: Renderer2, private dropDownService: DropdownService) { }
 
   dropdownObject: any;
   dropdownCurrentEl: any;
@@ -75,7 +77,6 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Afte
   }
 
   ngAfterViewChecked() {
-    this.selectItem();
   }
 
   onSelected(item, event) {
@@ -102,7 +103,7 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Afte
 
   writeValue(value: any): void {
     if (value) {
-      this.value = value || null;
+      this.value = value;
     } else {
       if (this.dropdownCurrentEl) {
         this.render.removeClass(this.dropdownCurrentEl, 'b-selected');
@@ -112,6 +113,7 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Afte
       this.dropdownCurrentEl = null;
       this.dropdownTriggerValue(null);
     }
+    setTimeout(() => this.selectItem());
   }
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -128,13 +130,16 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Afte
       setTimeout(() => this.text = null);
       return;
     }
+
     const selected = Array.from(this.dropdown.nativeElement.querySelectorAll('.b-dropdown-item'))
       .find((item: HTMLElement) => item.id === this.value) as HTMLElement;
 
     if (!selected) {
       return;
     }
-
+    if (this.text === selected.innerText) {
+      return;
+    }
     setTimeout(() => this.text = selected.innerText);
     this.dropdownCurrentEl = selected;
     this.render.addClass(this.dropdownCurrentEl, 'b-selected');
@@ -146,7 +151,7 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Afte
   }
 
   private async initDatasource() {
-    const data = await this.options.dataSource.toPromise();
+    const data = this.dropDownService.dropdowns.filter(d => d.group === this.options.dataSource);
     this.datasource = data
       .map(d => ({text: d[this.options.dataSourceOptions.text], value: d[this.options.dataSourceOptions.propertyName] }));
     this.loading = false;

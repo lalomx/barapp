@@ -37,6 +37,13 @@ export class MetadataFormService {
           editor: FormEditor.Number
         },
         {
+          caption: 'Granularidad',
+          propertyName: 'granularity',
+          visible: true,
+          readonly: false,
+          editor: FormEditor.Select
+        },
+        {
           caption: 'Precio Unitario',
           propertyName: 'unitPrice',
           visible: true,

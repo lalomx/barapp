@@ -21,13 +21,20 @@ export class SettingsService extends BaseService {
   }
 
   private getDropdownValues(req: Request, res: Response) {
-    Promise.all([this.getTipoInventarios()]).then((data: any) => {
+    Promise.all([this.getTipoInventarios(), this.getGranularidad()]).then((data: any) => {
+      console.log(data);
       const dropdowns = [].concat.apply([], data);
       res.send(dropdowns);
     })
   }
 
   private getTipoInventarios() {
-    return this.db.TipoInventario.findAll({ attributes: ['id', 'name']});
+    return this.db.TipoInventario.findAll({ attributes: ['id', 'name']})
+      .then(ti => Promise.resolve(ti.map(t => ({ id: t.id, name: t.name, group: 'TI' }))));
+  }
+
+  private getGranularidad() {
+    return this.db.Granularidad.findAll({ attributes: ['id', 'name']})
+      .then(ti => Promise.resolve(ti.map(t => ({ id: t.id, name: t.name, group: 'G' }))));
   }
 }

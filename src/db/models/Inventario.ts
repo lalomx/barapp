@@ -6,6 +6,7 @@ export interface InventarioAttributes extends Model {
   name: string;
   quantity: number;
   tipoId: string;
+  granularity?: string;
   unitPrice: number;
   unitLimit: number;
   createdAt?: Date;
@@ -39,6 +40,10 @@ const inventarioFactory = (sequalize: Sequelize) => {
     unitLimit: {
       allowNull: false,
       type: DataTypes.DOUBLE
+    },
+    granularity: {
+      allowNull: true,
+      type: DataTypes.STRING
     },
     tipoId: {
       allowNull: false,

@@ -27,6 +27,11 @@ export class MetadataTableService {
           type: 'number'
         },
         {
+          caption: 'Granularidad',
+          propertyName: 'granularity',
+          type: 'enum'
+        },
+        {
           caption: 'Precio Unitario',
           propertyName: 'unitPrice',
           type: 'number'

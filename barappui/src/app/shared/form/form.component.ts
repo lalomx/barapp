@@ -81,7 +81,6 @@ export class FormComponent implements OnChanges, AfterViewInit {
   }
 
   cancel() {
-    this.form.reset();
     this.entity = {};
     this.hasChangesService.hasChanges = false;
   }

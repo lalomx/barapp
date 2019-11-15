@@ -13,6 +13,7 @@ import { inventarioProductosFactory } from './InventarioProductos';
 import { PersonaProductosFactory } from './PersonaProductos';
 import { comandaFactory } from './Comandas';
 import { tipoInventarioFactory } from './TipoInventario';
+import { granularidadFactory } from './SettingsGranularidad';
 
 export const createDb = (): BarServicesDB => {
   let sequelize: Sequelize.Sequelize;
@@ -41,7 +42,8 @@ export const createDb = (): BarServicesDB => {
     InventarioProducto: inventarioProductosFactory(sequelize),
     PersonaProducto: PersonaProductosFactory(sequelize),
     Comanda: comandaFactory(sequelize),
-    TipoInventario: tipoInventarioFactory(sequelize)
+    TipoInventario: tipoInventarioFactory(sequelize),
+    Granularidad: granularidadFactory(sequelize),
   }
 
   Object.keys(db).forEach(modelName => {

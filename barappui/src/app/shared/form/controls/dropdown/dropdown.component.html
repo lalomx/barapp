@@ -10,20 +10,19 @@
       <span [class]="loading ? 'b-text uk-align-left loading': 'b-text uk-align-left'">{{text || placeholder}}</span>
       <span *ngIf="!loading" class="b-icon uk-align-right" uk-icon="icon: chevron-down"></span>
     </button>
+
+
     <div class="b-dropdown uk-width-1-1" uk-dropdown="mode: click" uk-overflow-auto #dropdownO>
-      <div *ngIf="datasource?.length == 0">
+      <ng-container *ngIf="datasource?.length > 0 else nodata">
+        <ul class="uk-list uk-list-divider uk-width-1-1 uk-overflow-auto" #data>
+          <li *ngFor="let item of datasource;let i = index" (click)="onSelected(item, $event)" [id]="item.value" class="b-dropdown-item">{{item.text}}</li>
+        </ul>
+      </ng-container>
+      <ng-template #nodata>
         <ul class="uk-list uk-list-divider uk-width-1-1 uk-overflow-auto">
           <li>No hay datos</li>
         </ul>
-      </div>
-      <div *ngIf="datasource?.length > 0">
-        <ul class="uk-list uk-list-divider uk-width-1-1 uk-overflow-auto">
-          <li *ngFor="let item of datasource;let i = index"
-            (click)="onSelected(item, $event)"
-            [id]="item.value"
-            class="b-dropdown-item">{{item.text}}</li>
-        </ul>
-      </div>
+      </ng-template>
     </div>
   </div>
 </div>

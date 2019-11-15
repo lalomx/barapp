@@ -37,6 +37,7 @@ export class InventarioService extends BaseService {
     router['put'](`${this.API_BASE}inventario/:id`, this.updateInventario.bind(this));
     router['delete'](`${this.API_BASE}inventario/:id`, this.deleteInventario.bind(this));
     router['get'](`${this.API_BASE}inventario/tipos`, this.getInventarioTipos.bind(this));
+    router['get'](`${this.API_BASE}inventario/granularidad`, this.getGranularidad.bind(this));
   }
 
   private async getInventario(req: Request, res: Response) {
@@ -58,6 +59,7 @@ export class InventarioService extends BaseService {
         unitPrice: c.unitPrice,
         tipoId: c.tipoId,
         createdAt: c.createdAt,
+        granularity: c.granularity,
         updatedAt: c.updatedAt,
       }
     }));
@@ -66,6 +68,11 @@ export class InventarioService extends BaseService {
   private async getInventarioTipos(req: Request, res: Response) {
     const tipoInventarios = await this.db.TipoInventario.findAll({ attributes: ['id', 'name']});
     res.send(tipoInventarios);
+  }
+
+  private async getGranularidad(req: Request, res: Response) {
+    const granularidad = await this.db.Granularidad.findAll({ attributes: ['id', 'name']});
+    res.send(granularidad);
   }
 
   private async createInventario(req: Request, res: Response){
@@ -117,6 +124,7 @@ export class InventarioService extends BaseService {
     }
 
     inventarioRecord.quantity = inventario.quantity;
+    inventarioRecord.granularity = inventario.granularity;
     inventarioRecord.name = inventario.name ;
     inventarioRecord.unitLimit = inventario.unitLimit;
     inventarioRecord.unitPrice = inventario.unitPrice;

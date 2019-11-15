@@ -2,6 +2,7 @@ import Sequelize from 'sequelize';
 import { UserModel } from '../db/models/User';
 import { RoleModel } from '../db/models/Role';
 import { BarModel } from '../db/models/Bares';
+import { GranularidadModel } from '../db/models/SettingsGranularidad';
 import { InventarioModel } from '../db/models/Inventario';
 import { MenuModel } from '../db/models/Menus';
 import { PersonaModel } from '../db/models/Persona';
@@ -25,4 +26,5 @@ export interface BarServicesDB {
     PersonaProducto: PersonaProductosModel;
     Comanda: ComandaModel;
     TipoInventario: TipoInventarioModel;
+    Granularidad: GranularidadModel,
 }
