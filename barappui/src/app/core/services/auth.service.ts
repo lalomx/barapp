@@ -7,8 +7,6 @@ import { tap, catchError } from 'rxjs/operators';
 
 import { StorageService } from './storage.service';
 import { config } from '../config/config';
-import { UserService } from './user.service';
-import { DropdownService } from './dropdown.service';
 
 @Injectable()
 export class AuthService {
