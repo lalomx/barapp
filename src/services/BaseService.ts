@@ -14,7 +14,7 @@ export abstract class BaseService {
         if (!!prop) {
           return;
         }
-        errors.push({ msg: `El campo [${v.caption}] no debe de estar vacio`, param: v.propertyName });
+        errors.push({ msg: `El campo [${v.caption}] no debe estar vacío`, param: v.propertyName });
       } else if (v.validation === Validators.MoreThanZero) {
         if (prop > 0) {
           return;

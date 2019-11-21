@@ -56,7 +56,7 @@ export class MetadataFormService {
           editor: FormEditor.Number
         },
         {
-          caption: 'Limite de unidades',
+          caption: 'Límite de unidades',
           propertyName: 'unitLimit',
           visible: true,
           readonly: true,

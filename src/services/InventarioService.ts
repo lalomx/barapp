@@ -20,18 +20,18 @@ export class InventarioService extends BaseService {
     caption: 'Cantidad',
     validation: Validators.MoreThanZero
   }, {
+    propertyName: 'granularity',
+    caption: 'Granularidad',
+    validation: Validators.NotNull
+  }, {
     propertyName: 'unitPrice',
     caption: 'Precio Unitario',
     validation: Validators.MoreThanZero
   }, {
     propertyName: 'unitLimit',
-    caption: 'Limite de unidades',
+    caption: 'Límite de unidades',
     validation: Validators.MoreThanZero
-  }, {
-    propertyName: 'granularity',
-    caption: 'Granularidad',
-    validation: Validators.NotNull
-  }];
+  }, ];
   private constructor(db: BarServicesDB) {
     super();
     this.db = db;
