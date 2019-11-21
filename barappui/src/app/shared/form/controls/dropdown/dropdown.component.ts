@@ -125,13 +125,14 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Afte
   }
 
   private selectItem() {
+    const allElements = Array.from(this.dropdown.nativeElement.querySelectorAll('.b-dropdown-item'));
+    allElements.forEach(el => this.render.removeClass(el, 'b-selected'));
     if (!this.value) {
       setTimeout(() => this.text = null);
       return;
     }
 
-    const selected = Array.from(this.dropdown.nativeElement.querySelectorAll('.b-dropdown-item'))
-      .find((item: HTMLElement) => item.id === this.value) as HTMLElement;
+    const selected = allElements.find((item: HTMLElement) => item.id === this.value) as HTMLElement;
 
     if (!selected) {
       return;

@@ -11,7 +11,7 @@ export class CommonMiddleware {
   }
 
   init(router: Router) {
-    router.use(cors());
+    router.use(cors({ origin: '*', credentials: true }));
     router.use(bodyParser.urlencoded({ extended: false }));
     router.use(bodyParser.json());
     router.use(compression());

@@ -53,9 +53,7 @@ export class InventarioService extends BaseService {
     const inventarios = await this.db.Inventario.findAll({include: [
       {
         association: 'tipo',
-        attributes: [
-          'name',
-        ]
+        attributes: ['name']
       }],
       order: ['name']
     });

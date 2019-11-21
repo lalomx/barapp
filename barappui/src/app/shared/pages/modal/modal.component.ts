@@ -55,6 +55,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.modalObject = UIkit.modal(this.modal.nativeElement);
     UIkit.util.on(this.modal.nativeElement, 'shown', (event) => {
+      this.modal.nativeElement.querySelector('.uk-modal-body').scrollTo( 0, 0 );
       event.preventDefault();
     });
     UIkit.util.on(this.modal.nativeElement, 'hidden', e => e.preventDefault()) ;
