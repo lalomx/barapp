@@ -56,7 +56,8 @@ export class InventarioService extends BaseService {
         attributes: [
           'name',
         ]
-      }]
+      }],
+      order:['name']
     });
     
     res.send(inventarios.map((c:any) => {
