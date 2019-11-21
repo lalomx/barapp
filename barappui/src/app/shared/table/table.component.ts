@@ -4,6 +4,7 @@ import {
   ViewChild, ElementRef, AfterViewInit
 } from '@angular/core';
 import { DropdownService } from '../../core/services/dropdown.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-table',
@@ -23,6 +24,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
 
   columns: any[];
   hasData = false;
+  tableSource: any[];
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.metadata && changes.metadata.currentValue) {
@@ -30,6 +32,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
     }
 
     if (changes.source && changes.source.currentValue) {
+      this.order();
       this.hasData = true;
     } else {
       this.hasData = false;
@@ -67,5 +70,19 @@ export class TableComponent implements AfterViewInit, OnChanges {
       default:
         break;
     }
+  }
+
+  private order() {
+    const ordered  = _.orderBy(this.source.map((r) => {
+      const obj = Object.assign({}, r);
+      if (typeof r[this.metadata.sortOptions.property] === 'string') {
+        obj[this.metadata.sortOptions.property] = obj[this.metadata.sortOptions.property].toLowerCase();
+      }
+      return obj;
+    }), [this.metadata.sortOptions.property], [this.metadata.sortOptions.sort]);
+
+    this.tableSource = ordered.map((el) => {
+      return this.source.find(s => s.id === el.id);
+    });
   }
 }

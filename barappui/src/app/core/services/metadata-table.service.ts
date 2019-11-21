@@ -10,6 +10,7 @@ export class MetadataTableService {
   constructor() {
     this.metadata.InventarioTable = {
       name: 'InventarioTable',
+      sortOptions: { property: 'name', sort: 'asc' },
       columns: [
         {
           caption: 'Nombre',
