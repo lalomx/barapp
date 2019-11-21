@@ -75,11 +75,7 @@ export class EditComponent implements OnInit, OnChanges {
     this.errors = null;
     try {
       await this.dataService.delete(args.rowData.id).toPromise();
-      if (args.rowIndex === 0) {
-        this.tableDataSource.splice(args.rowIndex);
-      } else {
-        this.tableDataSource.splice(args.rowIndex);
-      }
+      this.tableDataSource.splice(args.rowIndex, 1);
     } catch (e) {
       this.errors = e;
     }
