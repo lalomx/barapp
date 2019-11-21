@@ -100,7 +100,12 @@ export class InventarioService extends BaseService {
       res.status(400).send({
         errors: [{ msg: 'Ya existe un registro de inventario con ese nombre y tipo' }]
       })
-    } else {
+    } else if(inventario.unitLimit > inventario.quantity){
+      res.status(400).send({
+        errors: [{ msg: 'El límite de unidades debe ser menor o igual a la cantidad' }]
+      })
+    }
+    else {
       inventario.createdAt = new Date();
       inventario.updatedAt = new Date();
       inventario.tipoId = inventario.tipoId;
@@ -122,6 +127,12 @@ export class InventarioService extends BaseService {
     if (items.length > 0) {
       res.status(400).send({
         errors: [{ msg: 'Ya existe un registro de inventario con ese nombre y tipo' }]
+      })
+      return;
+    }
+    if(inventario.unitLimit > inventario.quantity){
+      res.status(400).send({
+        errors: [{ msg: 'El límite de unidades debe ser menor o igual a la cantidad' }]
       })
       return;
     }
