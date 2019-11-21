@@ -104,8 +104,7 @@ export class InventarioService extends BaseService {
       res.status(400).send({
         errors: [{ msg: 'El límite de unidades debe ser menor o igual a la cantidad' }]
       })
-    }
-    else {
+    } else {
       inventario.createdAt = new Date();
       inventario.updatedAt = new Date();
       inventario.tipoId = inventario.tipoId;
