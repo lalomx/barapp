@@ -61,7 +61,17 @@ export class FormComponent implements OnChanges, AfterViewInit {
       if (!changes) {
         return;
       }
-      changes.forEachItem((record) => {
+      changes.forEachAddedItem(record => {
+        this.propertyChanged.emit({
+          propertyName: record.key,
+          currentValue: record.currentValue,
+          previousValue: record.previousValue,
+          entity: this.entity
+        });
+        this.hasChangesService.hasChanges = true;
+      });
+
+      changes.forEachChangedItem((record) => {
         if (record.currentValue === record.previousValue) {
           return;
         }
@@ -97,6 +107,6 @@ export class FormComponent implements OnChanges, AfterViewInit {
   }
 
   reset() {
-    this.form.reset();
+    this.form.resetForm();
   }
 }

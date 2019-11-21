@@ -20,6 +20,7 @@ export class MetadataFormService {
           visible: true,
           readonly: true,
           placeholder: '',
+          required: true,
           editor: FormEditor.Text,
         },
         {
@@ -27,6 +28,7 @@ export class MetadataFormService {
           propertyName: 'tipoId',
           visible: true,
           readonly: true,
+          required: true,
           editor: FormEditor.Select,
         },
         {
@@ -34,6 +36,7 @@ export class MetadataFormService {
           propertyName: 'quantity',
           visible: true,
           readonly: true,
+          required: true,
           editor: FormEditor.Number
         },
         {
@@ -41,6 +44,7 @@ export class MetadataFormService {
           propertyName: 'granularity',
           visible: true,
           readonly: false,
+          required: true,
           editor: FormEditor.Select
         },
         {
@@ -48,6 +52,7 @@ export class MetadataFormService {
           propertyName: 'unitPrice',
           visible: true,
           readonly: true,
+          required: true,
           editor: FormEditor.Number
         },
         {
@@ -55,6 +60,7 @@ export class MetadataFormService {
           propertyName: 'unitLimit',
           visible: true,
           readonly: true,
+          required: true,
           editor: FormEditor.Number
         }
       ]

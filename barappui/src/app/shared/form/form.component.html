@@ -9,19 +9,17 @@
   <div *ngIf="!!entity">
     <div *ngFor="let item of inputs;" class="uk-margin">
       <div [ngSwitch]="item.editor">
+        <label class="uk-form-label" [for]="item.propertyName">{{item.caption}} <span *ngIf="item.required" class="uk-form-danger">*</span></label>
         <div *ngSwitchCase="editor.Text">
-          <label class="uk-form-label" [for]="item.propertyName">{{item.caption}}</label>
           <div class="uk-form-controls">
             <input class="uk-input" [name]="item.propertyName" [(ngModel)]="entity[item.propertyName]" [id]="formMetadataKey+'-'+item.propertyName"
-              type="text" [placeholder]="item.placeholder">
+              type="text" [placeholder]="item.placeholder"> 
           </div>
         </div>
         <app-numeric *ngSwitchCase="editor.Number"
-          [label]="item.caption"
           [name]="item.propertyName"
           [(ngModel)]="entity[item.propertyName]"></app-numeric>
         <app-dropdown *ngSwitchCase="editor.Select"
-          [label]="item.caption"
           [options]="item.dropdownOptions"
           [name]="item.propertyName"
           [(ngModel)]="entity[item.propertyName]"></app-dropdown>

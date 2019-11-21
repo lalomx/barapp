@@ -14,12 +14,12 @@ export abstract class BaseService {
         if (!!prop) {
           return;
         }
-        errors.push({ msg: `El campo [${v.propertyName}] no debe de estar vacio`, param: v.propertyName });
+        errors.push({ msg: `El campo [${v.caption}] no debe de estar vacio`, param: v.propertyName });
       } else if (v.validation === Validators.MoreThanZero) {
         if (prop > 0) {
           return;
         }
-        errors.push({ msg: `El campo [${v.propertyName}] no debe ser mayor que 0`, param: v.propertyName });
+        errors.push({ msg: `El campo [${v.caption}] debe ser mayor que 0`, param: v.propertyName });
       }
     });
 

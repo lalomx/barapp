@@ -1,9 +1,6 @@
 import { BarServicesDB } from "../interfaces/BarServicesDB";
 import { Router, Request, Response } from "express";
 import { BaseService } from "./BaseService";
-import Sequelize from 'sequelize';
-import moment from 'moment';
-import { Dropdown } from "../interfaces/Dropdown";
 
 export class SettingsService extends BaseService {
   private db: BarServicesDB;

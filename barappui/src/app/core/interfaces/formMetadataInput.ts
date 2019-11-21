@@ -6,6 +6,7 @@ export interface FormMetadataInput {
     propertyName: string;
     editor: FormEditor;
     visible: boolean;
+    required: boolean;
     readonly: boolean;
     placeholder?: string;
     min?: number;

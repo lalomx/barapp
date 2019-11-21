@@ -27,7 +27,6 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Afte
   @ViewChild('data', { static: true}) data: ElementRef;
 
   @Input() options: DropdownOptions;
-  @Input() label: string;
   @Input() placeholder = 'Selecciona...';
 
   constructor(private render: Renderer2, private dropDownService: DropdownService) { }

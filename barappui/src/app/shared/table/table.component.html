@@ -1,9 +1,9 @@
-<div class="uk-animation-fade">
-  <table class="uk-table uk-table-divider uk-width-1-1" #table>
+<div class="uk-animation-fade uk-overflow-auto">
+  <table class="uk-table uk-table-responsive uk-table-divider" #table>
     <thead>
       <tr>
         <th class="uk-width-small">Actions</th>
-        <th *ngFor="let column of columns">{{column.caption}}</th>
+        <th *ngFor="let column of columns" class="uk-width-small">{{column.caption}}</th>
       </tr>
     </thead>
     <div *ngIf="!hasData">Empty Data</div>
@@ -13,7 +13,9 @@
           <a (click)="onEdit(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="pencil"></a>
           <a (click)="onDelete(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="trash"></a>
         </td>
-        <td *ngFor="let column of columns; index as j" [id]="metadata.name+'-'+column.propertyName">{{row[column.propertyName]}}</td>
+        <td *ngFor="let column of columns; index as j"
+            [id]="metadata.name+'-'+column.propertyName"
+            class="uk-text-truncate">{{row[column.propertyName]}}</td>
       </tr>
     </tbody>
   </table>
