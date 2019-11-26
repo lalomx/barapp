@@ -1,5 +1,6 @@
 import { BarServicesDB } from "../interfaces/BarServicesDB";
 import { Router, Request, Response } from "express";
+import Sequelize from 'sequelize'
 import { BaseService } from "./BaseService";
 import uuid from "uuid";
 import { Validators } from "../interfaces/Validators";
@@ -50,27 +51,19 @@ export class InventarioService extends BaseService {
   }
 
   private async getInventario(req: Request, res: Response) {
-    const inventarios = await this.db.Inventario.findAll({include: [
+    const inventarios = await this.db.Inventario.findAll({
+      include: [
       {
-        association: 'tipo',
-        attributes: ['name']
+        association: 'transacciones',
+        attributes: []
       }],
-      order: ['name']
+      attributes: ['id', 'name', 'unitLimit', 'unitPrice', 'tipoId', 'granularity', [Sequelize.fn('sum', Sequelize.col('transacciones.quantity')), 'quantity'], 'updatedAt', 'createdAt'],
+      raw: true,
+      order: ['name'],
+      group: ['Inventarios.id'],
     });
     
-    res.send(inventarios.map((c:any) => {
-      return {
-        id: c.id,
-        quantity: c.quantity,
-        name: c.name,
-        unitLimit: c.unitLimit,
-        unitPrice: c.unitPrice,
-        tipoId: c.tipoId,
-        createdAt: c.createdAt,
-        granularity: c.granularity,
-        updatedAt: c.updatedAt,
-      }
-    }));
+    res.send(inventarios);
   }
 
   private async getInventarioTipos(req: Request, res: Response) {
@@ -141,7 +134,6 @@ export class InventarioService extends BaseService {
       return;
     }
 
-    inventarioRecord.quantity = inventario.quantity;
     inventarioRecord.granularity = inventario.granularity;
     inventarioRecord.name = inventario.name ;
     inventarioRecord.unitLimit = inventario.unitLimit;

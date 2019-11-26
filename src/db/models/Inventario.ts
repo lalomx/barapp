@@ -4,7 +4,6 @@ import { BarServicesDB } from '../../interfaces/BarServicesDB';
 export interface InventarioAttributes extends Model {
   id: string;
   name: string;
-  quantity: number;
   tipoId: string;
   granularity?: string;
   unitPrice: number;
@@ -28,10 +27,6 @@ const inventarioFactory = (sequalize: Sequelize) => {
     name: {
       allowNull: false,
       type: DataTypes.STRING
-    },
-    quantity: {
-      allowNull: false,
-      type: DataTypes.DOUBLE
     },
     unitPrice: {
       allowNull: false,
@@ -59,6 +54,7 @@ const inventarioFactory = (sequalize: Sequelize) => {
 
   Inventario.associate = (db: BarServicesDB) => {
     Inventario.belongsToMany(db.Producto, {through: 'InventarioProductos', foreignKey: 'inventarioId', as: 'productos'});
+    Inventario.hasMany(db.Transaccion, { sourceKey: 'id', foreignKey: 'inventarioId',  as: 'transacciones' })
     Inventario.belongsTo(db.TipoInventario, {foreignKey: { name: 'tipoId' }, as: 'tipo' })
   };
 
