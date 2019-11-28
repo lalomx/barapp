@@ -12,7 +12,11 @@
         <label class="uk-form-label" [for]="item.propertyName">{{item.caption}} <span *ngIf="item.required" class="uk-form-danger">*</span></label>
         <div *ngSwitchCase="editor.Text">
           <div class="uk-form-controls">
-            <input class="uk-input" [name]="item.propertyName" [(ngModel)]="entity[item.propertyName]" [id]="formMetadataKey+'-'+item.propertyName"
+            <input class="uk-input"
+              [name]="item.propertyName"
+              [(ngModel)]="entity[item.propertyName]"
+              [id]="formMetadataKey+'-'+item.propertyName"
+              [readonly]="item.readonly"
               type="text" [placeholder]="item.placeholder"> 
           </div>
         </div>

@@ -23,21 +23,21 @@ export class InventarioComponent implements OnInit {
     });
   }
 
-  onModifyInput(args: ModifyInputEventArgs) {
-    if (args.input.propertyName === 'tipoId') {
-      args.input.dropdownOptions = {
-        multiselect: false,
-        deselect: false,
-        dataSource: 'TI',
-        dataSourceOptions: { text: 'name', propertyName: 'id' }
-      };
-    } else if (args.input.propertyName === 'granularity') {
-      args.input.dropdownOptions = {
-        multiselect: false,
-        deselect: false,
-        dataSource: 'G',
-        dataSourceOptions: { text: 'name', propertyName: 'id' }
-      };
-    }
+  onFormInitializing(args: any) {
+    const dropdownOptionsTipo = {
+      multiselect: false,
+      deselect: false,
+      dataSource: 'TI',
+      dataSourceOptions: { text: 'name', propertyName: 'id' }
+    };
+
+    const dropdownOptionsGran = {
+      multiselect: false,
+      deselect: false,
+      dataSource: 'G',
+      dataSourceOptions: { text: 'name', propertyName: 'id' }
+    };
+    args.modifyInput('tipoId', { dropdownOptions: dropdownOptionsTipo });
+    args.modifyInput('granularity', { dropdownOptions: dropdownOptionsGran });
   }
 }

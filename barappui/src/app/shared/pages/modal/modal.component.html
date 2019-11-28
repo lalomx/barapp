@@ -9,6 +9,7 @@
         [entity]="entity"
         [formMetadataKey]="formMetadata"
         (modifyInput)="onModifyInput($event)"
+        (formInitializing)="onFormInitializing($event)"
         (propertyChanged)="onPropertyChanged($event)"></app-form>
     </div>
     <div class="uk-modal-footer uk-text-right">

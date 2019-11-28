@@ -27,11 +27,14 @@ export class EditComponent implements OnInit, OnChanges {
   @Input() metadataFormName: string;
   @Input() title: string;
   @Input() dataService: DataService;
+  @Input() allowEdit = true;
+  @Input() allowDelete = true;
 
   @Output() modifyInput = new EventEmitter<ModifyInputEventArgs>();
   @Output() newEvent = new EventEmitter();
   @Output() propertyChanged = new EventEmitter<PropertyChangedEventArgs>();
   @Output() saved = new EventEmitter<any>();
+  @Output() formInitializing = new EventEmitter<any>();
 
   tableMetadata: any;
   tableDataSource: any[];
@@ -104,4 +107,7 @@ export class EditComponent implements OnInit, OnChanges {
     this.propertyChanged.emit(args);
   }
 
+  onFormInitializing(args: any) {
+    this.formInitializing.emit(args);
+  }
 }

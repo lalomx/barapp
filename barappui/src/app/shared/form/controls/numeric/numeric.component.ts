@@ -18,6 +18,7 @@ export class NumericComponent implements ControlValueAccessor {
   @Input() max = 99999;
   @Input() min = 0;
   @Input() format: string;
+  @Input() readonly: boolean;
 
   constructor() { }
 

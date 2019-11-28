@@ -2,7 +2,7 @@ import {
   Component, Input, OnChanges,
   SimpleChanges, Output,
   EventEmitter, ViewChild,
-  AfterViewInit, KeyValueDiffers, KeyValueDiffer
+  AfterViewInit, KeyValueDiffers, KeyValueDiffer, OnInit
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MetadataFormService } from '../../core/services/metadata-form.service';
@@ -25,6 +25,7 @@ export class FormComponent implements OnChanges, AfterViewInit {
   @Input() entity: any = {};
 
   @Output() modifyInput = new EventEmitter<ModifyInputEventArgs>();
+  @Output() formInitializing = new EventEmitter<any>();
   @Output() propertyChanged = new EventEmitter<PropertyChangedEventArgs>();
 
   private originalEntity: any;
@@ -97,16 +98,22 @@ export class FormComponent implements OnChanges, AfterViewInit {
 
   private getMetadata() {
     this.formMetadata = this.metadataFormService.getMetadata(this.formMetadataKey);
-    this.formMetadata.inputs.forEach(i => {
-      this.modifyInput.emit({
-        input: i,
-      });
-    });
-
+    this.formInitializing.emit({ modifyInput: this.modifyFormInput.bind(this) });
     this.inputs = this.formMetadata.inputs.map(i => i);
   }
 
   reset() {
     this.form.resetForm();
+  }
+
+  private modifyFormInput(propertyName: string, { visible, readonly, dropdownOptions }) {
+    console.log(propertyName);
+    const input = this.formMetadata.inputs.find(i => i.propertyName === propertyName);
+    if (!input) {
+      return;
+    }
+    input.visible = visible;
+    input.readonly = readonly;
+    input.dropdownOptions = dropdownOptions;
   }
 }

@@ -20,6 +20,8 @@
     <div class="uk-width-1-1">
       <app-table [metadata]="tableMetadata"
       [source]="tableDataSource"
+      [allowEdit]="allowEdit"
+      [allowDelete]="allowDelete"
       (editEntity)="onEditEntity($event)"
       (deleteEntity)="onDeleteEntity($event)"></app-table>
     </div>
@@ -33,5 +35,6 @@
   [formMetadata]="metadataFormName"
   (saved)="onSaved($event)"
   (modifyInput)="onModifyInput($event)"
+  (formInitializing)="onFormInitializing($event)"
   (propertyChanged)="onPropertyChanged($event)"></app-modal>
   <app-confirm-dialog></app-confirm-dialog>

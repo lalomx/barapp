@@ -1,7 +1,9 @@
 <app-edit metadataTableName="InventarioTable"
           metadataFormName="InventarioForm"
           title="Inventario Item"
+          [allowEdit]="false"
+          [allowDelete]="false"
           [source]="inventario"
           [dataService]="inventarioService"
-          (modifyInput)="onModifyInput($event)">
+          (formInitializing)="onFormInitializing($event)">
 </app-edit>

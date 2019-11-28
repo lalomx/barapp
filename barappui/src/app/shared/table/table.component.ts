@@ -16,6 +16,8 @@ export class TableComponent implements AfterViewInit, OnChanges {
   @ViewChild('table', { static: true }) private table: ElementRef;
   @Input() source: any[];
   @Input() metadata: any;
+  @Input() allowEdit = true;
+  @Input() allowDelete = true;
 
   @Output() editEntity = new EventEmitter<any>();
   @Output() deleteEntity = new EventEmitter<any>();

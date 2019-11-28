@@ -10,8 +10,8 @@
     <tbody *ngIf="hasData">
       <tr *ngFor="let row of tableSource; index as i" [id]="i+'-'+metadata.name" class="row">
         <td [id]="metadata.name+'-actions'" class="cell">
-          <a (click)="onEdit(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="pencil"></a>
-          <a (click)="onDelete(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="trash"></a>
+          <a *ngIf="allowEdit" (click)="onEdit(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="pencil"></a>
+          <a *ngIf="allowDelete" (click)="onDelete(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="trash"></a>
         </td>
         <td *ngFor="let column of columns; index as j"
             [id]="metadata.name+'-'+column.propertyName"

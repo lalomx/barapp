@@ -28,6 +28,7 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Afte
 
   @Input() options: DropdownOptions;
   @Input() placeholder = 'Selecciona...';
+  @Input() readonly = false;
 
   constructor(private render: Renderer2, private dropDownService: DropdownService) { }
 
@@ -38,7 +39,6 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Afte
 
   value = null;
   text = null;
-  isDisabled: boolean;
   onChange = (_: any) => { };
   onTouch = () => { };
 
@@ -119,9 +119,6 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit, Afte
   }
   registerOnTouched(fn: any): void {
     this.onTouch = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
   }
 
   private selectItem() {
