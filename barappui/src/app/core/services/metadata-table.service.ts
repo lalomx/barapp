@@ -11,6 +11,10 @@ export class MetadataTableService {
     this.metadata.InventarioTable = {
       name: 'InventarioTable',
       sortOptions: { property: 'name', sort: 'asc' },
+      customActions: [{
+        name: 'transaccion',
+        icon: 'arrow-right'
+      }],
       columns: [
         {
           caption: 'Nombre',
@@ -40,6 +44,28 @@ export class MetadataTableService {
         {
           caption: 'Limite de unidades',
           propertyName: 'unitLimit',
+          type: 'number'
+        }
+      ]
+    };
+
+    this.metadata.ProductosTable = {
+      name: 'ProductosTable',
+      sortOptions: { property: 'name', sort: 'asc' },
+      columns: [
+        {
+          caption: 'Nombre',
+          propertyName: 'name',
+          type: 'text'
+        },
+        {
+          caption: 'Tipo',
+          propertyName: 'type',
+          type: 'text'
+        },
+        {
+          caption: 'Precio',
+          propertyName: 'precio',
           type: 'number'
         }
       ]

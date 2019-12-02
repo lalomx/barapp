@@ -35,6 +35,7 @@ export class EditComponent implements OnInit, OnChanges {
   @Output() propertyChanged = new EventEmitter<PropertyChangedEventArgs>();
   @Output() saved = new EventEmitter<any>();
   @Output() formInitializing = new EventEmitter<any>();
+  @Output() actionMetadata = new EventEmitter<any>();
 
   tableMetadata: any;
   tableDataSource: any[];
@@ -109,5 +110,9 @@ export class EditComponent implements OnInit, OnChanges {
 
   onFormInitializing(args: any) {
     this.formInitializing.emit(args);
+  }
+
+  onActionMetadata(args: any) {
+    this.actionMetadata.emit(args);
   }
 }

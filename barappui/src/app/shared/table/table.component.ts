@@ -21,6 +21,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
 
   @Output() editEntity = new EventEmitter<any>();
   @Output() deleteEntity = new EventEmitter<any>();
+  @Output() actionMetadata = new EventEmitter<any>();
 
   constructor(private dropdownService: DropdownService) { }
 
@@ -57,7 +58,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
     Array.from(this.table.nativeElement.querySelectorAll('.row'))
       .forEach((r: any) => {
         Array.from(r.cells)
-          .filter((c: any) => c.id !== `${this.metadata.name}-actions`)
+          .filter((c: any) => c.className.includes('row-cell'))
           .forEach((c: HTMLElement) => this.queryCellInfo(c));
       });
   }
@@ -86,5 +87,9 @@ export class TableComponent implements AfterViewInit, OnChanges {
     this.tableSource = ordered.map((el) => {
       return this.source.find(s => s.id === el.id);
     });
+  }
+
+  private onActionClick(actionName: string, row: any) {
+    this.actionMetadata.emit({ actionName, rowData: row });
   }
 }

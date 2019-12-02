@@ -21,6 +21,7 @@ import { MenuComponent } from './menu/menu.component';
 import { AlertaComponent } from './alerta/alerta.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { SharedModule } from './shared/shared.module';
+import { ProductosComponent } from './productos/productos.component';
 
 export function initializeApp(bootstrapperService: BootstrapperService) {
   return (): Promise<any> => {
@@ -40,6 +41,7 @@ export function initializeApp(bootstrapperService: BootstrapperService) {
     MenuComponent,
     AlertaComponent,
     ReportesComponent,
+    ProductosComponent,
   ],
   imports: [
     BrowserModule,

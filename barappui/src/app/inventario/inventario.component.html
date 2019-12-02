@@ -2,8 +2,13 @@
           metadataFormName="InventarioForm"
           title="Inventario Item"
           [allowEdit]="false"
-          [allowDelete]="false"
           [source]="inventario"
           [dataService]="inventarioService"
-          (formInitializing)="onFormInitializing($event)">
-</app-edit>
+          (formInitializing)="onFormInitializing($event)"
+          (actionMetadata)="onActionMetadata($event)"></app-edit>
+<app-modal entityTitle="Transaccion"
+  formMetadata="InventarioTransaccionForm"
+  [entity]="transaccion"
+  [dataService]="inventarioTransaccion"
+  (saved)="onTransaccionSaved($event)"
+  (formInitializing)="onTransaccionFormInitializing($event)"></app-modal>

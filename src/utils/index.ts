@@ -11,6 +11,7 @@ import { AlertaService } from "../services/AlertaService";
 import { ReportesService } from "../services/ReportesService";
 import { SettingsService } from "../services/SettingsService";
 import { MenuService } from "../services/MenuService";
+import { ProductoService } from "../services/ProductoService";
 
 export const applyCommonMiddleware = (router: Router, db: BarServicesDB) => {
   CommonMiddleware.instance().init(router);
@@ -30,4 +31,5 @@ export const applyRoutes = (router: Router, db: BarServicesDB, ) => {
   ReportesService.instance(db).init(router);
   SettingsService.instance(db).init(router);
   MenuService.instance(db).init(router);
+  ProductoService.instance(db).init(router);
 };

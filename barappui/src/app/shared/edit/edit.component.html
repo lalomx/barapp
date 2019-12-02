@@ -23,7 +23,8 @@
       [allowEdit]="allowEdit"
       [allowDelete]="allowDelete"
       (editEntity)="onEditEntity($event)"
-      (deleteEntity)="onDeleteEntity($event)"></app-table>
+      (deleteEntity)="onDeleteEntity($event)"
+      (actionMetadata)="onActionMetadata($event)"></app-table>
     </div>
   </div>
 </div>
@@ -37,4 +38,4 @@
   (modifyInput)="onModifyInput($event)"
   (formInitializing)="onFormInitializing($event)"
   (propertyChanged)="onPropertyChanged($event)"></app-modal>
-  <app-confirm-dialog></app-confirm-dialog>
+<app-confirm-dialog></app-confirm-dialog>

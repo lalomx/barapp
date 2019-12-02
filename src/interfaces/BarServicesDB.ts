@@ -8,6 +8,7 @@ import { MenuModel } from '../db/models/Menus';
 import { PersonaModel } from '../db/models/Persona';
 import { ProductoModel } from '../db/models/Productos';
 import { InventarioProductosModel } from '../db/models/InventarioProductos';
+import { InventarioTransaccionsModel } from '../db/models/InventarioTransaccion';
 import { PersonaProductosModel } from '../db/models/PersonaProductos';
 import { ComandaModel } from '../db/models/Comandas';
 import { TipoInventarioModel } from '../db/models/TipoInventario';
@@ -27,4 +28,5 @@ export interface BarServicesDB {
     Comanda: ComandaModel;
     TipoInventario: TipoInventarioModel;
     Granularidad: GranularidadModel,
+    Transaccion: InventarioTransaccionsModel,
 }

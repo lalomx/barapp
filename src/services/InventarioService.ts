@@ -33,6 +33,17 @@ export class InventarioService extends BaseService {
     caption: 'Límite de unidades',
     validation: Validators.MoreThanZero
   }, ];
+
+  private transaccionValidation = [{
+    propertyName: 'tipo',
+    caption: 'Tipo',
+    validation: Validators.NotNull
+  }, {
+    propertyName: 'quantity',
+    caption: 'Cantidad',
+    validation: Validators.MoreThanZero
+  }];
+
   private constructor(db: BarServicesDB) {
     super();
     this.db = db;
@@ -48,6 +59,7 @@ export class InventarioService extends BaseService {
     router['delete'](`${this.API_BASE}inventario/:id`, this.deleteInventario.bind(this));
     router['get'](`${this.API_BASE}inventario/tipos`, this.getInventarioTipos.bind(this));
     router['get'](`${this.API_BASE}inventario/granularidad`, this.getGranularidad.bind(this));
+    router['post'](`${this.API_BASE}inventario/transaccion`, this.createInventarioTransaccion.bind(this));
   }
 
   private async getInventario(req: Request, res: Response) {
@@ -102,6 +114,20 @@ export class InventarioService extends BaseService {
       await this.db.Inventario.create(inventario);
       res.status(201).send(inventario);
     }
+  }
+
+  private async createInventarioTransaccion(req: Request, res: Response) {
+    const transaccion = req.body;
+    const errors = this.validateEntity(transaccion, this.transaccionValidation);
+    transaccion.id = uuid();
+    if (!transaccion.inventarioId) {
+      res.status(400).send({
+        errors: [{ msg: 'La transacción debe estar asociada a un item de inventario' }]
+      });
+      return;
+    }
+    await this.db.Transaccion.create(transaccion);
+    res.status(201).send(transaccion);
   }
 
   private async updateInventario(req: Request, res: Response) {

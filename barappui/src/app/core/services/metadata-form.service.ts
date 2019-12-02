@@ -18,7 +18,7 @@ export class MetadataFormService {
           caption: 'Nombre',
           propertyName: 'name',
           visible: true,
-          readonly: true,
+          readonly: false,
           placeholder: '',
           required: true,
           editor: FormEditor.Text,
@@ -27,7 +27,7 @@ export class MetadataFormService {
           caption: 'Tipo',
           propertyName: 'tipoId',
           visible: true,
-          readonly: true,
+          readonly: false,
           required: true,
           editor: FormEditor.Select,
         },
@@ -35,7 +35,7 @@ export class MetadataFormService {
           caption: 'Cantidad',
           propertyName: 'quantity',
           visible: true,
-          readonly: true,
+          readonly: false,
           required: true,
           editor: FormEditor.Number
         },
@@ -51,7 +51,7 @@ export class MetadataFormService {
           caption: 'Precio Unitario',
           propertyName: 'unitPrice',
           visible: true,
-          readonly: true,
+          readonly: false,
           required: true,
           editor: FormEditor.Number
         },
@@ -59,9 +59,64 @@ export class MetadataFormService {
           caption: 'Límite de unidades',
           propertyName: 'unitLimit',
           visible: true,
+          readonly: false,
+          required: true,
+          editor: FormEditor.Number
+        }
+      ]
+    };
+    this.metadata.InventarioTransaccionForm = {
+      name: 'InventarioTransaccionForm',
+      entityName: 'Inventario Transaccion Item',
+      inputs: [
+        {
+          caption: 'Tipo',
+          propertyName: 'tipo',
+          visible: true,
+          readonly: true,
+          required: true,
+          editor: FormEditor.Select,
+        },
+        {
+          caption: 'Cantidad',
+          propertyName: 'quantity',
+          visible: true,
           readonly: true,
           required: true,
           editor: FormEditor.Number
+        }
+      ]
+    };
+    this.metadata.ProductosForm = {
+      name: 'ProductosForm',
+      entityName: 'Producto',
+      inputs: [
+        {
+          caption: 'Nombre',
+          propertyName: 'name',
+          placeholder: 'Nombre',
+          visible: true,
+          readonly: true,
+          required: true,
+          editor: FormEditor.Text,
+        },
+        {
+          caption: 'Tipo',
+          propertyName: 'type',
+          placeholder: 'Tipo',
+          visible: true,
+          readonly: true,
+          required: true,
+          editor: FormEditor.Text
+        },
+        {
+          caption: 'Precio',
+          propertyName: 'precio',
+          placeholder: 'Precio',
+          visible: true,
+          readonly: true,
+          required: true,
+          editor: FormEditor.Text
         }
       ]
     };

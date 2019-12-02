@@ -17,7 +17,6 @@ import { FormsModule, ReactiveFormsModule } from '../../../node_modules/@angular
 import { BrowserModule } from '../../../node_modules/@angular/platform-browser';
 import { EditComponent } from './edit/edit.component';
 import { PageNavComponent } from './pages/page-nav/page-nav.component';
-import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '../../../node_modules/@angular/router';
 import { ModalComponent } from './pages/modal/modal.component';
 import { FormComponent } from './form/form.component';
@@ -68,7 +67,8 @@ import { ConfirmDialogComponent } from './pages/confirm-dialog/confirm-dialog.co
     DateComponent,
     EditComponent,
     FormComponent,
-    InputNumericDirective
+    InputNumericDirective,
+    ModalComponent,
   ]
 })
 export class SharedModule { }

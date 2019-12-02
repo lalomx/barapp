@@ -28,6 +28,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
   @Output() propertyChanged = new EventEmitter<PropertyChangedEventArgs>();
   @Output() saved = new EventEmitter<any>();
   @Output() formInitializing = new EventEmitter<any>();
+  @Output() save = new EventEmitter<any>();
 
   private modalObject: any;
 
@@ -76,9 +77,14 @@ export class ModalComponent implements OnInit, AfterViewInit {
     this.propertyChanged.emit(args);
   }
 
-  async save() {
+  async submit() {
     this.form.errors = null;
     this.submitting = true;
+
+    if (!this.dataService) {
+      this.save.emit();
+    }
+
     try {
       const savedEntity = await this.dataService.save(this.entity).toPromise();
       this.saved.emit(savedEntity);

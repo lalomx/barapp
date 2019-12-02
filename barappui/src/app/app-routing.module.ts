@@ -10,6 +10,7 @@ import { AlertaComponent } from './alerta/alerta.component';
 import { InventarioComponent } from './inventario/inventario.component';
 import { PageComponent } from './shared/pages/page/page.component';
 import { PageNavComponent } from './shared/pages/page-nav/page-nav.component';
+import { ProductosComponent } from './productos/productos.component';
 
 
 const routes: Routes = [
@@ -28,7 +29,7 @@ const routes: Routes = [
         },
         children: [
           { path: 'almacen', component: InventarioComponent, data: { title: 'Almacen'} },
-          { path: 'productos', component: AlertaComponent, data: { title: 'Produtos'} },
+          { path: 'productos', component: ProductosComponent, data: { title: 'Produtos'} },
           { path: '', pathMatch: 'full', redirectTo: 'almacen' },
         ]
       },
