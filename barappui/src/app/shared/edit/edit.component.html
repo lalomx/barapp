@@ -2,7 +2,7 @@
 <div *ngIf="!loading">
   <div class="uk-text-center" uk-grid>
     <div class="uk-width-auto@m uk-width-1-1">
-      <ng-content></ng-content>
+      <ng-content select="[header]"></ng-content>
     </div>
     <div class="uk-width-expand@m uk-width-1-1">
       <button class="uk-button uk-button-primary uk-align-right" (click)="onAdd()">
@@ -37,5 +37,7 @@
   (saved)="onSaved($event)"
   (modifyInput)="onModifyInput($event)"
   (formInitializing)="onFormInitializing($event)"
-  (propertyChanged)="onPropertyChanged($event)"></app-modal>
+  (propertyChanged)="onPropertyChanged($event)">
+  <ng-content select="[formContent]"></ng-content>
+</app-modal>
 <app-confirm-dialog></app-confirm-dialog>

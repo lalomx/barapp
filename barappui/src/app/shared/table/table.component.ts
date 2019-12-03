@@ -18,6 +18,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
   @Input() metadata: any;
   @Input() allowEdit = true;
   @Input() allowDelete = true;
+  @Input() checkeable = false;
 
   @Output() editEntity = new EventEmitter<any>();
   @Output() deleteEntity = new EventEmitter<any>();

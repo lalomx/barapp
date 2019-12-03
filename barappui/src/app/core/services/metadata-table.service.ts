@@ -10,6 +10,7 @@ export class MetadataTableService {
   constructor() {
     this.metadata.InventarioTable = {
       name: 'InventarioTable',
+      showActions: true,
       sortOptions: { property: 'name', sort: 'asc' },
       customActions: [{
         name: 'transaccion',
@@ -51,6 +52,7 @@ export class MetadataTableService {
 
     this.metadata.ProductosTable = {
       name: 'ProductosTable',
+      showActions: true,
       sortOptions: { property: 'name', sort: 'asc' },
       columns: [
         {
@@ -67,6 +69,23 @@ export class MetadataTableService {
           caption: 'Precio',
           propertyName: 'precio',
           type: 'number'
+        }
+      ]
+    };
+
+    this.metadata.inventarioProductosTable = {
+      name: 'inventarioProductosTable',
+      sortOptions: { property: 'name', sort: 'asc' },
+      columns: [
+        {
+          caption: 'Nombre',
+          propertyName: 'name',
+          type: 'text'
+        },
+        {
+          caption: 'Granularidad',
+          propertyName: 'granularityName',
+          type: 'text'
         }
       ]
     };

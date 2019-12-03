@@ -2,7 +2,8 @@
   <table class="uk-table uk-table-responsive uk-table-divider" #table>
     <thead>
       <tr>
-        <th class="uk-table-shrink"></th>
+        <th *ngIf="metadata.showActions" class="uk-table-shrink"></th>
+        <th *ngIf="checkeable" class="uk-table-shrink">Selección</th>
         <th *ngIf="metadata.customActions" class="uk-table-shrink">Actions</th>
         <th *ngFor="let column of columns" class="uk-width-small">{{column.caption}}</th>
       </tr>
@@ -10,9 +11,12 @@
     <div *ngIf="!hasData">Empty Data</div>
     <tbody *ngIf="hasData">
       <tr *ngFor="let row of tableSource; index as i" [id]="i+'-'+metadata.name" class="row">
-        <td [id]="metadata.name+'-actions'" class="cell">
+        <td *ngIf="metadata.showActions" [id]="metadata.name+'-actions'" class="cell">
           <a *ngIf="allowEdit" (click)="onEdit(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="pencil"></a>
           <a *ngIf="allowDelete" (click)="onDelete(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="trash"></a>
+        </td>
+        <td *ngIf="checkeable">
+            <input class="uk-checkbox" type="checkbox">
         </td>
         <td *ngIf="metadata.customActions" id="custom-actions" class="cell">
           <a *ngFor="let action of metadata.customActions; index as i"
