@@ -22,7 +22,6 @@ import { AlertaComponent } from './alerta/alerta.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { SharedModule } from './shared/shared.module';
 import { ProductosComponent } from './productos/productos.component';
-import { InventarioProductosListComponent } from './productos/inventario-productos-list.component';
 
 export function initializeApp(bootstrapperService: BootstrapperService) {
   return (): Promise<any> => {
@@ -43,7 +42,6 @@ export function initializeApp(bootstrapperService: BootstrapperService) {
     AlertaComponent,
     ReportesComponent,
     ProductosComponent,
-    InventarioProductosListComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,15 @@
   metadataFormName="ProductosForm"
   title="Producto"
   [source]="productos"
+  [allowEdit]="false"
+  [allowDelete]="false"
   [dataService]="productosService">
-  <app-inventario-productos-list formContent></app-inventario-productos-list>
+  <div formContent>
+    <app-table [metadata]="metadata"
+      [source]="inventario"
+      [allowEdit]="false"
+      [allowDelete]="false"
+      [checkeable]="true"
+      (checked)="onStockSelected($event)"></app-table>
+  </div> 
 </app-edit>

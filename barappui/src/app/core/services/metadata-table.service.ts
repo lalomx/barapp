@@ -76,6 +76,7 @@ export class MetadataTableService {
     this.metadata.inventarioProductosTable = {
       name: 'inventarioProductosTable',
       sortOptions: { property: 'name', sort: 'asc' },
+      showActions: false,
       columns: [
         {
           caption: 'Nombre',
@@ -85,6 +86,33 @@ export class MetadataTableService {
         {
           caption: 'Granularidad',
           propertyName: 'granularityName',
+          type: 'text'
+        }
+      ]
+    };
+
+    this.metadata.comandasTable = {
+      name: 'comandasTable',
+      showActions: true,
+      columns: [
+        {
+          caption: 'Mesa',
+          propertyName: 'table',
+          type: 'enum'
+        },
+        {
+          caption: 'Total',
+          propertyName: 'total',
+          type: 'text'
+        },
+        {
+          caption: 'Status',
+          propertyName: 'status',
+          type: 'enum'
+        },
+        {
+          caption: 'Personas',
+          propertyName: 'numPersonas',
           type: 'text'
         }
       ]

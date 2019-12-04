@@ -19,7 +19,7 @@ const routes: Routes = [
     path: '', component: InitComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'comandas', component: ComandasComponent },
+      { path: 'comandas', data: { title: 'Comandas' }, component: ComandasComponent },
       {
         path: 'inventario', component: PageNavComponent,
         data: {
@@ -33,9 +33,9 @@ const routes: Routes = [
           { path: '', pathMatch: 'full', redirectTo: 'almacen' },
         ]
       },
-      { path: 'alertas', component: AlertaComponent },
-      { path: 'menus', component: MenuComponent },
-      { path: 'reportes', component: ReportesComponent },
+      // { path: 'alertas', component: AlertaComponent },
+      // { path: 'menus', component: MenuComponent },
+      // { path: 'reportes', component: ReportesComponent },
       { path: '**', pathMatch: 'full', redirectTo: 'dashboard', data: { isPublic: true } }
     ]
   },

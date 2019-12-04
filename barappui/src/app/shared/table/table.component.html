@@ -16,7 +16,7 @@
           <a *ngIf="allowDelete" (click)="onDelete(row, i)" class="uk-icon-link uk-margin-small-right" uk-icon="trash"></a>
         </td>
         <td *ngIf="checkeable">
-            <input class="uk-checkbox" type="checkbox">
+          <input class="uk-checkbox" type="checkbox" [(checked)]="row.checked" (change)="onChecked(row)" >
         </td>
         <td *ngIf="metadata.customActions" id="custom-actions" class="cell">
           <a *ngFor="let action of metadata.customActions; index as i"

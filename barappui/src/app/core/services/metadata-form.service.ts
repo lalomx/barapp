@@ -120,6 +120,40 @@ export class MetadataFormService {
         }
       ]
     };
+
+    this.metadata.ComandasForm = {
+      name: 'ComandasForm',
+      entityName: 'Comanda',
+      inputs: [
+        {
+          caption: 'Mesa',
+          propertyName: 'table',
+          placeholder: '',
+          visible: true,
+          readonly: false,
+          required: true,
+          editor: FormEditor.Select,
+        },
+        {
+          caption: 'Total',
+          propertyName: 'total',
+          placeholder: 'Tipo',
+          visible: true,
+          readonly: true,
+          required: true,
+          editor: FormEditor.Number
+        },
+        {
+          caption: 'Status',
+          propertyName: 'status',
+          placeholder: '',
+          visible: true,
+          readonly: true,
+          required: true,
+          editor: FormEditor.Select
+        }
+      ]
+    };
   }
 
   getMetadata(key: string) {

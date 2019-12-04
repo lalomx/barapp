@@ -1,60 +1,10 @@
-<app-page title="Comandas">
-
-
-    <div uk-grid class="uk-width-1-2">
-
-        <div class="uk-text-center">
-            <div>
-
-                <h1>Fecha</h1>
-
-            </div>
-        </div>
-        <div class="uk-text-right">
-            <div>
-
-                <p uk-margin>
-                    <button class="uk-button uk-button-default">Nueva comanda</button>
-                </p>
-            </div>
-        </div>
-
-
-
-    </div>
-
-
-
-
-    <table class="uk-table">
-        <caption>Table Caption</caption>
-        <thead>
-            <tr>
-                <th>Comanda</th>
-                <th>Mesa</th>
-                <th>Importe</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <td>Table Footer</td>
-                <td>Table Footer</td>
-                <td>Table Footer</td>
-            </tr>
-        </tfoot>
-        <tbody>
-            <tr>
-                <td>Table Data</td>
-                <td>Table Data</td>
-                <td>Table Data</td>
-            </tr>
-            <tr>
-                <td>Table Data</td>
-                <td>Table Data</td>
-                <td>Table Data</td>
-            </tr>
-        </tbody>
-    </table>
-
-
-</app-page>
+<app-edit metadataTableName="comandasTable"
+  metadataFormName="ComandasForm"
+  title="Comanda"
+  [source]="comandas"
+  [dataService]="comandasService"
+  (formInitializing)="onFormInitializing($event)">
+  <div formContent>
+    <p>aqui van los productos a elegir</p>
+  </div> 
+</app-edit>

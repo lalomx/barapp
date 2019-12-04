@@ -23,6 +23,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
   @Output() editEntity = new EventEmitter<any>();
   @Output() deleteEntity = new EventEmitter<any>();
   @Output() actionMetadata = new EventEmitter<any>();
+  @Output() checked = new EventEmitter<any>();
 
   constructor(private dropdownService: DropdownService) { }
 
@@ -36,7 +37,8 @@ export class TableComponent implements AfterViewInit, OnChanges {
     }
 
     if (changes.source && changes.source.currentValue) {
-      this.order();
+      // this.order();
+      this.tableSource = this.source.map(i => i);
       this.hasData = true;
     } else {
       this.hasData = false;
@@ -76,21 +78,33 @@ export class TableComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  private order() {
-    const ordered  = _.orderBy(this.source.map((r) => {
-      const obj = Object.assign({}, r);
-      if (typeof r[this.metadata.sortOptions.property] === 'string') {
-        obj[this.metadata.sortOptions.property] = obj[this.metadata.sortOptions.property].toLowerCase();
-      }
-      return obj;
-    }), [this.metadata.sortOptions.property], [this.metadata.sortOptions.sort]);
+  // private order() {
+  //   const ordered  = _.orderBy(this.source.map((r) => {
+  //     const obj = Object.assign({}, r);
+  //     if (typeof r[this.metadata.sortOptions.property] === 'string') {
+  //       obj[this.metadata.sortOptions.property] = obj[this.metadata.sortOptions.property].toLowerCase();
+  //     }
+  //     return obj;
+  //   }), [this.metadata.sortOptions.property], [this.metadata.sortOptions.sort]);
 
-    this.tableSource = ordered.map((el) => {
-      return this.source.find(s => s.id === el.id);
-    });
+  //   this.tableSource = ordered.map((el) => {
+  //     return this.source.find(s => s.id === el.id);
+  //   });
+  // }
+
+  onActionClick(actionName: string, row: any) {
+    this.actionMetadata.emit({ actionName, rowData: row });
   }
 
-  private onActionClick(actionName: string, row: any) {
-    this.actionMetadata.emit({ actionName, rowData: row });
+  onChecked(row: any) {
+    row.checked = !row.checked;
+    this.checked.emit(this.tableSource.filter(s => s.checked));
+    console.log(this.tableSource.filter(s => s.checked));
+  }
+
+  getCheckedRows() {
+    return this.tableSource
+      .filter(r => r.checked)
+      .map(r => r);
   }
 }

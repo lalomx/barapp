@@ -28,7 +28,7 @@ export class ComandaService extends BaseService {
       createdAt: req.query.date || today
     }
     const comandas = await this.db.Comanda.findAll({
-      where,
+      // where,
       include: ['personas'],
     })
     
@@ -40,7 +40,8 @@ export class ComandaService extends BaseService {
         status: c.status,
         createdAt: c.createdAt,
         updatedAt: c.updatedAt,
-        personas: c.personas
+        personas: c.personas,
+        numPersonas: c.personas ? c.personas.length : 0,
       }
     }));
   }

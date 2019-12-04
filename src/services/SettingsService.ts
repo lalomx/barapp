@@ -21,6 +21,8 @@ export class SettingsService extends BaseService {
     Promise.all([
       this.getTipoInventarios(),
       this.getGranularidad(),
+      this.getComandaStatus(),
+      this.getMesa(),
       this.getTransaccionTipo()]).then((data: any) => {
         const dropdowns = [].concat.apply([], data);
         res.send(dropdowns);
@@ -41,6 +43,24 @@ export class SettingsService extends BaseService {
     return Promise.resolve([
       { id: 'Ingreso', name: 'Ingreso', group: 'TT' },
       { id: 'Egreso', name: 'Egreso', group: 'TT' }
+    ])
+  }
+
+  private getComandaStatus() {
+    return Promise.resolve([
+      { id: '0', name: 'Abierta', group: 'CE' },
+      { id: '1', name: 'Cerrada', group: 'CE' }
+    ])
+  }
+
+  private getMesa() {
+    return Promise.resolve([
+      { id: 'Barra', name: 'Barra', group: 'CM' },
+      { id: '1', name: 'Mesa 1', group: 'CM' },
+      { id: '2', name: 'Mesa 2', group: 'CM' },
+      { id: '3', name: 'Mesa 3', group: 'CM' },
+      { id: '4', name: 'Mesa 4', group: 'CM' },
+      { id: '5', name: 'Mesa 5', group: 'CM' }
     ])
   }
 }
