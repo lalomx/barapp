@@ -3,8 +3,16 @@
   title="Comanda"
   [source]="comandas"
   [dataService]="comandasService"
-  (formInitializing)="onFormInitializing($event)">
-  <div formContent>
-    <p>aqui van los productos a elegir</p>
+  (formInitializing)="onFormInitializing($event)"
+  (beforeOpen)="beforeOpen($event)">
+  <div *ngIf="selectedProductos" formContent class="uk-flex">
+    <div *ngFor="let producto of productos" class="uk-card uk-card-default uk-card-body uk-margin-small-left product-card">
+      <h3 class="uk-card-title">{{producto.name}}</h3>
+      <div class="uk-width-1-1 product-selection">
+        <div class="plus"><a href uk-icon="plus" class="uk-icon-link " (click)="onPlus($event, producto.name)"></a></div>
+        <div class="input"><input type="text" [(ngModel)]="selectedProductos[pascalConverter(producto.name)]" /></div>
+        <div class="minus"><a href uk-icon="minus" class="uk-icon-link " (click)="onMinus($event, producto.name)"></a></div>
+      </div>
+    </div>
   </div> 
 </app-edit>

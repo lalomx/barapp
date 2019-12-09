@@ -36,6 +36,7 @@ export class EditComponent implements OnInit, OnChanges {
   @Output() saved = new EventEmitter<any>();
   @Output() formInitializing = new EventEmitter<any>();
   @Output() actionMetadata = new EventEmitter<any>();
+  @Output() beforeOpen = new EventEmitter<any>();
 
   tableMetadata: any;
   tableDataSource: any[];
@@ -61,14 +62,14 @@ export class EditComponent implements OnInit, OnChanges {
   onAdd() {
     this.mode = 'add';
     this.entity = {};
-    this.modal.show();
+    this.open();
   }
 
   onEditEntity(args) {
     this.mode = 'edit';
     this.entity = Object.assign({}, args.rowData);
     this.editIndex = args.rowIndex;
-    this.modal.show();
+    this.open();
   }
 
   async onDeleteEntity(args) {
@@ -114,5 +115,10 @@ export class EditComponent implements OnInit, OnChanges {
 
   onActionMetadata(args: any) {
     this.actionMetadata.emit(args);
+  }
+
+  private open() {
+    this.beforeOpen.emit(this.entity);
+    this.modal.show();
   }
 }
