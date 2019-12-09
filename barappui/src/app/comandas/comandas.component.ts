@@ -45,7 +45,7 @@ export class ComandasComponent implements OnInit {
       dataSourceOptions: { text: 'name', propertyName: 'id' }
     };
     args.modifyInput('status', { dropdownOptions: dropdownOptionsStatus });
-    args.modifyInput('mesa', { dropdownOptions: dropdownOptionsMesa });
+    args.modifyInput('table', { dropdownOptions: dropdownOptionsMesa });
   }
 
   onPlus(e, name) {
