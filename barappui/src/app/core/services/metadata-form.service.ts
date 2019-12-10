@@ -73,7 +73,7 @@ export class MetadataFormService {
           caption: 'Tipo',
           propertyName: 'tipo',
           visible: true,
-          readonly: true,
+          readonly: false,
           required: true,
           editor: FormEditor.Select,
         },
@@ -81,7 +81,7 @@ export class MetadataFormService {
           caption: 'Cantidad',
           propertyName: 'quantity',
           visible: true,
-          readonly: true,
+          readonly: false,
           required: true,
           editor: FormEditor.Number
         }
@@ -96,7 +96,7 @@ export class MetadataFormService {
           propertyName: 'name',
           placeholder: 'Nombre',
           visible: true,
-          readonly: true,
+          readonly: false,
           required: true,
           editor: FormEditor.Text,
         },
@@ -105,7 +105,7 @@ export class MetadataFormService {
           propertyName: 'type',
           placeholder: 'Tipo',
           visible: true,
-          readonly: true,
+          readonly: false,
           required: true,
           editor: FormEditor.Text
         },
@@ -114,7 +114,7 @@ export class MetadataFormService {
           propertyName: 'precio',
           placeholder: 'Precio',
           visible: true,
-          readonly: true,
+          readonly: false,
           required: true,
           editor: FormEditor.Text
         }
@@ -139,7 +139,7 @@ export class MetadataFormService {
           propertyName: 'total',
           placeholder: 'Tipo',
           visible: true,
-          readonly: true,
+          readonly: false,
           required: true,
           editor: FormEditor.Number
         },
@@ -148,7 +148,7 @@ export class MetadataFormService {
           propertyName: 'status',
           placeholder: '',
           visible: true,
-          readonly: true,
+          readonly: false,
           required: true,
           editor: FormEditor.Select
         }

@@ -44,5 +44,6 @@ export class ProductosComponent implements OnInit {
 
   onStockSelected(selected: any[]) {
     this.edit.entity.stock = selected;
+    console.log(this.edit.entity.stock);
   }
 }
