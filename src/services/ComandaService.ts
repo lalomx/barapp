@@ -4,6 +4,7 @@ import { BaseService } from "./BaseService";
 import Sequelize from 'sequelize';
 import moment from 'moment';
 import v4 from 'uuid';
+import * as _ from 'lodash'
 
 export class ComandaService extends BaseService {
   private db: BarServicesDB;
@@ -47,10 +48,15 @@ export class ComandaService extends BaseService {
   }
 
   private async createComanda(req: Request, res: Response) {
+    const comandas = req.body
+    const productos = _.values(comandas.selectedProductos)
+
+    console.log(productos)
+
     const comanda = await this.db.Comanda.create({
       id: v4(),
       table: req.body.table,
-      total: req.body.total,
+      total: productos && productos.length ? productos.reduce((t, s) => t + (s* 20), 0) : 0,
       status: req.body.status
     })
 
