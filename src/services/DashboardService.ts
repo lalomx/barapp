@@ -24,12 +24,12 @@ export class DashboardService extends BaseService {
   private async getDashboard(req: Request, res: Response) {
     const lastWeek = moment().subtract(7, 'days').format('YYYY-MM-DD');
     const today = moment().format('YYYY-MM-DD');
-    const where = {
-      createdAt: {
-        [Op.gte]: lastWeek,
-        [Op.lte]: today
-      }
-    }
+    // const where = {
+    //   createdAt: {
+    //     [Op.gte]: lastWeek,
+    //     [Op.lte]: today
+    //   }
+    // }
 
     const stockQueryResult = await this.db.sequelize.query(
       `SELECT 
@@ -45,10 +45,9 @@ export class DashboardService extends BaseService {
       LEFT OUTER JOIN "Personas" AS "pe" ON "pp"."personaId" = "pe"."id"
       LEFT OUTER JOIN "Comandas" AS "c" ON "pe"."comandaId" = "c"."id"
       WHERE "c"."status" = 0 OR "c"."status" = 1 
-        AND ("c"."createdAt" >= '${lastWeek}' AND "c"."createdAt" <= '${today}')
       GROUP BY date, product;`);
     const sales = await this.db.Comanda.findAll({
-      where,
+      // where,
       group: ['date'],
       attributes: [
         [Sequelize.fn('date_trunc', 'day', Sequelize.col('createdAt')), 'date'],
@@ -56,7 +55,7 @@ export class DashboardService extends BaseService {
     });
 
     const tables = await this.db.Comanda.findAll({
-      where,
+      // where,
       group: ['table'],
       attributes: [
         'table',
@@ -78,7 +77,7 @@ export class DashboardService extends BaseService {
           attributes: [],
           include: [{
             association: 'comanda',
-            where,
+            // where,
             attributes: []
           }]
         }
